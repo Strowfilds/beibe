@@ -39,8 +39,10 @@ VALUES
 INSERT INTO 
     tb_tipo_atendimento (id_tipo_atendimento, nome_tipo_atendimento)
 VALUES 
-	(1, 'Reclamação'),
-    (2, 'Sugestao');
+    (1, 'Reclamação'),
+    (2, 'Sugestao'),
+    (3, 'críticas' ),
+    (4, 'problemas');
     
 INSERT INTO
     tb_cidade (nome_cidade, id_estado) 
