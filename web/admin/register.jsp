@@ -39,14 +39,46 @@
               <form class="user">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome" required>
+                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome Completo" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Sobrenome" required>
+                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="CPF" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email" required>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-9 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Endereço" required>
+                  </div>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Número" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-8 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Complemento" required>
+                  </div>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Bairro" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-8 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Cidade" required>
+                  </div>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Estado" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-8 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="CEP" required>
+                  </div>
+                  <div class="col-sm-4">
+                    <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" required>
+                  </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
