@@ -32,7 +32,7 @@ VALUES
 INSERT INTO
     tb_tipo_usuario (id_tipo_usuario, nome_tipo_usuario)
 VALUES 
-	(1, 'Cliente'),
+    (1, 'Cliente'),
     (2, 'Funcionário'),
     (3, 'Gerente');
 
@@ -41,8 +41,8 @@ INSERT INTO
 VALUES 
     (1, 'Reclamação'),
     (2, 'Sugestao'),
-    (3, 'críticas' ),
-    (4, 'problemas');
+    (3, 'Crítica' ),
+    (4, 'Problema');
     
 INSERT INTO
     tb_cidade (nome_cidade, id_estado) 

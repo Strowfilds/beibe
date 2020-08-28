@@ -8,13 +8,13 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO web2;
 
 CREATE TABLE tb_estado (
     id_estado INT NOT NULL UNIQUE, 
-	sigla_estado CHAR(2) NOT NULL UNIQUE,
+    sigla_estado CHAR(2) NOT NULL UNIQUE,
     nome_estado VARCHAR(30) NOT NULL,
     PRIMARY KEY (id_estado)
 );
 
 CREATE TABLE tb_cidade (
-	id_cidade SERIAL,
+    id_cidade SERIAL,
     nome_cidade VARCHAR(50) NOT NULL, 
     id_estado INT,   
     PRIMARY KEY (id_cidade),
@@ -22,13 +22,13 @@ CREATE TABLE tb_cidade (
 );
 
 CREATE TABLE tb_tipo_usuario (
-	id_tipo_usuario INT NOT NULL UNIQUE,
+    id_tipo_usuario INT NOT NULL UNIQUE,
     nome_tipo_usuario VARCHAR(15),
     PRIMARY KEY (id_tipo_usuario)
 );
 
 CREATE TABLE tb_usuario (
-	id_usuario SERIAL,
+    id_usuario SERIAL,
     nome_usuario VARCHAR(70) NOT NULL,
     cpf_usuario VARCHAR(11) NOT NULL,
     email_usuario VARCHAR(100) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE tb_usuario (
 );
 
 CREATE TABLE tb_endereco (
-	id_endereco SERIAL,
+    id_endereco SERIAL,
     rua_endereco VARCHAR(50) NOT NULL,
     numero_endereco INT,
     complemento_endereco VARCHAR(50),
@@ -56,29 +56,29 @@ CREATE TABLE tb_endereco (
 );
 
 CREATE TABLE tb_categoria (
-	id_categoria SERIAL,
+    id_categoria SERIAL,
     nome_categoria VARCHAR(30) NOT NULL,
     PRIMARY KEY (id_categoria)
 );
 
 CREATE TABLE tb_produto (
-	id_produto SERIAL,
+    id_produto SERIAL,
     nome_produto VARCHAR(50) NOT NULL,    
     descricao_produto VARCHAR(1000) NOT NULL,
     id_categoria INT NOT NULL,
-	peso_categoria INT NOT NULL,
+    peso_categoria INT NOT NULL,
     PRIMARY KEY (id_produto),
     FOREIGN KEY (id_categoria) REFERENCES tb_categoria (id_categoria)
 );
 
 CREATE TABLE tb_tipo_atendimento (
-	id_tipo_atendimento INT NOT NULL UNIQUE,
+    id_tipo_atendimento INT NOT NULL UNIQUE,
     nome_tipo_atendimento VARCHAR(50) NOT NULL,
     PRIMARY KEY (id_tipo_atendimento)
 );
 
 CREATE TABLE tb_atendimento (
-	id_atendimento SERIAL,
+    id_atendimento SERIAL,
     data_hora_atendimento TIMESTAMP NOT NULL,
     atendimento_aberto BOOLEAN NOT NULL,    
     descricao_atendimento VARCHAR(1000),
