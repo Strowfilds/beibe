@@ -167,7 +167,7 @@
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
+                    <div class="small text-gray-500">12 de Dezembro de 2019</div>
                     <span class="font-weight-bold">Você tem um atendimento pendente para as 14h</span>
                   </div>
                 </a>
@@ -178,7 +178,7 @@
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
+                    <div class="small text-gray-500">7 de Dezembro de 2019</div>
                     Você foi paga por Fulaninho no valor de R$50,00
                   </div>
                 </a>
@@ -451,12 +451,12 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Partindo já?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Pressione "Logout" abaixo se você realmente deseja sair</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
           <a class="btn btn-primary" href="login.jsp">Logout</a>

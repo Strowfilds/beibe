@@ -277,171 +277,17 @@
         </nav>
         <!-- End of Topbar -->
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Marcar Horário</a>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm f-right"><i class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório</a>
-          </div>
-
-        </div>
-
         <!-- Funcionários -->
         <div class="row">
-          <div class="col-md-12">
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Funcionários</h6>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                      <tr>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Endereço</th>
-                        <th>Telefone</th>
-                        <th>Editar</th>
-                        <th>Remover</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- Dados Funcionário -->
-                      <tr>
-                        <th>Cissa Magalhães</th>
-                        <th>000.000.000-00</th>
-                        <th>Rua dos Bobos, nº 0, apartamento 0, Centro, Curitiba - PR. CEP: 00.000-000</th>
-                        <th>11 1111-1111</th>
-                        <th><a href="#page-top"><i class="fas fa-pencil" style="color: orange;"></i></a></th>
-                        <th><a href="#page-top"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                      </tr>
-                      <!-- fim Dados Funcionário -->
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+          <div class="col-md-12 text-center">
+            <i class="fas fa-sad-tear" style="color: white; font-size: 75px;"></i>
+            <h1><strong>ERRO 500</strong></h1>
+            <p>Tente atualizar a página ou retomar a navegação do passo anterior</p>
+            <p>Não há nada para ver aqui</p>
+            <p>Você não tem permissão para acessar esse conteúdo</p>
           </div>
         </div>
         <!-- fim Funcionários -->
-
-        <!-- Clientes -->
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Funcionários</h6>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                      <tr>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Endereço</th>
-                        <th>Telefone</th>
-                        <th>Editar</th>
-                        <th>Remover</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- Dados Funcionário -->
-                      <tr>
-                        <th>Cissa Magalhães</th>
-                        <th>000.000.000-00</th>
-                        <th>Rua dos Bobos, nº 0, apartamento 0, Centro, Curitiba - PR. CEP: 00.000-000</th>
-                        <th>11 1111-1111</th>
-                        <th><a href="#page-top"><i class="fas fa-pencil" style="color: orange;"></i></a></th>
-                        <th><a href="#page-top"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                      </tr>
-                      <!-- fim Dados Funcionário -->
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Atendimentos</h6>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                      <tr>
-                        <th>Nome</th>
-                        <th>Serviço</th>
-                        <th>Horário</th>
-                        <th>Status</th>
-                        <th>Cancelar</th>
-                        <th>Reagendar</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>João</th>
-                        <th>Unhas</th>
-                        <th>11H40</th>
-                        <th>
-                          <select>
-                            <option>Selecione</option>
-                            <option>Confirmado</option>
-                            <option>Concluído</option>
-                            <option>Cancelado</option>
-                            <option>Reagendado</option>
-                          </select>
-                        </th>
-                        <th><a href="#page-top"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                        <th><a href="#page-top"><i class="fas fa-clock" style="color: orange;"></i></a></th>
-                      </tr>
-                      <tr>
-                        <th>Maria</th>
-                        <th>Cabelo</th>
-                        <th>11H40</th>
-                        <th>
-                          <select>
-                            <option>Selecione</option>
-                            <option>Confirmado</option>
-                            <option>Concluído</option>
-                            <option>Cancelado</option>
-                            <option>Reagendado</option>
-                          </select>
-                        </th>
-                      <th><a href="#page-top"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                      <th><a href="#page-top"><i class="fas fa-clock" style="color: orange;"></i></a></th>
-                      <tr>
-                        <th>Pedro</th>
-                        <th>Hidratação</th>
-                        <th>11H40</th>
-                        <th>
-                          <select>
-                            <option>Selecione</option>
-                            <option>Confirmado</option>
-                            <option>Concluído</option>
-                            <option>Cancelado</option>
-                            <option>Reagendado</option>
-                          </select>
-                        </th>
-                        <th><a href="#page-top"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                        <th><a href="#page-top"><i class="fas fa-clock" style="color: orange;"></i></a></th>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.container-fluid -->
 
       </div>
       <!-- End of Main Content -->
