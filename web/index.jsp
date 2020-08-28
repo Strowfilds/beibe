@@ -31,17 +31,7 @@
                         <img src="images/logo.png" alt="Cabelereira Leila" class="logo" height="65">
                     </a> <!-- #branding -->
 
-                    <!-- Default snippet for navigation -->
-                    <div class="main-navigation" style="margin: auto; margin-right: 0;">
-                        <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
-                        <ul class="menu">
-                            <li class="menu-item"><a href="sobre.jsp">Sobre</a></li>
-                            <li class="menu-item"><a href="servicos.jsp">Serviços</a></li>
-                            <li class="menu-item"><a href="galeria.jsp">Galeria</a></li>
-                            <li class="menu-item"><a href="contato.jsp">Contato</a></li>
-                            <li class="menu-item"><a href="admin/login.jsp">Entrar</a></li>
-                        </ul> <!-- .menu -->
-                    </div> <!-- .main-navigation -->
+                    <%@include file="includes/navigationSnippet.jsp" %>
 
                     <div class="mobile-navigation"></div>
                 </div>
@@ -233,10 +223,7 @@
                 </div>
             </footer>
         </div>
-
-
-
-
+        
         <script src="js/jquery-1.11.1.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/app.js"></script>

@@ -64,7 +64,6 @@
             <h6 class="collapse-header">Sua Conta:</h6>
             <a class="collapse-item" href="logout.jsp">Logout</a>
             <a class="collapse-item" href="register.jsp">Registrar</a>
-            <a class="collapse-item" href="forgot-password.jsp">Esqueci minha senha</a>
           </div>
         </div>
       </li>
@@ -73,34 +72,39 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables_funcionarios.jsp">
-          <i class="fas fa-fw fa-table"></i>
+        <a class="nav-link" href="funcionarios.jsp">
+          <i class="fas fa-fw fa-user-tie"></i>
           <span>Funcionários</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="tables_cliente.jsp">
-          <i class="fas fa-fw fa-table"></i>
+        <a class="nav-link" href="clientes.jsp">
+          <i class="fas fa-fw fa-users"></i>
           <span>Clientes</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="tables_horarios.jsp">
-          <i class="fas fa-fw fa-table"></i>
+        <a class="nav-link" href="atendimentos_funcionario.jsp">
+          <i class="fas fa-fw fa-fire"></i>
           <span>Atendimentos</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="tables_horarios.jsp">
-          <i class="fas fa-fw fa-table"></i>
+        <a class="nav-link" href="atendimentos_cliente.jsp">
+          <i class="fas fa-fw fa-fire"></i>
+          <span>Meus Atendimentos</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="produtos.jsp">
+          <i class="fas fa-fw fa-gift"></i>
           <span>Produtos</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="tables_horarios.jsp">
-          <i class="fas fa-fw fa-table"></i>
+        <a class="nav-link" href="categorias.jsp">
+          <i class="fas fa-fw fa-gifts"></i>
           <span>Categorias de Produtos</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="tables_horarios.jsp">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Atendimentos</span></a>
+        <a class="nav-link" href="minha-conta.jsp">
+          <i class="fas fa-fw fa-user"></i>
+          <span>Minha Conta</span></a>
       </li>
 
       <!-- Divider -->
@@ -136,23 +140,11 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Barbara Barbeira</span>
-                <img class="img-profile rounded-circle" src="../images/gallery/barbara-barbeira.png">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">##########NOME DO USUÀRIO##################</span>
+                <img class="img-profile rounded-circle" src="../images/avatar.jpg">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Sua conta
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Configurações
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Notificações
-                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

@@ -32,9 +32,9 @@ public class TipoUsuarioDAO implements DAO<TipoUsuario> {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                TipoUsuario tu = new TipoUsuario();
-                tu.setId(rs.getInt("id_tipo_usuario"));
-                tu.setNome(rs.getString("nome_tipo_usuario"));
+                tipoUsuario = new TipoUsuario();
+                tipoUsuario.setId(rs.getInt("id_tipo_usuario"));
+                tipoUsuario.setNome(rs.getString("nome_tipo_usuario"));
             }
         } catch (SQLException e) {
             throw new DAOException("Erro buscando todas os tipos atendimento: " + QUERY_BUSCAR, e);
