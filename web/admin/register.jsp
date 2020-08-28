@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-8 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Complemento" required>
+                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Complemento">
                   </div>
                   <div class="col-sm-4">
                     <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Bairro" required>
