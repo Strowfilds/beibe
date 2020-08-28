@@ -67,7 +67,7 @@ public class CidadeDAO implements DAO<Cidade> {
         try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR_TODOS_ESTADO)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
+            while(rs.next()) {
                 Cidade c = new Cidade();
                 c.setId(rs.getInt("id_cidade"));
                 c.setNome(rs.getString("nome_cidade"));

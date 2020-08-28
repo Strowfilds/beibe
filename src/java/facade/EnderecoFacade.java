@@ -1,10 +1,14 @@
 package facade;
 
+import beans.Cidade;
+import beans.Estado;
 import beans.Endereco;
 import dao.CidadeDAO;
 import dao.ConnectionFactory;
 import dao.EnderecoDAO;
 import dao.EstadoDAO;
+import exceptions.DAOException;
+import java.util.List;
 
 public class EnderecoFacade {
 
@@ -19,7 +23,7 @@ public class EnderecoFacade {
             return endereco;
         }
     }
-    
+
     public static Endereco buscarUsuario(int id) throws Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             EnderecoDAO enderecoDAO = new EnderecoDAO(connFactory.getConnection());
@@ -29,6 +33,20 @@ public class EnderecoFacade {
             CidadeDAO cidadeDAO = new CidadeDAO(connFactory.getConnection());
             endereco.setCidade(cidadeDAO.buscar(endereco.getCidade().getId()));
             return endereco;
+        }
+    }
+
+    public static List<Cidade> buscarCidadesEstado(int id) throws DAOException, Exception {
+        try (ConnectionFactory connFactory = new ConnectionFactory()) {
+            CidadeDAO cidadeDAO = new CidadeDAO(connFactory.getConnection());
+            return cidadeDAO.buscarTodosEstado(id);
+        }
+    }
+
+    public static List<Estado> buscarEstados() throws DAOException, Exception {
+        try (ConnectionFactory connFactory = new ConnectionFactory()) {
+            EstadoDAO estadoDAO = new EstadoDAO(connFactory.getConnection());
+            return estadoDAO.buscarTodos();
         }
     }
 }

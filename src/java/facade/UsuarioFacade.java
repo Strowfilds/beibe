@@ -4,6 +4,7 @@ import beans.Usuario;
 import dao.ConnectionFactory;
 import dao.TipoUsuarioDAO;
 import dao.UsuarioDAO;
+import exceptions.BuscarUsuarioException;
 import exceptions.DAOException;
 import java.security.MessageDigest;
 
@@ -19,8 +20,8 @@ public class UsuarioFacade {
             return usuario;
         }
     }
-    
-    public static Usuario buscarEmail(String email)throws Exception{
+
+    public static Usuario buscarEmail(String email) throws BuscarUsuarioException, DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             UsuarioDAO usuarioDAO = new UsuarioDAO(connFactory.getConnection());
             Usuario usuario = usuarioDAO.buscarEmail(email);
@@ -31,7 +32,7 @@ public class UsuarioFacade {
         }
     }
 
-    public static boolean checkLogin(String email, String senha) throws Exception {
+    public static boolean checkLogin(String email, String senha) throws BuscarUsuarioException, DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             UsuarioDAO usuarioDAO = new UsuarioDAO(connFactory.getConnection());
             Usuario usuario = usuarioDAO.buscarEmail(email);
@@ -40,10 +41,10 @@ public class UsuarioFacade {
             StringBuilder hexString = new StringBuilder();
             for (byte b : messageDigest) {
                 hexString.append(String.format("%02X", 0xFF & b));
-            }            
-            String senhaHex = hexString.toString();            
-            return usuario.getSenha().equalsIgnoreCase(senhaHex);            
-        }        
+            }
+            String senhaHex = hexString.toString();
+            return usuario.getSenha().equalsIgnoreCase(senhaHex);
+        }
     }
 
 }
