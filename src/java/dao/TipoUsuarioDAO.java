@@ -11,29 +11,30 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TipoUsuarioDAO implements DAO<TipoUsuario>{
+public class TipoUsuarioDAO implements DAO<TipoUsuario> {
 
     private static final String QUERY_BUSCAR_TODOS = "SELECT id_tipo_usuario, nome_tipo_usuario FROM tb_tipo_usuario";
-    private static final String QUERY_BUSCAR = "SELECT id_tipo_usuario, nome_tipo_usuario FROM tb_tipo_usuario WHERE id_usuario = ?";
-    
+    private static final String QUERY_BUSCAR = "SELECT id_tipo_usuario, nome_tipo_usuario FROM tb_tipo_usuario WHERE id_tipo_usuario = ?";
+
     private Connection con = null;
 
-    public TipoUsuarioDAO(Connection con)  throws DAOException {
+    public TipoUsuarioDAO(Connection con) throws DAOException {
         if (con == null) {
-            throw new DAOException("Conexão nula ao criar PessoaDAO.");
+            throw new DAOException("Conexão nula ao criar UsuarioDAO.");
         }
         this.con = con;
-    }    
-    
+    }
+
     @Override
     public TipoUsuario buscar(int id) throws DAOException {
         TipoUsuario tipoUsuario = null;
         try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR)) {
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 TipoUsuario tu = new TipoUsuario();
-                tu.setId(rs.getInt("id_tipo_atendimento"));
-                tu.setNome(rs.getString("nome_tipo_Atendimento"));                
+                tu.setId(rs.getInt("id_tipo_usuario"));
+                tu.setNome(rs.getString("nome_tipo_usuario"));
             }
         } catch (SQLException e) {
             throw new DAOException("Erro buscando todas os tipos atendimento: " + QUERY_BUSCAR, e);
@@ -72,5 +73,5 @@ public class TipoUsuarioDAO implements DAO<TipoUsuario>{
     public void remover(TipoUsuario t) throws DAOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

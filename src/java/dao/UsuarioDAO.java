@@ -55,6 +55,7 @@ public class UsuarioDAO implements DAO<Usuario> {
                 usuario.setSenha(rs.getString("senha_usuario").substring(2));
                 TipoUsuario tipoUsuario = new TipoUsuario();
                 tipoUsuario.setId(rs.getInt("id_tipo_usuario"));
+                usuario.setTipoUsuario(tipoUsuario);
             }
         } catch (SQLException e) {
             throw new DAOException("Erro buscando usuario: " + QUERY_BUSCAR + "/ " + Integer.toString(id), e);
@@ -77,6 +78,7 @@ public class UsuarioDAO implements DAO<Usuario> {
                 usuario.setSenha(rs.getString("senha_usuario").substring(2));
                 TipoUsuario tipoUsuario = new TipoUsuario();
                 tipoUsuario.setId(rs.getInt("id_tipo_usuario"));
+                usuario.setTipoUsuario(tipoUsuario);
             } else {
                 throw new BuscarUsuarioException("Usuário com email: " + email + " não encontrado");
             }

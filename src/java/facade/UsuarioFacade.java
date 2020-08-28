@@ -25,6 +25,8 @@ public class UsuarioFacade {
             UsuarioDAO usuarioDAO = new UsuarioDAO(connFactory.getConnection());
             Usuario usuario = usuarioDAO.buscarEmail(email);
             usuario.setEndereco(EnderecoFacade.buscarUsuario(usuario.getId()));
+            TipoUsuarioDAO tipousuarioDAO = new TipoUsuarioDAO(connFactory.getConnection());
+            usuario.setTipoUsuario(tipousuarioDAO.buscar(usuario.getTipoUsuario().getId()));
             return usuario;
         }
     }
