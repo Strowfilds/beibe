@@ -7,7 +7,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <a href="edit-cliente.jsp" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Adicionar Cliente</a>
+            <a href="edit-categoria.jsp" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Adicionar Categoria</a>
           </div>
 
         </div>
@@ -17,7 +17,7 @@
           <div class="col-md-12">
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Clientes</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Categorias</h6>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -25,22 +25,16 @@
                     <thead>
                       <tr>
                         <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Endereço</th>
-                        <th>Telefone</th>
                         <th>Editar</th>
-                        <th>Remover</th>
+                        <th>Excluir</th>
                       </tr>
                     </thead>
                     <tbody>
                       <!-- Dados cliente -->
                       <tr>
-                        <th>Cissa Magalhães</th>
-                        <th>000.000.000-00</th>
-                        <th>Rua dos Bobos, nº 0, apartamento 0, Centro, Curitiba - PR. CEP: 00.000-000</th>
-                        <th>11 1111-1111</th>
-                        <th><a href="edit-cliente.jsp"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></th>
-                        <th><a href="###########EXCLUIR CLIENTE#############"><i class="fas fa-trash" style="color: red;"></i></a></th>
+                        <th>Unhas</th>
+                        <th><a href="edit-categoria.jsp"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></th>
+                        <th><a href="########EXCLUIR CATEGORIA###########"><i class="fas fa-trash" style="color: red;"></i></a></th>
                       </tr>
                       <!-- fim Dados cliente -->
                     </tbody>
