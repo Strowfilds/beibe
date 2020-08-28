@@ -2,16 +2,20 @@ package facade;
 
 import beans.Usuario;
 import dao.ConnectionFactory;
+import dao.TipoUsuarioDAO;
 import dao.UsuarioDAO;
+import exceptions.DAOException;
 import java.security.MessageDigest;
 
 public class UsuarioFacade {
 
-    public static Usuario buscar(int id) throws Exception {
+    public static Usuario buscar(int id) throws DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             UsuarioDAO usuarioDAO = new UsuarioDAO(connFactory.getConnection());
             Usuario usuario = usuarioDAO.buscar(id);
             usuario.setEndereco(EnderecoFacade.buscarUsuario(id));
+            TipoUsuarioDAO tipousuarioDAO = new TipoUsuarioDAO(connFactory.getConnection());
+            usuario.setTipoUsuario(tipousuarioDAO.buscar(usuario.getTipoUsuario().getId()));
             return usuario;
         }
     }

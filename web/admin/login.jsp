@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page errorPage = "erro.jsp"%>
+<%@page errorPage = "erro.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,16 +41,16 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Login</h1>
                   </div>
-                  <form class="user" action="../LoginServlet">
+                    <form class="user" action="LoginServlet" method="post">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email" required>
+                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" name="email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha" required>
+                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha" name="senha" required>
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                          <input type="checkbox" class="custom-control-input" id="customCheck" name="lembrar">
                         <label class="custom-control-label" for="customCheck">Lembrar minhas credenciais</label>
                       </div>
                     </div>

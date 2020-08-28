@@ -1,7 +1,10 @@
 package servlets;
 
+import beans.Login;
 import beans.Usuario;
+import beans.enums.TipoUsuarioEnum;
 import exceptions.DAOException;
+import facade.UsuarioFacade;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "LoginServlet", urlPatterns = {"/Login"})
+@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
     /**
@@ -51,37 +54,30 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher rd = null;
-        String login = request.getParameter("login");
+        String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        if (login == null || senha == null) {
+        if (senha == null || senha == null) {
             request.setAttribute("msg", "Invocação inválida: login ou senha nulos.");
-            rd = request.getRequestDispatcher("/erro.jsp");
+            rd = request.getRequestDispatcher("admin/erro.jsp");
             rd.forward(request, response);
             return;
         }
         try {
-            if (UsuariosFacade.checkLogin(login, senha)) {
-                Usuario usuario = UsuariosFacade.getUsuario(login);
-                LoginBean loginBean = new LoginBean(usuario.getIdUsuario(), usuario.getLoginUsuario());
+            if (UsuarioFacade.checkLogin(email, senha)) {
+                Usuario usuario = UsuarioFacade.buscarEmail(email);
+                Login login = new Login();
+                login.setId(usuario.getId());
+                login.setNome(usuario.getNome());
+                login.setTipoUsuario(TipoUsuarioEnum.getTipoUsuarioFromInt(usuario.getTipoUsuario().getId()));
                 HttpSession session = request.getSession();
-                session.setAttribute("dadosLogin", loginBean);
-                rd = getServletContext().getRequestDispatcher("/portal.jsp");
+                session.setAttribute("login", login);
+                rd = getServletContext().getRequestDispatcher("/sobre.jsp");
                 rd.forward(request, response);
             } else {
                 request.setAttribute("msg", "Usuário/Senha inválidos.");
                 rd = request.getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
             }
-        } catch (CheckLoginException cle) {
-            request.setAttribute("javax.servlet.jsp.jspException", cle);
-            request.setAttribute("javax.servlet.error.status_code", 500);
-            request.setAttribute("msg", "ERRO: " + cle.getMessage());
-            rd = request.getRequestDispatcher("/erro.jsp");
-            rd.forward(request, response);
-        } catch (DAOException dex) {
-            request.setAttribute("msg", "ERRO: " + dex.getMessage());
-            rd = request.getRequestDispatcher("/erro.jsp");
-            rd.forward(request, response);
         } catch (Exception ex) {
             request.setAttribute("msg", "ERRO: " + ex.getMessage());
             rd = request.getRequestDispatcher("/erro.jsp");

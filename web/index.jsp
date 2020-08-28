@@ -38,7 +38,7 @@
                             <li class="menu-item"><a href="servicos.jsp">Serviços</a></li>
                             <li class="menu-item"><a href="galeria.jsp">Galeria</a></li>
                             <li class="menu-item"><a href="contato.jsp">Contato</a></li>
-                            <li class="menu-item"><a href="login.jsp">Entrar</a></li>
+                            <li class="menu-item"><a href="admin/login.jsp">Entrar</a></li>
                         </ul> <!-- .menu -->
                     </div> <!-- .main-navigation -->
 

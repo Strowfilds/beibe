@@ -14,10 +14,11 @@ import java.util.List;
 public class TipoUsuarioDAO implements DAO<TipoUsuario>{
 
     private static final String QUERY_BUSCAR_TODOS = "SELECT id_tipo_usuario, nome_tipo_usuario FROM tb_tipo_usuario";
+    private static final String QUERY_BUSCAR = "SELECT id_tipo_usuario, nome_tipo_usuario FROM tb_tipo_usuario WHERE id_usuario = ?";
     
     private Connection con = null;
 
-    public TipoUsuarioDAO()  throws DAOException {
+    public TipoUsuarioDAO(Connection con)  throws DAOException {
         if (con == null) {
             throw new DAOException("Conexão nula ao criar PessoaDAO.");
         }
@@ -26,7 +27,18 @@ public class TipoUsuarioDAO implements DAO<TipoUsuario>{
     
     @Override
     public TipoUsuario buscar(int id) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TipoUsuario tipoUsuario = null;
+        try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR)) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                TipoUsuario tu = new TipoUsuario();
+                tu.setId(rs.getInt("id_tipo_atendimento"));
+                tu.setNome(rs.getString("nome_tipo_Atendimento"));                
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Erro buscando todas os tipos atendimento: " + QUERY_BUSCAR, e);
+        }
+        return tipoUsuario;
     }
 
     @Override
