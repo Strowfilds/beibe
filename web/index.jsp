@@ -48,7 +48,7 @@
 
             <div class="hero hero-slider">
                 <ul class="slides">
-                    <li data-bg-image="dummy/slider-1.jpg">
+                    <li data-bg-image="images/gallery/slider-1.jpg">
                         <div class="container">
                             <h3 class="slider-subtitle">O CENTRO DE CABELEIREIRO BEAUTY CENTER DA</h3>
                             <h2 class="slider-title">CABELEIREIRA LEILA</h2>
@@ -56,7 +56,7 @@
                             <a href="#" class="button large">Saiba Mais</a>
                         </div>
                     </li>
-                    <li data-bg-image="dummy/slider-2.jpg">
+                    <li data-bg-image="images/gallery/slider-2.jpg">
                         <div class="container">
                             <h3 class="slider-subtitle">O CENTRO DE CABELEIREIRO BEAUTY CENTER DA</h3>
                             <h2 class="slider-title">CABELEIREIRA LEILA</h2>
@@ -64,7 +64,7 @@
                             <a href="#" class="button large">Saiba Mais</a>
                         </div>
                     </li>
-                    <li data-bg-image="dummy/slider-3.jpg">
+                    <li data-bg-image="images/gallery/slider-3.jpg">
                         <div class="container">
                             <h3 class="slider-subtitle">O CENTRO DE CABELEIREIRO BEAUTY CENTER DA</h3>
                             <h2 class="slider-title">CABELEIREIRA LEILA</h2>
@@ -163,7 +163,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="team">
-                                    <figure class="team-image"><img src="dummy/henry-hair.png"></figure>
+                                    <figure class="team-image"><img src="images/gallery/henry-hair.png"></figure>
                                     <h3 class="team-name">Henry Hair</h3>
                                     <div class="social-links">
                                         <a href="#"><i class="fa fa-facebook"></i></a>
@@ -174,7 +174,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="team">
-                                    <figure class="team-image"><img src="dummy/dora-depiladora.png"></figure>
+                                    <figure class="team-image"><img src="images/gallery/dora-depiladora.png"></figure>
                                     <h3 class="team-name">Dora Depiladora</h3>
                                     <div class="social-links">
                                         <a href="#"><i class="fa fa-facebook"></i></a>
@@ -185,7 +185,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="team">
-                                    <figure class="team-image"><img src="dummy/esteticista-cissa.png"></figure>
+                                    <figure class="team-image"><img src="images/gallery/esteticista-cissa.png"></figure>
                                     <h3 class="team-name">Esteticista Cissa</h3>
                                     <div class="social-links">
                                         <a href="#"><i class="fa fa-facebook"></i></a>
@@ -196,7 +196,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="team">
-                                    <figure class="team-image"><img src="dummy/barbara-barbeira.png"></figure>
+                                    <figure class="team-image"><img src="images/gallery/barbara-barbeira.png"></figure>
                                     <h3 class="team-name">Bárbara Barbeira</h3>
                                     <div class="social-links">
                                         <a href="#"><i class="fa fa-facebook"></i></a>

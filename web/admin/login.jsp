@@ -35,7 +35,7 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              <div class="col-lg-6 d-none d-lg-block" style="background-image: url(../dummy/gallery-3.jpg); background-repeat: no-repeat; background-size: cover;"></div>
+              <div class="col-lg-6 d-none d-lg-block" style="background-image: url(../images/gallery/gallery-3.jpg); background-repeat: no-repeat; background-size: cover;"></div>
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
@@ -54,17 +54,17 @@
                         <label class="custom-control-label" for="customCheck">Lembrar minhas credenciais</label>
                       </div>
                     </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
+                    <a href="index.jsp" class="btn btn-primary btn-user btn-block">
                       Login
                     </a>
                     <hr>
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="forgot-password.html">Esqueceu sua senha?</a>
+                    <a class="small" href="forgot-password.jsp">Esqueceu sua senha?</a>
                   </div>
                   <div class="text-center">
-                    <a class="small" href="register.html">Crie uma conta!</a>
+                    <a class="small" href="register.jsp">Crie uma conta!</a>
                   </div>
                 </div>
               </div>

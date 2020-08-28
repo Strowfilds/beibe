@@ -75,9 +75,9 @@
 
 						<div class="filterable-items">
 							<div class="gallery-item filterable-item manicure">
-								<a href="dummy/large-gallery/gallery-1.jpg">
+								<a href="images/gallery/large-gallery/gallery-1.jpg">
 									<figure class="featured-image">
-										<img src="dummy/gallery-1.jpg" alt="">
+										<img src="images/gallery/gallery-1.jpg" alt="">
 										<figcaption>
 											<h2 class="gallery-title">Lorem ipsum dolor sit amet</h2>
 											<p>Maecenas dictum suscipit</p>
@@ -86,9 +86,9 @@
 								</a>
 							</div>
 							<div class="gallery-item filterable-item face">
-								<a href="dummy/large-gallery/gallery-2.jpg">
+								<a href="images/gallery/large-gallery/gallery-2.jpg">
 									<figure class="featured-image">
-										<img src="dummy/gallery-2.jpg" alt="">
+										<img src="images/gallery/gallery-2.jpg" alt="">
 										<figcaption>
 											<h2 class="gallery-title">Consectetur adipisicing elit</h2>
 											<p>Maecenas dictum suscipit</p>
@@ -97,9 +97,9 @@
 								</a>
 							</div>
 							<div class="gallery-item filterable-item hair">
-								<a href="dummy/large-gallery/gallery-3.jpg">
+								<a href="images/gallery/large-gallery/gallery-3.jpg">
 									<figure class="featured-image">
-										<img src="dummy/gallery-3.jpg" alt="">
+										<img src="images/gallery/gallery-3.jpg" alt="">
 										<figcaption>
 											<h2 class="gallery-title">Repellat fugit tenetur</h2> 
 											<p>Maecenas dictum suscipit</p>
@@ -108,9 +108,9 @@
 								</a>
 							</div>
 							<div class="gallery-item filterable-item pedicure">
-								<a href="dummy/large-gallery/gallery-4.jpg">
+								<a href="images/gallery/large-gallery/gallery-4.jpg">
 									<figure class="featured-image">
-										<img src="dummy/gallery-4.jpg" alt="">
+										<img src="images/gallery/gallery-4.jpg" alt="">
 										<figcaption>
 											<h2 class="gallery-title">Asperiores quas voluptatem</h2>
 											<p>Maecenas dictum suscipit</p>

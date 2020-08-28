@@ -31,7 +31,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"style="background-color: #1b181b; background-image: none;">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-cut
           "></i>
@@ -44,7 +44,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.jsp">
+        <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -62,9 +62,9 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Sua Conta:</h6>
-            <a class="collapse-item" href="login.jsp">Login</a>
-            <a class="collapse-item" href="register.jsp">Registrar</a>
-            <a class="collapse-item" href="forgot-password.jsp">Esqueci minha senha</a>
+            <a class="collapse-item" href="login.html">Login</a>
+            <a class="collapse-item" href="register.html">Registrar</a>
+            <a class="collapse-item" href="forgot-password.html">Esqueci minha senha</a>
           </div>
         </div>
       </li>
@@ -73,17 +73,17 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables_funcionarios.jsp">
+        <a class="nav-link" href="tables_funcionarios.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Funcionários</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="tables_cliente.jsp">
+        <a class="nav-link" href="tables_cliente.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Clientes</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="tables_horarios.jsp">
+        <a class="nav-link" href="tables_horarios.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Horários</span></a>
       </li>
@@ -368,62 +368,9 @@
               </div>
             </div>
           </div>
-
-          <!-- Content Row -->
-
-
-          <!-- Content Row -->
           
-
         </div>
         <div class="row">
-          <div class="col-md-12">
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Funcionários</h6>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                      <tr>
-                        <th>Nome</th>
-                        <th>Função</th>
-                        <th>Remover</th>
-                        <th>CPF</th>
-                        <th>Salário</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>João</th>
-                        <th>Unhas</th>
-                        
-                        <th><a href="#page-top"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                        <th>000.000.000-00</th>
-                        <th>R$2.500,00</th>
-                      </tr>
-                      <tr>
-                        <th>Maria</th>
-                        <th>Cabelo</th>
-                        
-                      <th><a href="#page-top"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                      <th>000.000.000-00</th>
-                      <th>R$2.500,00</th>
-                      <tr>
-                        <th>Pedro</th>
-                        <th>Hidratação</th>
-                        
-                        <th><a href="#page-top"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                        <th>000.000.000-00</th>
-                        <th>R$2.500,00</th>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="row">
           <div class="col-md-12">
@@ -481,80 +428,6 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Horários Marcados</h6>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                      <tr>
-                        <th>Nome</th>
-                        <th>Serviço</th>
-                        <th>Horário</th>
-                        <th>Status</th>
-                        <th>Cancelar</th>
-                        <th>Reagendar</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>João</th>
-                        <th>Unhas</th>
-                        <th>11H40</th>
-                        <th>
-                          <select>
-                            <option>Selecione</option>
-                            <option>Confirmado</option>
-                            <option>Concluído</option>
-                            <option>Cancelado</option>
-                            <option>Reagendado</option>
-                          </select>
-                        </th>
-                        <th><a href="#page-top"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                        <th><a href="#page-top"><i class="fas fa-clock" style="color: orange;"></i></a></th>
-                      </tr>
-                      <tr>
-                        <th>Maria</th>
-                        <th>Cabelo</th>
-                        <th>11H40</th>
-                        <th>
-                          <select>
-                            <option>Selecione</option>
-                            <option>Confirmado</option>
-                            <option>Concluído</option>
-                            <option>Cancelado</option>
-                            <option>Reagendado</option>
-                          </select>
-                        </th>
-                      <th><a href="#page-top"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                      <th><a href="#page-top"><i class="fas fa-clock" style="color: orange;"></i></a></th>
-                      <tr>
-                        <th>Pedro</th>
-                        <th>Hidratação</th>
-                        <th>11H40</th>
-                        <th>
-                          <select>
-                            <option>Selecione</option>
-                            <option>Confirmado</option>
-                            <option>Concluído</option>
-                            <option>Cancelado</option>
-                            <option>Reagendado</option>
-                          </select>
-                        </th>
-                        <th><a href="#page-top"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                        <th><a href="#page-top"><i class="fas fa-clock" style="color: orange;"></i></a></th>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <!-- /.container-fluid -->
 
       </div>
@@ -594,7 +467,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.jsp">Logout</a>
+          <a class="btn btn-primary" href="login.html">Logout</a>
         </div>
       </div>
     </div>

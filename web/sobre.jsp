@@ -61,7 +61,7 @@
 						<div class="row">
 							<div class="col-md-4">
 								<h3 class="section-title">Sobre</h3>
-								<figure><img src="dummy/cabeleireira-leila2.jpg" alt=""></figure>
+								<figure><img src="images/gallery/cabeleireira-leila2.jpg" alt=""></figure>
 								<h4>Donec pulvinar enim ante lacinia consectetur lorem dolor sit amet</h4>
 								<p>Aenean vitae nisl dapibus, blandit urna a, consequat arcu. Fusce blandit felis nec mattis condimentum. Phasellus accumsan nisi est, et tincidunt arcu aliquam non. Morbi fringilla, velit ac pretium condimentum, mi libero facilisis arcu, quis dictum mauris orci vel quam. Vestibulum et nulla lorem. Donec a tristique arcu. In eu nisi nec justo.</p>
 							</div>
@@ -79,28 +79,28 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="team small">
-											<figure class="team-image"><img src="dummy/esteticista-cissa.png"></figure>
+											<figure class="team-image"><img src="images/gallery/esteticista-cissa.png"></figure>
 											<h3 class="team-name">Dora depiladora</h3>
 										</div>
 										<div class="team small">
-											<figure class="team-image"><img src="dummy/barbara-barbeira.png"></figure>
+											<figure class="team-image"><img src="images/gallery/barbara-barbeira.png"></figure>
 											<h3 class="team-name">Esteticista Cissa</h3>
 										</div>
 										
 									</div>
 									<div class="col-md-6">
 										<div class="team small">
-											<figure class="team-image"><img src="dummy/dora-depiladora.png"></figure>
+											<figure class="team-image"><img src="images/gallery/dora-depiladora.png"></figure>
 											<h3 class="team-name">Barbara barbeira</h3>
 										</div>
 										<div class="team small">
-											<figure class="team-image"><img src="dummy/henry-hair.png"></figure>
+											<figure class="team-image"><img src="images/gallery/henry-hair.png"></figure>
 											<h3 class="team-name">Henry Hair</h3>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="team small">
-											<figure class="team-image"><img src="dummy/massoterapeuta-massa.png"></figure>
+											<figure class="team-image"><img src="images/gallery/massoterapeuta-massa.png"></figure>
 											<h3 class="team-name">Massoterapeuta Massa</h3>
 										</div>
 									</div>
