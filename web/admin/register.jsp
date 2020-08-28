@@ -39,34 +39,29 @@
               <form class="user">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome">
+                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Sobrenome">
+                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Sobrenome" required>
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email">
+                  <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email" required>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha">
+                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repita a senha">
+                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repita a senha" required>
                   </div>
                 </div>
-                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                  Cadastre-me!
-                </a>
+                <input type="submit" value="Cadastre-me" class="btn btn-primary btn-user btn-block">
                 <hr>
               </form>
               <hr>
               <div class="text-center">
-                <a class="small" href="forgot-password.html">Esqueceu sua senha?</a>
-              </div>
-              <div class="text-center">
-                <a class="small" href="login.html">Já tem uma conta? Faça o Login</a>
+                <a class="small" href="login.jsp">Já tem uma conta? Faça o Login</a>
               </div>
             </div>
           </div>

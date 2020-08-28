@@ -41,7 +41,7 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Login</h1>
                   </div>
-                  <form class="user" action="./admin.sjp">
+                  <form class="user" action="../LoginServlet">
                     <div class="form-group">
                       <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email" required>
                     </div>
@@ -57,9 +57,6 @@
                     <input type="submit" class="btn btn-primary btn-user btn-block">
                   </form>
                   <hr>
-                  <div class="text-center">
-                    <a class="small" href="forgot-password.jsp">Esqueceu sua senha?</a>
-                  </div>
                   <div class="text-center">
                     <a class="small" href="register.jsp">Crie uma conta!</a>
                   </div>

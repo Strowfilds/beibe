@@ -31,7 +31,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"style="background-color: #1b181b; background-image: none;">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-cut
           "></i>
@@ -44,7 +44,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.jsp">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -62,9 +62,9 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Sua Conta:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Registrar</a>
-            <a class="collapse-item" href="forgot-password.html">Esqueci minha senha</a>
+            <a class="collapse-item" href="logout.jsp">Logout</a>
+            <a class="collapse-item" href="user_data.jsp">Meus Dados</a>
+            
           </div>
         </div>
       </li>
@@ -73,17 +73,17 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables_funcionarios.html">
+        <a class="nav-link" href="tables_funcionarios.jsp">
           <i class="fas fa-fw fa-table"></i>
           <span>Funcionários</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="tables_cliente.html">
+        <a class="nav-link" href="tables_cliente.jsp">
           <i class="fas fa-fw fa-table"></i>
           <span>Clientes</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="tables_horarios.html">
+        <a class="nav-link" href="tables_horarios.jsp">
           <i class="fas fa-fw fa-table"></i>
           <span>Horários</span></a>
       </li>
@@ -459,7 +459,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="login.jsp">Logout</a>
         </div>
       </div>
     </div>

@@ -43,16 +43,16 @@
                     <div class="form-group">
                       <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Seu endereço de e-mail">
                     </div>
-                    <a href="login.html" class="btn btn-primary btn-user btn-block">
+                    <a href="login.jsp" class="btn btn-primary btn-user btn-block">
                       Resetar a senha
                     </a>
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="register.html">Crie uma conta</a>
+                    <a class="small" href="register.jsp">Crie uma conta</a>
                   </div>
                   <div class="text-center">
-                    <a class="small" href="login.html">Já tem uma conta? Faça o Login</a>
+                    <a class="small" href="login.jsp">Já tem uma conta? Faça o Login</a>
                   </div>
                 </div>
               </div>
