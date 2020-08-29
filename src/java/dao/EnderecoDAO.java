@@ -94,6 +94,7 @@ public class EnderecoDAO implements DAO<Endereco> {
             stmt.setInt(6, t.getCidade().getId());
             stmt.setInt(7, t.getEstado().getId());
             stmt.setInt(8, t.getIdUsuario());
+            stmt.executeUpdate();
         } catch (SQLException ex) {
             throw new DAOException("Erro inserindo endereco: " + QUERY_INSERIR + "/ " + t.toString(), ex);
         }
