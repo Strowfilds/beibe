@@ -130,9 +130,23 @@ public class UsuarioServlet extends HttpServlet {
                 session.setAttribute("login", login);
                 response.sendRedirect("admin/index.jsp");
             } catch (NumberFormatException nfe) {
-
+                request.setAttribute("javax.servlet.jsp.jspException", nfe);
+                request.setAttribute("javax.servlet.error.status_code", 500);
+                request.setAttribute("msg", "ERRO: " + nfe.getMessage());
+                rd = getServletContext().getRequestDispatcher("/erro.jsp");
+                rd.forward(request, response);
+            } catch (DAOException daoex) {
+                request.setAttribute("javax.servlet.jsp.jspException", daoex);
+                request.setAttribute("javax.servlet.error.status_code", 500);
+                request.setAttribute("msg", "ERRO: " + daoex.getMessage());
+                rd = getServletContext().getRequestDispatcher("/erro.jsp");
+                rd.forward(request, response);
             } catch (Exception ex) {
-                Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+                request.setAttribute("javax.servlet.jsp.jspException", ex);
+                request.setAttribute("javax.servlet.error.status_code", 500);
+                request.setAttribute("msg", "ERRO: " + ex.getMessage());
+                rd = getServletContext().getRequestDispatcher("/erro.jsp");
+                rd.forward(request, response);
             }
 
         } else {

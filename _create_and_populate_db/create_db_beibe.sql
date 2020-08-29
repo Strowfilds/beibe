@@ -30,8 +30,8 @@ CREATE TABLE tb_tipo_usuario (
 CREATE TABLE tb_usuario (
     id_usuario SERIAL,
     nome_usuario VARCHAR(70) NOT NULL,
-    cpf_usuario VARCHAR(11) NOT NULL,
-    email_usuario VARCHAR(100) NOT NULL,
+    cpf_usuario VARCHAR(11) NOT NULL UNIQUE,
+    email_usuario VARCHAR(100) UNIQUE NOT NULL,
     telefone_usuario VARCHAR(14) NOT NULL,
     senha_usuario CHAR(64) NOT NULL,    
     id_tipo_usuario INT NOT NULL,

@@ -92,7 +92,10 @@
                             <span>Produtos</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="categorias.jsp">
+                        <c:url value="../CategoriaServlet" var="categorias">
+                            <c:param name="action" value="listcategoria"/>
+                        </c:url>
+                        <a class="nav-link" href="${categorias}">
                             <i class="fas fa-fw fa-gifts"></i>
                             <span>Categorias de Produtos</span></a>
                     </li>

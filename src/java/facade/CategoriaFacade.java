@@ -45,8 +45,8 @@ public class CategoriaFacade {
             CategoriaDAO categoriaDAO = new CategoriaDAO(connFactory.getConnection());
             categoriaDAO.atualizar(categoria);
         }
-    } 
-    
+    }
+
     public static void atualizar(int id, String nome) throws DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             CategoriaDAO categoriaDAO = new CategoriaDAO(connFactory.getConnection());
@@ -55,7 +55,7 @@ public class CategoriaFacade {
             categoria.setNome(nome);
             categoriaDAO.atualizar(categoria);
         }
-    } 
+    }
 
     public static void remover(Categoria categoria) throws DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
@@ -63,5 +63,13 @@ public class CategoriaFacade {
             categoriaDAO.remover(categoria);
         }
     }
+
+    public static void remover(int id) throws DAOException, Exception {
+        try (ConnectionFactory connFactory = new ConnectionFactory()) {
+            CategoriaDAO categoriaDAO = new CategoriaDAO(connFactory.getConnection());
+            Categoria categoria = categoriaDAO.buscar(id);
+            categoriaDAO.remover(categoria);
+        }
+    }   
 
 }

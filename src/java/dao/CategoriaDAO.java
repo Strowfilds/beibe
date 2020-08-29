@@ -77,8 +77,8 @@ public class CategoriaDAO implements DAO<Categoria> {
     @Override
     public void atualizar(Categoria t) throws DAOException {
         try (PreparedStatement stmt = con.prepareStatement(QUERY_ATUALIZAR)) {
-            stmt.setInt(1, t.getId());            
-            stmt.setString(2, t.getNome());            
+            stmt.setString(1, t.getNome());            
+            stmt.setInt(2, t.getId());            
             stmt.executeUpdate();
         } catch (SQLException ex) {
             throw new DAOException("Erro atualizando categoria: " + QUERY_ATUALIZAR + "/ " + t.toString(), ex);
