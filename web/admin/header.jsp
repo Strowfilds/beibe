@@ -52,11 +52,7 @@
                 </li>
 
                 <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-
-                <!-- Heading -->
+                <hr class="sidebar-divider">                
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
@@ -104,7 +100,10 @@
                         <span>Categorias de Produtos</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="minha-conta.jsp">
+                    <c:url value="../UsuarioServlet" var="minhaconta">
+                        <c:param name="action" value="minhaconta"/>
+                    </c:url>
+                    <a class="nav-link" href="${minhaconta}">
                         <i class="fas fa-fw fa-user"></i>
                         <span>Minha Conta</span></a>
                 </li>
