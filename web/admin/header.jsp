@@ -64,41 +64,46 @@
                             <a class="collapse-item" href="register.jsp">Registrar</a>
                         </div>
                     </div>
-                </li>
-
-                <!-- Nav Item - Charts -->
+                </li>                
 
                 <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="funcionarios.jsp">
-                        <i class="fas fa-fw fa-user-tie"></i>
-                        <span>Funcionários</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="clientes.jsp">
-                        <i class="fas fa-fw fa-users"></i>
-                        <span>Clientes</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="atendimentos_funcionario.jsp">
-                        <i class="fas fa-fw fa-fire"></i>
-                        <span>Atendimentos</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="atendimentos_cliente.jsp">
-                        <i class="fas fa-fw fa-fire"></i>
-                        <span>Meus Atendimentos</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="produtos.jsp">
-                        <i class="fas fa-fw fa-gift"></i>
-                        <span>Produtos</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="categorias.jsp">
-                        <i class="fas fa-fw fa-gifts"></i>
-                        <span>Categorias de Produtos</span></a>
-                </li>
+                <c:if test="${login.tipoUsuario.id eq 3}">                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="funcionarios.jsp">
+                            <i class="fas fa-fw fa-user-tie"></i>
+                            <span>Funcionários</span></a>
+                    </li>
+                </c:if>
+                <c:if test="${login.tipoUsuario.id > 1}">                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="clientes.jsp">
+                            <i class="fas fa-fw fa-users"></i>
+                            <span>Clientes</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="atendimentos_funcionario.jsp">
+                            <i class="fas fa-fw fa-fire"></i>
+                            <span>Atendimentos</span></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="produtos.jsp">
+                            <i class="fas fa-fw fa-gift"></i>
+                            <span>Produtos</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categorias.jsp">
+                            <i class="fas fa-fw fa-gifts"></i>
+                            <span>Categorias de Produtos</span></a>
+                    </li>
+                </c:if>
+                <c:if test="${login.tipoUsuario.id eq 1}">                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="atendimentos_cliente.jsp">
+                            <i class="fas fa-fw fa-fire"></i>
+                            <span>Meus Atendimentos</span></a>
+                    </li>
+                </c:if>
                 <li class="nav-item">
                     <c:url value="../UsuarioServlet" var="minhaconta">
                         <c:param name="action" value="minhaconta"/>

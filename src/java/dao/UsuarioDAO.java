@@ -79,7 +79,7 @@ public class UsuarioDAO implements DAO<Usuario> {
                 usuario.setNome(rs.getString("nome_usuario"));
                 usuario.setCpf(rs.getString("cpf_usuario"));
                 usuario.setEmail(rs.getString("email_usuario"));
-                usuario.setTelefone(rs.getString("telefone_usuario"));                
+                usuario.setTelefone(rs.getString("telefone_usuario"));
                 usuario.setSenha(rs.getString("senha_usuario"));
                 TipoUsuario tipoUsuario = new TipoUsuario();
                 tipoUsuario.setId(rs.getInt("id_tipo_usuario"));

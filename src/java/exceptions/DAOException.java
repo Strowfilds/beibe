@@ -28,8 +28,4 @@ public class DAOException extends Exception {
     public DAOException(String string, SQLException ex) {
         super();
     }
-
-    public DAOException(String string, java.io.UnsupportedEncodingException | java.security.NoSuchAlgorithmException ex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

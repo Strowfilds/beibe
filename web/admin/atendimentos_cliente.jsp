@@ -1,6 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page errorPage = "erro.jsp"%>
 <jsp:include page="header.jsp" />
+<c:if test="${empty sessionScope.login}">     
+    <jsp:forward page="erro.jsp" >
+        <jsp:param name="msg" value="Usuário deve se autentificar para acessar o sistema."  />
+        <jsp:param name="cod" value="403" />
+    </jsp:forward>
+</c:if>
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
@@ -9,7 +15,6 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <a href="edit-atendimento.jsp" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Abrir Chamado</a>
           </div>
-
 
         </div>
         

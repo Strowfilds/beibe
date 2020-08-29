@@ -52,7 +52,7 @@
                   </div>
                 </div>
                 <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
-                <a href="clientes.jsp" class="btn btn-primary btn-user btn-block btn btn-secondary">Voltar</a>
+                <a href="index.jsp" class="btn btn-primary btn-user btn-block btn btn-secondary">Voltar</a>
                 <hr>
               </form>
             </div>

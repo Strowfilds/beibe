@@ -37,7 +37,7 @@ public class CidadeDAO implements DAO<Cidade> {
                 cidade.setId(rs.getInt("id_cidade"));
                 cidade.setNome(rs.getString("nome_cidade"));
                 cidade.setIdEstado(rs.getInt("id_estado"));
-            }
+            } 
         } catch (SQLException e) {
             throw new DAOException("Erro buscando cidade: " + QUERY_BUSCAR + "/ " + Integer.toString(id), e);
         }

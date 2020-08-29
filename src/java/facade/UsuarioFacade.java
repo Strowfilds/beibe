@@ -1,8 +1,5 @@
 package facade;
 
-import beans.Cidade;
-import beans.Endereco;
-import beans.Estado;
 import beans.TipoUsuario;
 import beans.Usuario;
 import dao.ConnectionFactory;
