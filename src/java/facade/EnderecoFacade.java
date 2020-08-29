@@ -49,4 +49,27 @@ public class EnderecoFacade {
             return estadoDAO.buscarTodos();
         }
     }
+
+    public static void inserir(Endereco endereco) throws DAOException, Exception {
+        try (ConnectionFactory connFactory = new ConnectionFactory()) {
+            EnderecoDAO enderecoDAO = new EnderecoDAO(connFactory.getConnection());
+            enderecoDAO.inserir(endereco);
+        }
+    }
+    
+    public static Endereco criarNovoEndereco(String endereco, int num, String compl, String bairro, int cidade, int estado, String cep){
+        Endereco novoEndereco = new Endereco();
+        novoEndereco.setEndereco(endereco);
+        novoEndereco.setNumero(num);
+        novoEndereco.setComplemento(compl);
+        novoEndereco.setBairro(bairro);
+        novoEndereco.setCep(cep);
+
+        novoEndereco.setCidade(new Cidade());
+        novoEndereco.getCidade().setId(cidade);
+        novoEndereco.setEstado(new Estado());
+        novoEndereco.getEstado().setId(estado);
+        
+        return novoEndereco;
+    }
 }

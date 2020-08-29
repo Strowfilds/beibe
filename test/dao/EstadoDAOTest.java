@@ -31,6 +31,7 @@ public class EstadoDAOTest {
             EstadoDAO estadoDAO = new EstadoDAO(connFactory.getConnection());
             System.out.println("+++ TESTE");
             Estado estado = estadoDAO.buscar(1);
+            assertNotNull(estado);
             System.out.println("+++ ESTADO: " + estado.getNome());
         } catch (Exception ex) {
             ex.printStackTrace();

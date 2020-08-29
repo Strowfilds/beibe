@@ -33,7 +33,7 @@ CREATE TABLE tb_usuario (
     cpf_usuario VARCHAR(11) NOT NULL,
     email_usuario VARCHAR(100) NOT NULL,
     telefone_usuario VARCHAR(14) NOT NULL,
-    senha_usuario BYTEA NOT NULL,    
+    senha_usuario CHAR(64) NOT NULL,    
     id_tipo_usuario INT NOT NULL,
     PRIMARY KEY (id_usuario),    
     FOREIGN KEY (id_tipo_usuario) REFERENCES tb_tipo_usuario (id_tipo_usuario)

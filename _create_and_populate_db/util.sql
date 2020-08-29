@@ -1,3 +1,7 @@
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO web2;
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO web2;
+
 /*
 ++  Selecionar todos os usuários    
 */

@@ -20,11 +20,9 @@
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"/>
 
     </head>
-
 
     <body style="background-color: #151215">
 
@@ -75,7 +73,7 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-6">
-                                            <select class="form-control" style="border-radius: 50rem;" name="uf" id="estado">
+                                            <select class="form-control" style="border-radius: 50rem;" name="estado" id="estado">
                                                 <c:forEach items="${applicationScope.estados}" var="estado">                                                    
                                                     <option value="${estado.id}">${estado.nome} - ${estado.sigla}</option>                                                    
                                                 </c:forEach>
@@ -85,19 +83,16 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-8 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="CEP" required>
+                                            <input type="text" class="form-control form-control-user" id="cep" name="cep" placeholder="CEP" required>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" required>
+                                            <input type="tel" class="form-control form-control-user" id="tel" name="tel" placeholder="Telefone" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repita a senha" required>
-                                        </div>
+                                            <input type="password" class="form-control form-control-user" id="psw" name="senha" placeholder="Senha" required>
+                                        </div>                                        
                                     </div>
                                     <input type="submit" value="Cadastre-me" class="btn btn-primary btn-user btn-block">
                                     <hr>
