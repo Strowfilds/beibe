@@ -24,9 +24,9 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Partindo jÃ¡?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Partindo já?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">Ã—</span>
+            <span aria-hidden="true">X</span>
           </button>
         </div>
         <div class="modal-body">Pressione "Logout" abaixo se você realmente deseja sair</div>
