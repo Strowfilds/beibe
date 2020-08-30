@@ -35,14 +35,14 @@
                                     <form class="user">
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome Completo"  value="${usuario.nome}">
+                                                <input type="text" class="form-control form-control-user" id="nomecompleto" placeholder="Nome Completo"  value="${usuario.nome}">
                                             </div>
                                             <div class="col-sm-6">                                                
                                                 <input type="text" class="form-control form-control-user" id="cpf" placeholder="CPF" disabled value="${usuario.cpf}">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email" disabled value="${usuario.email}">
+                                            <input type="email" class="form-control form-control-user" id="email" placeholder="Email" disabled value="${usuario.email}">
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-9 mb-3 mb-sm-0">
@@ -65,25 +65,25 @@
                                                 <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Cidade" value="${usuario.endereco.cidade.nome}">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Estado" value="${usuario.endereco.estado.nome}">
+                                                <input type="text" class="form-control form-control-user" id="estado" placeholder="Estado" value="${usuario.endereco.estado.nome}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-8 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="CEP" value="${usuario.endereco.cep}">
+                                                <input type="text" class="form-control form-control-user" id="cep" placeholder="CEP" value="${usuario.endereco.cep}">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" value="${usuario.telefone}">
+                                                <input type="tel" class="form-control form-control-user" id="tel" placeholder="Telefone" value="${usuario.telefone}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha" required>
+                                                <input type="password" class="form-control form-control-user" id="password" placeholder="Senha" required>
                                             </div>
                                         </div>
-                                        <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
+                                        <input id="submitBtn" type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
                                         <c:if test="${login.tipoUsuario.id eq 3}">
-                                            <input type="submit" value="Excluir Conta De Usuário" class="btn btn-primary btn-user btn-block btn-danger">
+                                            <input id="submitBtn" type="submit" value="Excluir Conta De Usuário" class="btn btn-primary btn-user btn-block btn-danger">
                                         </c:if>
                                         <hr>
                                     </form>

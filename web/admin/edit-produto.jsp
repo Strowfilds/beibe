@@ -25,14 +25,14 @@
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-9 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Descrição" value="###########descrição###########">
+                    <input type="text" class="form-control form-control-user" id="descricao" placeholder="Descrição" value="###########descrição###########">
                   </div>
                   <div class="col-sm-3">
-                    <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Peso" value="###########peso###########">
+                    <input type="text" class="form-control form-control-user" id="peso" placeholder="Peso" value="###########peso###########">
                   </div>
                 </div>
                 
-                <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
+                <input id="submitBtn" type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
                 <a href="produtos.jsp" class="btn btn-primary btn-user btn-block btn btn-secondary">Voltar</a>
                 <hr>
               </form>

@@ -14,53 +14,53 @@
               <form class="user" action="###########ClienteServlet#############">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome Completo" disabled value="#########nome do usuario###########">
+                    <input type="text" class="form-control form-control-user" id="nomecompleto" placeholder="Nome Completo" disabled value="#########nome do usuario###########">
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="CPF" disabled value="##########cpf usuario#############">
+                    <input type="text" class="form-control form-control-user" maxlength="14" id="exampleLastName" placeholder="CPF" disabled value="##########cpf usuario#############">
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email" value="###########email usuario###########">
+                  <input type="email" class="form-control form-control-user" id="email" placeholder="Email" value="###########email usuario###########">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-9 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Endereço" value="###########endereco usuario###########">
+                    <input type="text" class="form-control form-control-user" id="endereco" placeholder="Endereço" value="###########endereco usuario###########">
                   </div>
                   <div class="col-sm-3">
-                    <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Número" value="###########numero usuario###########">
+                    <input type="text" class="form-control form-control-user" id="endereconum" placeholder="Número" value="###########numero usuario###########">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-8 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Complemento" value="###########complemento usuário###########">
+                    <input type="text" class="form-control form-control-user" id="complemento" placeholder="Complemento" value="###########complemento usuário###########">
                   </div>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Bairro" value="###########bairro usuario###########">
+                    <input type="text" class="form-control form-control-user" id="bairro" placeholder="Bairro" value="###########bairro usuario###########">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-8 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Cidade" value="###########cidade usuario###########">
+                    <input type="text" class="form-control form-control-user" id="cidade" placeholder="Cidade" value="###########cidade usuario###########">
                   </div>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Estado" value="###########estado###########">
+                    <input type="text" class="form-control form-control-user" id="estado" placeholder="Estado" value="###########estado###########">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-8 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="CEP" value="###########CEP###########">
+                    <input type="text" class="form-control form-control-user" id="cep" placeholder="CEP" value="###########CEP###########">
                   </div>
                   <div class="col-sm-4">
-                    <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" value="###########telefone###########">
+                    <input type="tel" class="form-control form-control-user" id="tel" placeholder="Telefone" value="###########telefone###########">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha" required>
+                    <input type="password" class="form-control form-control-user" id="password" placeholder="Senha" required>
                   </div>
                 </div>
-                <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
+                <input id="submitBtn" type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
                 <a href="clientes.jsp" class="btn btn-primary btn-user btn-block btn btn-secondary">Voltar</a>
                 <hr>
               </form>

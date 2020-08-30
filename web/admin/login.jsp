@@ -45,7 +45,7 @@
                   <c:url value="/LoginServlet" var="login"/>
                     <form class="user" action="${login}" method="post">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" name="email" placeholder="Email" required>
+                      <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" name="email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha" name="senha" required>
@@ -56,7 +56,7 @@
                         <label class="custom-control-label" for="customCheck">Lembrar minhas credenciais</label>
                       </div>
                     </div>
-                    <input type="submit" class="btn btn-primary btn-user btn-block">
+                    <input id="submitBtn" type="submit" class="btn btn-primary btn-user btn-block">
                   </form>
                   <hr>
                   <div class="text-center">

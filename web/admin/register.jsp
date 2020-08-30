@@ -46,6 +46,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control form-control-user" name="cpf" id="CPF" placeholder="CPF" value="00000000000" required>
+                                            <div id="resultadoValidacao"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -56,7 +57,7 @@
                                             <input type="text" class="form-control form-control-user" name="endereco" placeholder="Endereço" required>
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control form-control-user" name="num" placeholder="Número" required>
+                                            <input type="num" maxlength="5" class="form-control form-control-user" name="num" placeholder="Número" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -69,12 +70,12 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <select class="form-control" style="border-radius: 50rem;" name="cidade" id="cidade">                             
+                                            <select class="form-control" style="border-radius: 50px;" name="cidade" id="cidade">                             
                                                 <option value="0" selected>Selecione um estado</option>                               
                                             </select>
                                         </div>
                                         <div class="col-sm-6">
-                                            <select class="form-control" style="border-radius: 50rem;" name="estado" id="estado">
+                                            <select class="form-control" style="border-radius: 50px;" name="estado" id="estado">
                                                 <c:forEach items="${applicationScope.estados}" var="estado">                                                    
                                                     <option value="${estado.id}">${estado.nome} - ${estado.sigla}</option>                                                    
                                                 </c:forEach>
@@ -83,10 +84,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-sm-8 mb-3 mb-sm-0">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
                                             <input type="text" class="form-control form-control-user" id="cep" name="cep" placeholder="CEP" required>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <input type="tel" class="form-control form-control-user" id="tel" name="tel" placeholder="Telefone" required>
                                         </div>
                                     </div>
@@ -95,7 +96,7 @@
                                             <input type="password" class="form-control form-control-user" id="psw" name="senha" placeholder="Senha" required>
                                         </div>                                        
                                     </div>
-                                    <input type="submit" value="Cadastre-me" class="btn btn-primary btn-user btn-block">
+                                    <input id="submitBtn" type="submit" value="Cadastre-me" class="btn btn-primary btn-user btn-block">
                                     <hr>
                                 </form>
                                 <hr>
@@ -121,7 +122,9 @@
         <script src="js/sb-admin-2.min.js"></script>
 
         <!-- -->
+        <script src='https://code.jquery.com/jquery-latest.min.js'></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+        <script type="text/javascript" src="js/cpf.js"></script>
 
         
         <script>
@@ -132,6 +135,22 @@
             $(document).ready(function () {
                 var $seuCampoCpf = $("#CPF");
                 $seuCampoCpf.mask('000.000.000-00', {reverse: true});
+            });
+            $(document).ready(function () {
+                var $seuCampoTel = $("#tel");
+            });
+
+            $(document).ready(function () {
+                var $seuCampoTel = $("#tel");
+                $seuCampoTel.mask('00 0 0000-0000', {reverse: true});
+            });
+            $(document).ready(function () {
+                var $seuCampoCep = $("#cep");
+            });
+
+            $(document).ready(function () {
+                var $seuCampoCep = $("#cep");
+                $seuCampoCep.mask('00.000-000', {reverse: true});
             });
         </script>
         <script type="text/javascript" >
