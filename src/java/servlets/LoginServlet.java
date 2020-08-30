@@ -79,7 +79,8 @@ public class LoginServlet extends HttpServlet {
                 login.setTipoUsuario(TipoUsuarioEnum.getTipoUsuarioFromInt(usuario.getTipoUsuario().getId()));
                 HttpSession session = request.getSession();
                 session.setAttribute("login", login);
-                response.sendRedirect("admin/index.jsp");
+                response.sendRedirect("AtendimentoServlet?action=home");
+                //response.sendRedirect("admin/index.jsp");
                 //rd = getServletContext().getRequestDispatcher("/admin/index.jsp");
                 //rd.forward(request, response);                
             } else {

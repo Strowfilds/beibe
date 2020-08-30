@@ -57,7 +57,7 @@
                                 </thead>
                                 <tbody>
                                     <!-- Dados cliente -->
-                                    <c:forEach items="${sessionScope.produtos}" var="produto">          
+                                    <c:forEach items="${sessionScope.produtos}" var="produto">
                                     <tr>
                                         <td><c:out value="${produto.nome}"/></td>
                                         <td><c:out value="${produto.categoria.nome}"/></td>

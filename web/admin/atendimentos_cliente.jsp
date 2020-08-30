@@ -13,7 +13,10 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="edit-atendimento.jsp" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Abrir Chamado</a>
+        <c:url value="../AtendimentoServlet" var="novoatendimento">
+            <c:param name="action" value="novo"/>
+        </c:url>
+        <a href="${novoatendimento}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm f-right"><i class="fas fa-plus fa-sm text-white-50"></i> Abrir um chamado</a>
     </div>
 
 </div>

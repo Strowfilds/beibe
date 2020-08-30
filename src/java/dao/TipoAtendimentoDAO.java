@@ -17,7 +17,7 @@ public class TipoAtendimentoDAO implements DAO<TipoAtendimento> {
 
     private Connection con = null;
 
-    public TipoAtendimentoDAO() throws DAOException {
+    public TipoAtendimentoDAO(Connection con) throws DAOException {
         if (con == null) {
             throw new DAOException("Conexão nula ao criar PessoaDAO.");
         }

@@ -1,64 +1,132 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page errorPage = "erro.jsp"%>
-<jsp:include page="header.jsp" />
-  <div class="container-fluid">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="header.jsp" %>
+<c:if test="${empty sessionScope.login}">     
+    <jsp:forward page="erro.jsp" >
+        <jsp:param name="msg" value="Usuário deve se autentificar para acessar o sistema."  />
+        <jsp:param name="cod" value="403" />
+    </jsp:forward>
+</c:if>
+<div class="container-fluid">
     <div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body p-0">
-        <!-- Nested Row within Card Body -->
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="p-5">
-              <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Informações do Atendimento</h1>
-              </div>
-              <form class="user" action="###########AtendimentoServlet#############">
-                <div class="form-group row">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome Completo" disabled value="#########nome do usuario###########">
-                  </div>
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email" disabled value="###########email usuario###########">
-                  </div>
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Informações do Atendimento</h1>
+                        </div>
+                        <c:choose>
+                            <c:when test="${param.action eq 'novo'}">
+                                <c:url value="../AtendimentoServlet" var="actionurl">
+                                    <c:param name="action" value="adicionar"/>                                    
+                                </c:url>
+                            </c:when>
+                            <c:when test="${param.action eq 'modificar'}">
+                                <c:url value="../AtendimentoServlet" var="actionurl">
+                                    <c:param name="action" value="editar"/>                                    
+                                </c:url>
+                                <c:set var="id" value="${param.id}"/>                                        
+                                <c:set var="nome" value="${param.nome}"/>                                        
+                            </c:when>
+                        </c:choose>
+                        <form class="user" action="${actionurl}" method="post">                            
+                            <div class="form-group row">
+                                <div class="col-sm-5 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome Completo" disabled value="${atendimento.usuario.nome}">
+                                </div>
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email" disabled value="${atendimento.usuario.email}">
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" disabled value="${atendimento.usuario.telefone}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <c:if test="${param.action eq 'modificar'}">                                    
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Data e Hora" disabled value="${atendimento.dataHora}">
+                                    </div>
+                                </c:if>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <select class="form-control" style="border-radius: 50px; height: calc(2.2em + .75rem + 2px); " id="exampleLastName" name="produto" required>
+                                        <c:choose>
+                                            <c:when test="${param.action eq 'novo'}">
+                                                <c:forEach items="${sessionScope.produtos}" var="produto">                                                    
+                                                    <option value="${produto.id}">${produto.nome}</option>                                                    
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:when test="${param.action eq 'modificar'}">
+                                                <option value="${atendimento.produto.id}" selected>${atendimento.produto.nome}</option>
+                                                <c:forEach items="${sessionScope.produtos}" var="produto">                                               
+                                                    <c:if test="${atendimento.produto.id != produto.id}">
+                                                        <option value="${produto.id}">${produto.nome}</option>         
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:when>
+                                        </c:choose>                                                                             
+                                    </select>
+                                </div>
+                                <c:if test="${param.action eq 'modificar'}">
+                                    <div class="col-sm-3">
+                                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Resolver">
+                                        <label for="vehicle3">Resolvido?</label>
+                                    </div>                                    
+                                </c:if>                            
+                                <div class="col-sm-4">
+                                    <c:choose>
+                                        <c:when test="${param.action eq 'novo'}">
+                                            <select class="form-control" style="border-radius: 50px; height: calc(2.2em + .75rem + 2px); " id="exampleLastName" name="tipoatendimento" required>
+                                                <c:forEach items="${sessionScope.tiposatendimento}" var="tipoatendimento">                                                    
+                                                    <option value="${tipoatendimento.id}">${tipoatendimento.nome}</option>                                                    
+                                                </c:forEach>
+                                            </select>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <select class="form-control" style="border-radius: 50px; height: calc(2.2em + .75rem + 2px); " id="exampleLastName" name="tipoatendimento" disabled required>
+                                                <option value="${atendimento.produto.id}" selected>${atendimento.produto.nome}</option>
+                                            </select>                                            
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Descrição" name="descricao" value="${atendimendo.tipoAtendimento.descricao}" required>
+                                </div>
+                            </div>
+                            <c:if test="${login.tipoUsuario.id > 1}">                                        
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Solução" name="solucao" value="${atendimendo.tipoAtendimento.solucao}">
+                                    </div>
+                                </div>
+                            </c:if>
+                            <c:if test="${login.tipoUsuario.id eq 1}">                                        
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Solução" name="tipoatendimento" disabled value="${atendimendo.tipoAtendimento.nome}">
+                                    </div>
+                                </div>
+                            </c:if>
+
+                            <input type="hidden" value="${login.id}" name="id"/> 
+
+                            <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
+                            <c:url value="../AtendimentoServlet" var="voltar">
+                                <c:param name="action" value="home"/>
+                            </c:url>
+                            <a href="${voltar}" class="btn btn-primary btn-user btn-block btn btn-secondary">Voltar</a>
+                            <hr>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group row">
-                  <div class="col-sm-6">
-                    <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" disabled value="###########telefone###########">
-                  </div>
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="CEP" disabled value="###########DATA E HORA###########">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="CEP" disabled value="###########PRODUTO###########">
-                  </div>
-                  <div class="col-sm-6">
-                    <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" disabled value="###########SITUAÇÂO###########">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-6">
-                    <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" disabled value="###########TIPO DO ATENDIMENTO###########">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-12 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="CEP" disabled value="###########DESCRICAO###########">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                    <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" disabled value="###########SOLUCAO###########">
-                  </div>
-                </div>
-                <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
-                <a href="index.jsp" class="btn btn-primary btn-user btn-block btn btn-secondary">Voltar</a>
-                <hr>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 <%@include file="footer.jsp" %>

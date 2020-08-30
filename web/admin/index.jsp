@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="header.jsp"%>
 <c:if test="${empty sessionScope.login}">     
@@ -19,9 +20,15 @@
         </div>
     </c:if>
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm f-right"><i class="fas fa-plus fa-sm text-white-50"></i> Abrir um chamado</a>
-    </div>
+    <c:if test= "${sessionScope.login.tipoUsuario.id eq 1}">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <c:url value="../AtendimentoServlet" var="novoatendimento">
+                <c:param name="action" value="novo"/>
+            </c:url>
+            <a href="${novoatendimento}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm f-right"><i class="fas fa-plus fa-sm text-white-50"></i> Abrir um chamado</a>
+        </div>
+    </c:if>
+
     <c:if test= "${sessionScope.login.tipoUsuario.id > 1}">
         <!-- Estatísticas ATENDIMENTOS -->
         <div class="row">        
@@ -63,65 +70,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Presencial</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">20 / 30</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-handshake fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Telefônico</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">20 / 30</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-phone fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Online</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">20 / 30</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-at fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div>            
         </div>
         <!-- Estatísticas ATENDIMENTOS -->
     </c:if>
 </div>
-<c:if test="${sessionScope.login.tipoUsuario.id < 1}" >
+<c:if test="${sessionScope.login.tipoUsuario.id > 1}" >
 
-    <!-- atendimentos funcionário -->
+    <!-- atendimentos abertos -->
 
     <div class="row">
         <div class="col-md-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Atendimentos do Funcionário</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Atendimentos abertos</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -181,6 +143,7 @@
                     </div>
                 </div>
             </div>
+            <!--
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -240,13 +203,15 @@
                     </table>
                 </div>
             </div>
+            -->
         </div>
     </div>
 </c:if>
 </div>
+
 <!-- atendimentos funcionário -->
 <c:if test="${sessionScope.login.tipoUsuario.id eq 1}" >
-    <!-- atendimentos cliente -->
+    <!-- atendimentos cliente -->    
     <div class="row">
         <div class="col-md-12">
             <div class="card shadow mb-4">
@@ -256,101 +221,56 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th colspan="9">Não há atendimentos marcados</th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th>Data/Hora</th>
-                                    <th>Cliente</th>
-                                    <th>Situação Do Atendimento</th>
-                                    <th>Produto</th>
-                                    <th>Tipo Do Atendimento</th>
-                                    <th>Descrição</th>
-                                    <th>Solução Apresentada</th>
-                                    <th>Editar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>11-11-2020 | 09:00</th>
-                                    <th>Maria de Lourdes</th>
-                                    <th>
-                                        <button style="pointer-events: none;" type="button" class="btn btn-primary">Aberto</button>
-                                        <button style="pointer-events: none;" type="button" class="btn btn-success">Resolvido</button>
-                                        <button style="pointer-events: none;" type="button" class="btn btn-danger">Pendente</button>
-                                        <button style="pointer-events: none;" type="button" class="btn btn-warning">Em andamento</button>
-                                        <button style="pointer-events: none;" type="button" class="btn btn-info">Congelado</button>
-                                    </th>
-                                    <th>
-                                        Hidratante
-                                    </th>
-                                    <th>
-                                        Telefônico
-                                    </th>
-                                    <th>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip</th>
-                                    <th>Excepteur sint occaecat cupidatat non
-                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</th>
-                                    <th><a href="#page-top"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></th>
-                                </tr>
-                            </tbody>
+                            <c:choose>
+                                <c:when test="${empty atendimentos}">
+                                     <thead>
+                                    <tr>
+                                        <th colspan="9">Não há atendimentos marcados</th>
+                                    </tr>
+                                </thead>  
+                                </c:when>
+                                <c:otherwise>                                    
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>                                            
+                                            <th>Situação Do Atendimento</th>
+                                            <th>Produto</th>
+                                            <th>Tipo Do Atendimento</th>
+                                            <th>Descrição</th>
+                                            <th>Solução Apresentada</th>
+                                            <th>Editar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${sessionScope.atendimentos}" var="atendimento">
+                                        <tr>
+                                            <td><fmt:formatDate value="${atendimento.dataHora}" pattern="dd/MM/yyyy"/> </td>                                            
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${atendimento.aberto}">
+                                                        <c:out value="Em aberto" />
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:out value="Resolvido" />
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <c:out value="${atendimento.produto.nome}"/>
+                                            </td>
+                                            <td>                                                
+                                                <c:out value="${atendimento.tipoAtendimento.nome}"/>
+                                            </td>
+                                            <td><c:out value="${atendimento.descricao}"/></td>
+                                            <td><c:out value="${atendimento.solucao}"/></td>
+                                            <td><a href="#page-top"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                        </tr>                                            
+                                        </c:forEach>
+                                    </tbody>
+                                </c:otherwise>
+                            </c:choose>                            
                         </table>
                     </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th colspan="9">Não há atendimentos marcados</th>
-                            </tr>
-                        </thead>
-                        <thead>
-                            <tr>
-                                <th>Data/Hora</th>
-                                <th>Cliente</th>
-                                <th>Situação Do Atendimento</th>
-                                <th>Produto</th>
-                                <th>Tipo Do Atendimento</th>
-                                <th>Descrição</th>
-                                <th>Solução Apresentada</th>
-                                <th>Editar</th>
-                                <th>Resolvido</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>11-11-2020 | 09:00</th>
-                                <th>Maria de Lourdes</th>
-                                <th>
-                                    <button style="pointer-events: none;" type="button" class="btn btn-primary">Aberto</button>
-                                    <button style="pointer-events: none;" type="button" class="btn btn-success">Resolvido</button>
-                                    <button style="pointer-events: none;" type="button" class="btn btn-danger">Pendente</button>
-                                    <button style="pointer-events: none;" type="button" class="btn btn-warning">Em andamento</button>
-                                    <button style="pointer-events: none;" type="button" class="btn btn-info">Congelado</button>
-                                </th>
-                                <th>
-                                    Hidratante
-                                </th>
-                                <th>
-                                    Telefônico
-                                </th>
-                                <th>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip</th>
-                                <th>Excepteur sint occaecat cupidatat non
-                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</th>
-                                <th><a href="#page-top"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></th>
-                                <th>
-                                    <a href="#page-top">Marcar como resolvido<i class="fas fa-check" style="color: green;"></i></a></th>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>

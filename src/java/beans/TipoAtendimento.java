@@ -2,10 +2,6 @@ package beans;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Ana Nicole
- */
 public class TipoAtendimento implements Serializable {
 
     private int id;

@@ -45,8 +45,11 @@
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
+                <c:url value="../AtendimentoServlet" var="atendimentos">
+                    <c:param name="action" value="home"/>
+                </c:url>
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.jsp">
+                    <a class="nav-link" href="${atendimentos}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -74,14 +77,20 @@
                             <span>Funcionários</span></a>
                     </li>
                 </c:if>
-                <c:if test="${login.tipoUsuario.id > 1}">                    
+                <c:if test="${login.tipoUsuario.id > 1}">       
+                    <!--
                     <li class="nav-item">
                         <a class="nav-link" href="clientes.jsp">
                             <i class="fas fa-fw fa-users"></i>
                             <span>Clientes</span></a>
                     </li>
+                    -->
+
                     <li class="nav-item">
-                        <a class="nav-link" href="atendimentos_funcionario.jsp">
+                        <c:url value="../AtendimentoServlet" var="atendimentos">
+                            <c:param name="action" value="listatendimentos"/>
+                        </c:url>
+                        <a class="nav-link" href="${atendimentos}">
                             <i class="fas fa-fw fa-fire"></i>
                             <span>Atendimentos</span></a>
                     </li>
@@ -94,6 +103,7 @@
                             <i class="fas fa-fw fa-gift"></i>
                             <span>Produtos</span></a>
                     </li>
+
                     <li class="nav-item">
                         <c:url value="../CategoriaServlet" var="categorias">
                             <c:param name="action" value="listcategoria"/>
