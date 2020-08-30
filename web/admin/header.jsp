@@ -87,7 +87,10 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="produtos.jsp">
+                        <c:url value="../ProdutoServlet" var="produtos">
+                            <c:param name="action" value="listproduto"/>
+                        </c:url>
+                        <a class="nav-link" href="${produtos}">
                             <i class="fas fa-fw fa-gift"></i>
                             <span>Produtos</span></a>
                     </li>

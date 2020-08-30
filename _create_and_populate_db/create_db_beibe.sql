@@ -66,7 +66,7 @@ CREATE TABLE tb_produto (
     nome_produto VARCHAR(50) NOT NULL,    
     descricao_produto VARCHAR(1000) NOT NULL,
     id_categoria INT NOT NULL,
-    peso_categoria INT NOT NULL,
+    peso_produto INT NOT NULL,
     PRIMARY KEY (id_produto),
     FOREIGN KEY (id_categoria) REFERENCES tb_categoria (id_categoria)
 );

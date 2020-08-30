@@ -80,4 +80,4 @@
 </div>
 <!-- End of Main Content -->
 
-<jsp:include page="footer.jsp" />
+<%@include file="footer.jsp" %>

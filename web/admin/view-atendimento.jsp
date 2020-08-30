@@ -60,4 +60,4 @@
       </div>
     </div>
   </div>
-<jsp:include page="footer.jsp" />
+<%@include file="footer.jsp" %>

@@ -7,6 +7,6 @@
         <li class="menu-item"><a href="galeria.jsp">Galeria</a></li>
         <li class="menu-item"><a href="contato.jsp">Contato</a></li>
         <c:url value="admin/login.jsp" var="login"/>
-        <li class="menu-item"><a href="${login}">Entrar</a></li>
+        <li class="menu-item"><a href="${login}">Entrar</a></li>        
     </ul> <!-- .menu -->
 </div> <!-- .main-navigation -->

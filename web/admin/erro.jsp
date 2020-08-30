@@ -134,5 +134,5 @@
                 </div>
                 <!-- End of Main Content -->
 
-                <jsp:include page="footer.jsp" />
+                <%@include file="footer.jsp" %>
                 <a href="../../../Exercicio7/src/java/servlets/LogoutServlet.java"></a>

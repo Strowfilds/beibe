@@ -81,10 +81,7 @@
                                                 <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha" required>
                                             </div>
                                         </div>
-                                        <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
-                                        <c:if test="${login.tipoUsuario.id eq 3}">
-                                            <input type="submit" value="Excluir Conta De Usuário" class="btn btn-primary btn-user btn-block btn-danger">
-                                        </c:if>
+                                        <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">                                        
                                         <hr>
                                     </form>
                                 </div>
@@ -110,7 +107,7 @@
 </div>
 <!-- End of Main Content -->
 
-<jsp:include page="footer.jsp" />
+<%@include file="footer.jsp" %>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 <script>
     $(document).ready(function () {
