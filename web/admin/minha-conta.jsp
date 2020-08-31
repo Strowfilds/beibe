@@ -39,14 +39,14 @@
                                         <input type="hidden" value="${login.id}" name="id"/> 
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome Completo"  name="nome" value="${usuario.nome}">
+                                                <input type="text" class="form-control form-control-user" id="nomecompleto" name="nome" placeholder="Nome Completo"  value="${usuario.nome}">
                                             </div>
                                             <div class="col-sm-6">                                                
                                                 <input type="text" class="form-control form-control-user" id="cpf" placeholder="CPF" disabled value="${usuario.cpf}">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email" disabled value="${usuario.email}">
+                                            <input type="email" class="form-control form-control-user" id="email" placeholder="Email" disabled value="${usuario.email}">
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-9 mb-3 mb-sm-0">
@@ -84,10 +84,10 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-8 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="exampleInputtext" name="cep" placeholder="CEP" value="${usuario.endereco.cep}">
+                                                <input type="text" class="form-control form-control-user" id="cep" name="cep" placeholder="CEP" value="${usuario.endereco.cep}">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="tel" class="form-control form-control-user" id="exampleRepeattext" name="tel" placeholder="Telefone" value="${usuario.telefone}">
+                                                <input type="tel" class="form-control form-control-user" id="tel" name="tel" placeholder="Telefone" value="${usuario.telefone}">
                                             </div>
                                         </div>
                                         <div class="form-group row">

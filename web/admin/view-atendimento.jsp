@@ -14,41 +14,41 @@
               <form class="user" action="###########AtendimentoServlet#############">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome Completo" disabled value="#########nome do usuario###########">
+                    <input type="text" class="form-control form-control-user" id="nomecompleto" placeholder="Nome Completo" disabled value="#########nome do usuario###########">
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email" disabled value="###########email usuario###########">
+                    <input type="email" class="form-control form-control-user" id="email" placeholder="Email" disabled value="###########email usuario###########">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6">
-                    <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" disabled value="###########telefone###########">
+                    <input type="tel" class="form-control form-control-user" id="tel" placeholder="Telefone" disabled value="###########telefone###########">
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="CEP" disabled value="###########DATA E HORA###########">
+                    <input type="text" class="form-control form-control-user" id="cep" placeholder="CEP" disabled value="###########DATA E HORA###########">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="CEP" disabled value="###########PRODUTO###########">
+                    <input type="text" class="form-control form-control-user" id="produto" placeholder="Produto" disabled value="###########PRODUTO###########">
                   </div>
                   <div class="col-sm-6">
-                    <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" disabled value="###########SITUAÇÂO###########">
+                    <input type="text" class="form-control form-control-user" id="situacao" placeholder="Situação" disabled value="###########SITUAÇÂO###########">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6">
-                    <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" disabled value="###########TIPO DO ATENDIMENTO###########">
+                    <input type="text" class="form-control form-control-user" id="tipoAtendimento" placeholder="Tipo do Atendimento" disabled value="###########TIPO DO ATENDIMENTO###########">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-12 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="CEP" disabled value="###########DESCRICAO###########">
+                    <input type="text" class="form-control form-control-user" id="descricao" placeholder="Descrição" disabled value="###########DESCRICAO###########">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-12">
-                    <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" disabled value="###########SOLUCAO###########">
+                    <input type="text" class="form-control form-control-user" id="solucao" placeholder="Solução" disabled value="###########SOLUCAO###########">
                   </div>
                 </div>
                 <a href="clientes.jsp" class="btn btn-primary btn-user btn-block btn btn-secondary">Voltar</a>

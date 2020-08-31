@@ -38,7 +38,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Atendimentos até o Momento</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">400</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${atendimentosQtd}"/></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -88,57 +88,54 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th colspan="9">Não há atendimentos marcados</th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th>Data/Hora</th>
-                                    <th>Cliente</th>
-                                    <th>Situação Do Atendimento</th>
-                                    <th>Produto</th>
-                                    <th>Tipo Do Atendimento</th>
-                                    <th>Descrição</th>
-                                    <th>Solução Apresentada</th>
-                                    <th>Salvar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>11-11-2020 | 09:00</th>
-                                    <th>Maria de Lourdes</th>
-                                    <th>
-                                        <select>
-                                            <option value="aberto">Aberto</option>
-                                            <option value="em andamento">Em andamento</option>
-                                            <option value="congelado">Congelado</option>
-                                            <option value="pendente">Pendente</option>
-                                            <option value="concluido">Concluído</option>
-                                        </select>
-                                    </th>
-                                    <th>
-                                        <select>
-                                            <option value="Base">Base</option>
-                                            <option value="Hidratante">Hidratante</option>
-                                            <option value="Protese de Unha">Prótese de Unha</option>
-                                            <option value="Agua Oxigenada">Água Oxigenada</option>
-                                            <option value="Algodao">Algodão</option>
-                                        </select>
-                                    </th>
-                                    <th>
-                                        <select>
-                                            <option value="Presencial">Presencial</option>
-                                            <option value="Telefonico">Telefônico</option>
-                                            <option value="Online">Online</option>
-                                        </select>
-                                    </th>
-                                    <th><input type="text" name="description" value="lorem ipsum bla bla bla"></th>
-                                    <th><input type="text" name="solution" value="lorem ipsum bla bla bla"></th>
-                                    <th><a href="#page-top"><i class="fas fa-save" style="color: grey;"></i></a></th>
-                                </tr>
-                            </tbody>
+                           <c:choose>
+                                <c:when test="${empty atendimentos}">
+                                     <thead>
+                                    <tr>
+                                        <th colspan="9">Não há atendimentos marcados</th>
+                                    </tr>
+                                </thead>  
+                                </c:when>
+                                <c:otherwise>                                    
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>                                            
+                                            <th>Situação Do Atendimento</th>
+                                            <th>Produto</th>
+                                            <th>Tipo Do Atendimento</th>
+                                            <th>Descrição</th>
+                                            <th>Solução Apresentada</th>
+                                            <th>Editar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${sessionScope.atendimentos}" var="atendimento">
+                                        <tr>
+                                            <td><fmt:formatDate value="${atendimento.dataHora}" pattern="dd/MM/yyyy"/> </td>                                            
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${atendimento.aberto}">
+                                                        <c:out value="Em aberto" />
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:out value="Resolvido" />
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <c:out value="${atendimento.produto.nome}"/>
+                                            </td>
+                                            <td>                                                
+                                                <c:out value="${atendimento.tipoAtendimento.nome}"/>
+                                            </td>
+                                            <td><c:out value="${atendimento.descricao}"/></td>
+                                            <td><c:out value="${atendimento.solucao}"/></td>
+                                            <td><a href="#page-top"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                        </tr>                                            
+                                        </c:forEach>
+                                    </tbody>
+                                </c:otherwise>
+                            </c:choose>                            
                         </table>
                     </div>
                 </div>

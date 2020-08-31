@@ -70,13 +70,7 @@
                                             </c:when>
                                         </c:choose>                                                                             
                                     </select>
-                                </div>
-                                <c:if test="${param.action eq 'modificar'}">
-                                    <div class="col-sm-3">
-                                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Resolver">
-                                        <label for="vehicle3">Resolvido?</label>
-                                    </div>                                    
-                                </c:if>                            
+                                </div>                                                        
                                 <div class="col-sm-4">
                                     <c:choose>
                                         <c:when test="${param.action eq 'novo'}">
@@ -88,33 +82,40 @@
                                         </c:when>
                                         <c:otherwise>
                                             <select class="form-control" style="border-radius: 50px; height: calc(2.2em + .75rem + 2px); " id="exampleLastName" name="tipoatendimento" disabled required>
-                                                <option value="${atendimento.produto.id}" selected>${atendimento.produto.nome}</option>
+                                                <option value="${atendimento.tipoAtendimento.id}" selected>${atendimento.tipoAtendimento.nome}</option>
                                             </select>                                            
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
+                                <c:if test="${param.action eq 'modificar'}">
+                                    <div class="col-sm-3">
+                                        <input type="checkbox" id="vehicle3" name="resolvido" value="Resolver">
+                                        <label for="vehicle3">Resolvido?</label>
+                                    </div>                                    
+                                </c:if>    
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-12 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Descrição" name="descricao" value="${atendimendo.tipoAtendimento.descricao}" required>
+                                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Descrição" name="descricao" value="${atendimendo.descricao}" required>
                                 </div>
                             </div>
                             <c:if test="${login.tipoUsuario.id > 1}">                                        
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Solução" name="solucao" value="${atendimendo.tipoAtendimento.solucao}">
+                                        <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Solução" name="solucao" value="${atendimendo.solucao}">
                                     </div>
                                 </div>
                             </c:if>
                             <c:if test="${login.tipoUsuario.id eq 1}">                                        
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Solução" name="tipoatendimento" disabled value="${atendimendo.tipoAtendimento.nome}">
+                                        <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Solução" name="tipoatendimento" disabled value="${atendimendo.solucao}">
                                     </div>
                                 </div>
                             </c:if>
 
                             <input type="hidden" value="${login.id}" name="id"/> 
+                            <input type="hidden" value="${atendimento.usuario.id}" name="idAtendimento"/> 
 
                             <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
                             <c:url value="../AtendimentoServlet" var="voltar">
@@ -129,4 +130,3 @@
         </div>
     </div>
 </div>
-<%@include file="footer.jsp" %>

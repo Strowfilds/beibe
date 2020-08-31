@@ -26,7 +26,7 @@
                       <!-- Dados cliente -->
                       <tr>
                         <th>Relatório de Funcionários</th>
-                        <th><a href="###########RELATÓRIO#############"><i class="fas fa-download" style="color: GREY;"></i></a></th>
+                        <th><a href="../GeradorRelatorio"><i class="fas fa-download" style="color: GREY;"></i></a></th>
                       </tr>
                       <!-- fim Dados cliente -->
                     </tbody>
@@ -40,7 +40,7 @@
                       <!-- Dados cliente -->
                       <tr>
                         <th>Relatório de Produtos Mais Reclamados</th>
-                        <th><a href="###########RELATÓRIO#############"><i class="fas fa-download" style="color: GREY;"></i></a></th>
+                        <th><a href="../RelatorioProdutoReclamadoServlet"><i class="fas fa-download" style="color: GREY;"></i></a></th>
                       </tr>
                       <!-- fim Dados cliente -->
                     </tbody>
@@ -86,4 +86,4 @@
       </div>
       <!-- End of Main Content -->
 
-      <%@include file="footer.jsp" %>
+      <jsp:include page="footer.jsp" />

@@ -26,6 +26,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "AtendimentoServlet", urlPatterns = {"/AtendimentoServlet"})
 public class AtendimentoServlet extends HttpServlet {
 
+    // <editor-fold defaultstate="collapsed" desc="processRequest method. Click on the + sign on the left to edit the code.">
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,22 +38,15 @@ public class AtendimentoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AtendiemntoServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AtendiemntoServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        HttpSession session = request.getSession();
+        session.setAttribute("msg", "Forma de acesso inválida.");
+        session.setAttribute("code", 400);
+        response.sendRedirect("erro.jsp");
+
+    }
+    // </editor-fold>
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -68,12 +62,14 @@ public class AtendimentoServlet extends HttpServlet {
         RequestDispatcher rd = null;
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        // Conferindo acesso ===================================================
-        if (session.getAttribute("login") != null) {
-            Login login = (Login) session.getAttribute("login");
-            if (login.getTipoUsuario().getId() < 2) {
-                if (action.equals("novo")) { // ====================================NOVO                
-                    try {
+        try {
+            // ================================================================= Conferindo acesso
+            if (session.getAttribute("login") != null) {
+                Login login = (Login) session.getAttribute("login");
+                if (login.getTipoUsuario().getId() == 1) {
+                    // ========================================================= Opções cliente
+                    if (action.equals("novo")) {
+                        // ===================================================== Novo atendimento
                         Usuario usuario = UsuarioFacade.buscar(login.getId());
                         Atendimento atendimento = new Atendimento();
                         atendimento.setUsuario(usuario);
@@ -83,157 +79,79 @@ public class AtendimentoServlet extends HttpServlet {
                         List<Produto> produtos = ProdutoFacade.buscarTodos();
                         session.setAttribute("produtos", produtos);
                         response.sendRedirect("admin/edit-atendimento.jsp?action=novo");
-                    } catch (Exception ex) {
-                        request.setAttribute("javax.servlet.jsp.jspException", ex);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + ex.getMessage());
-                        rd = getServletContext().getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    }
-                } else if (action.equals("listatendimentosusuario")) { // ======================LISTAR
-                    try {
+                    } else if (action.equals("listatendimentosusuario")) {
+                        // ===================================================== Listagem atendimentos
                         List<Atendimento> atendimentos = AtendimentoFacade.buscarUsuario(login.getId());
                         session.setAttribute("atendimentos", atendimentos);
                         response.sendRedirect("admin/atendimentos_cliente.jsp");
-                    } catch (DAOException daoex) {
-                        request.setAttribute("javax.servlet.jsp.jspException", daoex);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + daoex.getMessage());
-                        rd = getServletContext().getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    } catch (Exception ex) {
-                        request.setAttribute("javax.servlet.jsp.jspException", ex);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + ex.getMessage());
-                        rd = getServletContext().getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    }
-                } else if (action.equals("home")) { // ======================== HOME
-                    try {
+                    } else if (action.equals("home")) {
+                        // ===================================================== Home Page
                         List<Atendimento> atendimentos = AtendimentoFacade.buscarUsuario(login.getId());
                         session.setAttribute("atendimentos", atendimentos);
                         response.sendRedirect("admin/index.jsp");
-                    } catch (DAOException daoex) {
-                        request.setAttribute("javax.servlet.jsp.jspException", daoex);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + daoex.getMessage());
-                        rd = getServletContext().getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    } catch (Exception ex) {
-                        request.setAttribute("javax.servlet.jsp.jspException", ex);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + ex.getMessage());
-                        rd = getServletContext().getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
+                    } else {
+                        session.setAttribute("msg", "Opção inválida");
+                        response.sendRedirect("erro.jsp");
                     }
                 } else {
-                    request.setAttribute("msg", "Opção inválida");
-                    rd = getServletContext().getRequestDispatcher("/admin/erro.jsp");
-                    rd.forward(request, response);
-                }
-
-            } else {
-                // Conferindo opção ================================================
-                if (action.equals("listatendimentos")) { // ======================LISTAR
-                    try {
+                    // ========================================================= Opções ADM
+                    if (action.equals("listatendimentos")) {
+                        // ===================================================== Listar atendimentos
                         List<Atendimento> atendimentos = AtendimentoFacade.buscarTodos();
                         session.setAttribute("atendimentos", atendimentos);
                         response.sendRedirect("admin/atendimentos_funcionario.jsp");
-                    } catch (DAOException daoex) {
-                        request.setAttribute("javax.servlet.jsp.jspException", daoex);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + daoex.getMessage());
-                        rd = getServletContext().getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    } catch (Exception ex) {
-                        request.setAttribute("javax.servlet.jsp.jspException", ex);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + ex.getMessage());
-                        rd = getServletContext().getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    }
-                } else if (action.equals("modificar")) { // =========================== EDITAR
-                    String strId = request.getParameter("id");
-                    int id = 0;
-                    if (strId == null) {
-                        request.setAttribute("msg", "Invocação inválida: id é nulo");
-                        rd = request.getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                        return;
-                    } else {
-                        try {
+                    } else if (action.equals("home")) {
+                        // ===================================================== Home
+                        List<Atendimento> atendimentosAbertos = AtendimentoFacade.buscarAtendimentosAbertos();
+                        int atendimentosQtd = atendimentosAbertos.size();
+                        List<Atendimento> atendimentos = AtendimentoFacade.buscarTodos();
+                        int atendimentosQtdTotal = atendimentos.size();
+                        session.setAttribute("atendimentosQtd", atendimentosQtd);
+                        session.setAttribute("atendimentosQtdTotal", atendimentosQtdTotal);
+                        session.setAttribute("atendimentos", atendimentosAbertos);
+                        response.sendRedirect("admin/index.jsp");
+                    } else if (action.equals("modificar")) {
+                        // ===================================================== Modificar
+                        String strId = request.getParameter("id");
+                        int id = 0;
+                        if (strId == null) {
+                            session.setAttribute("msg", "Invocação inválida: id é nulo");
+                            response.sendRedirect("/erro.jsp");
+                            return;
+                        } else {
                             id = Integer.parseInt(request.getParameter("id"));
-                            Produto produto = ProdutoFacade.buscar(id);
-                            session.setAttribute("produto", produto);
-                            response.sendRedirect("admin/edit-produto.jsp?action=modificar");
-                        } catch (NumberFormatException e) {
-                            request.setAttribute("javax.servlet.jsp.jspException", e);
-                            request.setAttribute("javax.servlet.error.status_code", 500);
-                            request.setAttribute("msg", "Id para apresentação inválido: " + id);
-                            rd = request.getRequestDispatcher("/erro.jsp");
-                            rd.forward(request, response);
-                        } catch (DAOException daoex) {
-                            request.setAttribute("javax.servlet.jsp.jspException", daoex);
-                            request.setAttribute("javax.servlet.error.status_code", 500);
-                            request.setAttribute("msg", "ERRO: " + daoex.getMessage());
-                            rd = getServletContext().getRequestDispatcher("/erro.jsp");
-                            rd.forward(request, response);
-                        } catch (Exception ex) {
-                            request.setAttribute("javax.servlet.jsp.jspException", ex);
-                            request.setAttribute("javax.servlet.error.status_code", 500);
-                            request.setAttribute("msg", "ERRO: " + ex.getMessage());
-                            rd = request.getRequestDispatcher("/erro.jsp");
-                            rd.forward(request, response);
+                            Atendimento atendimento = AtendimentoFacade.buscar(id);
+                            session.setAttribute("atendimento", atendimento);
+                            response.sendRedirect("admin/edit-atendimento.jsp?action=modificar");
                         }
-                    }
-                } else if (action.equals("remover")) { //=========================== REMOVER
-                    String strId = request.getParameter("id");
-                    int id = 0;
-                    if (strId == null) {
-                        request.setAttribute("msg", "Invocação inválida: id é nulo");
-                        rd = request.getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                        return;
                     } else {
-                        try {
-                            id = Integer.parseInt(strId);
-                            ProdutoFacade.remover(id);
-                            List<Produto> produtos = ProdutoFacade.buscarTodos();
-                            session.setAttribute("produtos", produtos);
-                            response.sendRedirect("admin/produtos.jsp");
-                        } catch (NumberFormatException e) {
-                            request.setAttribute("javax.servlet.jsp.jspException", e);
-                            request.setAttribute("javax.servlet.error.status_code", 500);
-                            request.setAttribute("msg", "Id para apresentação inválido: " + id);
-                            rd = request.getRequestDispatcher("/erro.jsp");
-                            rd.forward(request, response);
-                        } catch (DAOException de) {
-                            request.setAttribute("javax.servlet.jsp.jspException", de);
-                            request.setAttribute("javax.servlet.error.status_code", 500);
-                            request.setAttribute("msg", "ERRO: " + de.getMessage());
-                            rd = request.getRequestDispatcher("/erro.jsp");
-                            rd.forward(request, response);
-                        } catch (Exception ex) {
-                            request.setAttribute("javax.servlet.jsp.jspException", ex);
-                            request.setAttribute("javax.servlet.error.status_code", 500);
-                            request.setAttribute("msg", "ERRO: " + ex.getMessage());
-                            rd = request.getRequestDispatcher("/erro.jsp");
-                            rd.forward(request, response);
-                        }
+                        // ===================================================== Opção invalida
+                        session.setAttribute("msg", "Opção inválida");
+                        response.sendRedirect("erro.jsp");
                     }
-                } else {
-                    request.setAttribute("msg", "Opção inválida");
-                    rd = getServletContext().getRequestDispatcher("/admin/erro.jsp");
-                    rd.forward(request, response);
                 }
-                // Conferindo opção ================================================
+            } else {
+                // ============================================================= Acesso não autorizado
+                request.setAttribute("msg", "Acesso não autorizado!");
+                rd = getServletContext().getRequestDispatcher("/admin/erro.jsp");
+                rd.forward(request, response);
             }
-        } else {
-            request.setAttribute("msg", "Acesso não autorizado!");
-            rd = getServletContext().getRequestDispatcher("/admin/erro.jsp");
-            rd.forward(request, response);
+        } catch (NumberFormatException e) {
+            session.setAttribute("javax.servlet.jsp.jspException", e);
+            session.setAttribute("javax.servlet.error.status_code", 500);
+            session.setAttribute("msg", "Dados para apresentação inválidos.");
+            response.sendRedirect("erro.jsp");
+        } catch (DAOException daoex) {
+            session.setAttribute("javax.servlet.jsp.jspException", daoex);
+            session.setAttribute("javax.servlet.error.status_code", 500);
+            session.setAttribute("msg", "ERRO: " + daoex.getMessage());
+            response.sendRedirect("erro.jsp");
+        } catch (Exception ex) {
+            session.setAttribute("javax.servlet.jsp.jspException", ex);
+            session.setAttribute("javax.servlet.error.status_code", 500);
+            session.setAttribute("msg", "ERRO: " + ex.getMessage());
+            response.sendRedirect("erro.jsp");
         }
-
     }
 
     /**
@@ -322,6 +240,45 @@ public class AtendimentoServlet extends HttpServlet {
                         rd = getServletContext().getRequestDispatcher("/erro.jsp");
                         rd.forward(request, response);
                     }
+                } else if (action.equals("modificar")) { // =========================== EDITAR
+                    String strId = request.getParameter("idAtendimento");
+                    int id = 0;
+                    if (strId == null) {
+                        request.setAttribute("msg", "Invocação inválida: id é nulo");
+                        rd = request.getRequestDispatcher("/erro.jsp");
+                        rd.forward(request, response);
+                        return;
+                    } else {
+                        try {
+                            id = Integer.parseInt(strId);
+                            Atendimento atendimento = AtendimentoFacade.buscar(id);
+
+                            atendimento.setAberto(request.getParameter("resolvido") != null);
+                            atendimento.setSolucao((String) request.getAttribute("solucao"));
+
+                            AtendimentoFacade.atualizar(atendimento);
+
+                            response.sendRedirect("admin/index.jsp");
+                        } catch (NumberFormatException e) {
+                            request.setAttribute("javax.servlet.jsp.jspException", e);
+                            request.setAttribute("javax.servlet.error.status_code", 500);
+                            request.setAttribute("msg", "Id para apresentação inválido: " + id);
+                            rd = request.getRequestDispatcher("/erro.jsp");
+                            rd.forward(request, response);
+                        } catch (DAOException daoex) {
+                            request.setAttribute("javax.servlet.jsp.jspException", daoex);
+                            request.setAttribute("javax.servlet.error.status_code", 500);
+                            request.setAttribute("msg", "ERRO: " + daoex.getMessage());
+                            rd = getServletContext().getRequestDispatcher("/erro.jsp");
+                            rd.forward(request, response);
+                        } catch (Exception ex) {
+                            request.setAttribute("javax.servlet.jsp.jspException", ex);
+                            request.setAttribute("javax.servlet.error.status_code", 500);
+                            request.setAttribute("msg", "ERRO: " + ex.getMessage());
+                            rd = request.getRequestDispatcher("/erro.jsp");
+                            rd.forward(request, response);
+                        }
+                    }
                 } else {
                     request.setAttribute("msg", "Opção inválida");
                     rd = getServletContext().getRequestDispatcher("/admin/erro.jsp");
@@ -337,6 +294,7 @@ public class AtendimentoServlet extends HttpServlet {
 
     }
 
+// <editor-fold defaultstate="collapsed" desc="getServletInfo method. Click on the + sign on the left to edit the code.">
     /**
      * Returns a short description of the servlet.
      *

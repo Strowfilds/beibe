@@ -2,6 +2,7 @@
 <%@page errorPage = "erro.jsp"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="header.jsp" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:choose>
     <c:when test="${sessionScoped.login.tipoUsuario.id < 2}">
         <jsp:forward page="erro.jsp" >
@@ -33,58 +34,56 @@
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <c:choose>
-                            <c:when test="${empty sessionScope.atendimentos}">
+                            <c:when test="${empty atendimentos}">
                                 <thead>
                                     <tr>
-                                        <th colspan="9">Não existem atendimentos</th>
+                                        <th colspan="9">Não há atendimentos marcados</th>
                                     </tr>
-                                </thead>
+                                </thead>  
                             </c:when>
-                            <c:when test="${fn:length(atendimentos) > 1}">
+                            <c:otherwise>                                    
                                 <thead>
                                     <tr>
-                                        <th>Data/Hora</th>
-                                        <th>Cliente</th>
+                                        <th>Data</th>                                            
                                         <th>Situação Do Atendimento</th>
                                         <th>Produto</th>
                                         <th>Tipo Do Atendimento</th>
-                                        <th>Detalhes</th>
+                                        <th>Descrição</th>
+                                        <th>Solução Apresentada</th>
                                         <th>Editar</th>
-                                        <th>Remover</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- DADOS ATENDIMENTOS -->
-                                    <c:forEach items="${sessionScope.atendimentos}" var="atendimento">                                        
+                                    <c:forEach items="${sessionScope.atendimentos}" var="atendimento">
                                         <tr>
-                                            <td><c:out value="atendimento.dataHora"/></td>
-                                            <td><c:out value="atendimento.usuario.nome"/></td>
+                                            <td><fmt:formatDate value="${atendimento.dataHora}" pattern="dd/MM/yyyy"/> </td>                                            
                                             <td>
-                                                <c:out value="atendimento.aberto"/>
-                                                <!--
-                                                <button style="pointer-events: none;" type="button" class="btn btn-primary">Aberto</button>
-                                                <button style="pointer-events: none;" type="button" class="btn btn-success">Resolvido</button>
-                                                <button style="pointer-events: none;" type="button" class="btn btn-danger">Pendente</button>
-                                                <button style="pointer-events: none;" type="button" class="btn btn-warning">Em andamento</button>
-                                                <button style="pointer-events: none;" type="button" class="btn btn-info">Congelado</button>
-                                                -->
+                                                <c:choose>
+                                                    <c:when test="${atendimento.aberto}">
+                                                        <c:out value="Em aberto" />
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:out value="Resolvido" />
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </td>
                                             <td>
-                                                <c:out value="atendimento.produto.nome"/>
+                                                <c:out value="${atendimento.produto.nome}"/>
                                             </td>
-                                            <td>
-                                                <c:out value="atendimento.tipoAtendimento.nome"/>
+                                            <td>                                                
+                                                <c:out value="${atendimento.tipoAtendimento.nome}"/>
                                             </td>
-                                            <td><a href="###########CRIAR LINK BASEADO NA  JSP VIEW-ATENDIEMENTO####################">Mais detalhes</a></td>
-                                            <td><a href="edit-atendimento.jsp"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
-                                            <td><a href="##############EXCLUIR ATENDIMENTO##############"><i class="fas fa-trash" style="color: red;"></i></a></td>
-                                        </tr>
+                                            <td><c:out value="${atendimento.descricao}"/></td>
+                                            <td><c:out value="${atendimento.solucao}"/></td>
+                                            <c:url value="../AtendimentoServlet" var="edit">
+                                                <c:param name="action" value="modificar"/>
+                                                <c:param name="id" value="${atendimento.id}"/>                                                
+                                            </c:url>
+                                            <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                        </tr>                                            
                                     </c:forEach>
-                                    <!-- DADOS ATENDIMENTOS -->
                                 </tbody>
-
-                            </c:when>
-
+                            </c:otherwise>
                         </c:choose>
                     </table>
                 </div>

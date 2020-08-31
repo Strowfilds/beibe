@@ -17,6 +17,11 @@ public class AtendimentoFacade {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             AtendimentoDAO atendimentoDAO = new AtendimentoDAO(connFactory.getConnection());
             Atendimento atendimento = atendimentoDAO.buscar(id);
+            atendimento.setUsuario(UsuarioFacade.buscar(atendimento.getUsuario().getId()));
+            Produto produto = ProdutoFacade.buscar(atendimento.getProduto().getId());
+            atendimento.setProduto(produto);
+            TipoAtendimento tipoAtendimento = AtendimentoFacade.buscarTipoAtendimento(atendimento.getTipoAtendimento().getId());
+            atendimento.setTipoAtendimento(tipoAtendimento);
             return atendimento;
         }
     }
@@ -24,10 +29,19 @@ public class AtendimentoFacade {
     public static List<Atendimento> buscarTodos() throws DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             AtendimentoDAO atendimentoDAO = new AtendimentoDAO(connFactory.getConnection());
-            return atendimentoDAO.buscarTodos();
+            List<Atendimento> atendimentos = atendimentoDAO.buscarTodos();
+            for (Atendimento atendimento : atendimentos) {
+                Produto produto = ProdutoFacade.buscar(atendimento.getProduto().getId());
+                atendimento.setProduto(produto);
+                TipoAtendimento tipoAtendimento = AtendimentoFacade.buscarTipoAtendimento(atendimento.getTipoAtendimento().getId());
+                atendimento.setTipoAtendimento(tipoAtendimento);
+                Usuario usuario = UsuarioFacade.buscar(atendimento.getUsuario().getId());
+                atendimento.setUsuario(usuario);
+            }
+            return atendimentos;
         }
     }
-    
+
     public static List<Atendimento> buscarAtendimentosAbertos() throws DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             AtendimentoDAO atendimentoDAO = new AtendimentoDAO(connFactory.getConnection());
@@ -39,7 +53,7 @@ public class AtendimentoFacade {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             AtendimentoDAO atendimentoDAO = new AtendimentoDAO(connFactory.getConnection());
             List<Atendimento> atendimentos = atendimentoDAO.buscarUsuario(id);
-            for(Atendimento atendimento : atendimentos){
+            for (Atendimento atendimento : atendimentos) {
                 Produto produto = ProdutoFacade.buscar(atendimento.getProduto().getId());
                 atendimento.setProduto(produto);
                 TipoAtendimento tipoAtendimento = AtendimentoFacade.buscarTipoAtendimento(atendimento.getTipoAtendimento().getId());
@@ -48,21 +62,21 @@ public class AtendimentoFacade {
             return atendimentos;
         }
     }
-    
+
     public static List<TipoAtendimento> buscarTiposAtendimento() throws DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             TipoAtendimentoDAO tipoAtendimentoDAO = new TipoAtendimentoDAO(connFactory.getConnection());
             return tipoAtendimentoDAO.buscarTodos();
         }
     }
-    
+
     public static TipoAtendimento buscarTipoAtendimento(int id) throws DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             TipoAtendimentoDAO tipoAtendimentoDAO = new TipoAtendimentoDAO(connFactory.getConnection());
             return tipoAtendimentoDAO.buscar(id);
         }
     }
-    
+
     public static void atualizar(Atendimento atendimento) throws DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             AtendimentoDAO atendimentoDAO = new AtendimentoDAO(connFactory.getConnection());

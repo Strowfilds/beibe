@@ -52,7 +52,7 @@
                                     <c:if test="${not empty id}">
                                         <input type="hidden" value="${id}" name="id"/> 
                                     </c:if>
-                                    <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success mb-2">
+                                    <input id="submitBtn" type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success mb-2">
                                     <c:url value="../CategoriaServlet" var="voltar">
                                         <c:param name="action" value="listcategoria"/>
                                     </c:url>

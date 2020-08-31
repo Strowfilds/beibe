@@ -29,10 +29,12 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("msg", "Forma de acesso inválida.");
-        RequestDispatcher rd = null;
-        rd = request.getRequestDispatcher("/erro.jsp");
-        rd.forward(request, response);
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("msg", "Forma de acesso inválida.");
+        session.setAttribute("code", 400);
+        response.sendRedirect("erro.jsp");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,46 +63,50 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // ===================================================================== INÍCIO/Recuperando dados <form>
         RequestDispatcher rd = null;
+        HttpSession session = request.getSession();
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
+        // ===================================================================== Verificando se os dados são válidos
         if (senha == null || senha == null) {
-            request.setAttribute("msg", "Invocação inválida: login ou senha nulos.");
-            rd = request.getRequestDispatcher("admin/erro.jsp");
-            rd.forward(request, response);
+            session.setAttribute("msg", "Invocação inválida: login ou senha nulos.");
+            response.sendRedirect("erro.jsp");
             return;
         }
+        // ===================================================================== Verificando o login
         try {
             if (UsuarioFacade.checkLogin(email, senha)) {
+        // ===================================================================== Configurando acesso                
                 Usuario usuario = UsuarioFacade.buscarEmail(email);
                 Login login = new Login();
                 login.setId(usuario.getId());
                 login.setNome(usuario.getNome());
                 login.setTipoUsuario(TipoUsuarioEnum.getTipoUsuarioFromInt(usuario.getTipoUsuario().getId()));
-                HttpSession session = request.getSession();
+                session = request.getSession();
                 session.setAttribute("login", login);
                 response.sendRedirect("AtendimentoServlet?action=home");
-                //response.sendRedirect("admin/index.jsp");
-                //rd = getServletContext().getRequestDispatcher("/admin/index.jsp");
-                //rd.forward(request, response);                
+                
             } else {
-                request.setAttribute("msg", "Usuário/Senha inválidos.");
-                rd = request.getRequestDispatcher("/index.jsp");
-                rd.forward(request, response);
+                session.setAttribute("msg", "Usuário/Senha inválidos.");
+                session.setAttribute("code", 401);
+                response.sendRedirect("erro.jsp");
             }
         } catch (BuscarUsuarioException buex) {
-            request.setAttribute("msg", "ERRO: " + buex.getMessage());
-            rd = request.getRequestDispatcher("/erro.jsp");
-            rd.forward(request, response);
+            session.setAttribute("code", "400.");
+            session.setAttribute("msg", "ERRO: " + buex.getMessage());
+            response.sendRedirect("erro.jsp");
         } catch (DAOException daoex) {
-            request.setAttribute("msg", "ERRO: " + daoex.getMessage());
-            rd = request.getRequestDispatcher("/erro.jsp");
-            rd.forward(request, response);
+            session.setAttribute("code", "400.");
+            session.setAttribute("msg", "ERRO: " + daoex.getMessage());
+            response.sendRedirect("erro.jsp");
         } catch (Exception ex) {
-            request.setAttribute("msg", "ERRO: " + ex.getMessage());
-            rd = request.getRequestDispatcher("/erro.jsp");
-            rd.forward(request, response);
+            session.setAttribute("code", "500.");
+            session.setAttribute("msg", "ERRO: " + ex.getMessage());
+            response.sendRedirect("erro.jsp");
         }
+
     }
 
     /**
