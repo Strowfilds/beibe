@@ -71,5 +71,12 @@ public class EnderecoFacade {
         novoEndereco.getEstado().setId(estado);
         
         return novoEndereco;
+    }     
+
+    static void atualizar(Endereco endereco) throws DAOException, Exception {
+        try (ConnectionFactory connFactory = new ConnectionFactory()) {
+            EnderecoDAO enderecoDAO = new EnderecoDAO(connFactory.getConnection());
+            enderecoDAO.atualizar(endereco);
+        }
     }
 }

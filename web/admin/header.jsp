@@ -115,7 +115,10 @@
                 </c:if>
                 <c:if test="${login.tipoUsuario.id eq 1}">                    
                     <li class="nav-item">
-                        <a class="nav-link" href="atendimentos_cliente.jsp">
+                        <c:url value="../AtendimentoServlet" var="categorias">
+                            <c:param name="action" value="listatendimentosusuario"/>
+                        </c:url>
+                        <a class="nav-link" href="${categorias}">
                             <i class="fas fa-fw fa-fire"></i>
                             <span>Meus Atendimentos</span></a>
                     </li>

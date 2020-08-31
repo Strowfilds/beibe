@@ -105,7 +105,59 @@ public class UsuarioServlet extends HttpServlet {
 
         RequestDispatcher rd = null;
         String action = request.getParameter("action");
-        if (action.equals("autocadastro")) { // = = = AUTOCADASTRO = = =            
+        HttpSession session = request.getSession();
+        if (session.getAttribute("login") != null) {
+
+            if (action.equals("editar")) {
+                String strId = request.getParameter("id");
+                if (strId == null) {
+                    request.setAttribute("msg", "Invocação inválida: id é nulo");
+                    rd = request.getRequestDispatcher("/erro.jsp");
+                    rd.forward(request, response);
+                    return;
+                } else {
+                    try {
+                        String nome = request.getParameter("nome");                        
+                        String endereco = request.getParameter("endereco");
+                        int num = Integer.parseInt(request.getParameter("num"));
+                        String compl = request.getParameter("compl");
+                        String bairro = request.getParameter("bairro");
+                        int cidade = Integer.parseInt(request.getParameter("cidade"));
+                        int estado = Integer.parseInt(request.getParameter("estado"));
+                        String cep = request.getParameter("cep");
+                        String tel = request.getParameter("tel");
+                        String senha = request.getParameter("senha");
+                        int id = Integer.parseInt(strId);                        
+                        UsuarioFacade.alterar(id, nome, endereco, num, compl, bairro, cidade, estado, cep, tel, senha);
+                        response.sendRedirect("admin/index.jsp");
+                    } catch (NumberFormatException e) {
+                        request.setAttribute("javax.servlet.jsp.jspException", e);
+                        request.setAttribute("javax.servlet.error.status_code", 500);
+                        request.setAttribute("msg", "Dados para apresentação inválido");
+                        rd = request.getRequestDispatcher("/erro.jsp");
+                        rd.forward(request, response);
+                    } catch (DAOException de) {
+                        request.setAttribute("javax.servlet.jsp.jspException", de);
+                        request.setAttribute("javax.servlet.error.status_code", 500);
+                        request.setAttribute("msg", "ERRO: " + de.getMessage());
+                        rd = request.getRequestDispatcher("/erro.jsp");
+                        rd.forward(request, response);
+                    } catch (Exception ex) {
+                        request.setAttribute("javax.servlet.jsp.jspException", ex);
+                        request.setAttribute("javax.servlet.error.status_code", 500);
+                        request.setAttribute("msg", "ERRO: " + ex.getMessage());
+                        rd = request.getRequestDispatcher("/erro.jsp");
+                        rd.forward(request, response);
+                    }
+                }
+
+            } else {
+                request.setAttribute("msg", "Opção inválida");
+                rd = getServletContext().getRequestDispatcher("/admin/erro.jsp");
+                rd.forward(request, response);
+            }
+
+        } else if (action.equals("autocadastro")) { // = = = AUTOCADASTRO = = =            
             try {
                 String nome = request.getParameter("nome");
                 String cpf = request.getParameter("cpf").replace(".", "").replace("-", "");;
@@ -126,7 +178,7 @@ public class UsuarioServlet extends HttpServlet {
                 login.setId(usuario.getId());
                 login.setNome(usuario.getNome());
                 login.setTipoUsuario(TipoUsuarioEnum.getTipoUsuarioFromInt(usuario.getTipoUsuario().getId()));
-                HttpSession session = request.getSession();
+                session = request.getSession();
                 session.setAttribute("login", login);
                 response.sendRedirect("admin/index.jsp");
             } catch (NumberFormatException nfe) {
@@ -148,7 +200,6 @@ public class UsuarioServlet extends HttpServlet {
                 rd = getServletContext().getRequestDispatcher("/erro.jsp");
                 rd.forward(request, response);
             }
-
         } else {
             rd = getServletContext().getRequestDispatcher("/erro.jsp");
             rd.forward(request, response);

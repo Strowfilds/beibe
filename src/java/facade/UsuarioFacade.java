@@ -86,4 +86,36 @@ public class UsuarioFacade {
         UsuarioFacade.adicionar(novoUsuario);
     }
 
+    public static void alterar(int id, String nome, String endereco, int num, String compl, String bairro, int cidade, int estado, String cep, String tel, String senha) throws DAOException, Exception {
+        Usuario novoUsuario = UsuarioFacade.buscar(id);
+        novoUsuario.setNome(nome);        
+        novoUsuario.setTelefone(tel);
+        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+        byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
+
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : messageDigest) {
+            hexString.append(String.format("%02X", 0xFF & b));
+        }
+
+        String senhaHex = hexString.toString();
+        novoUsuario.setSenha(senhaHex);       
+
+        novoUsuario.setEndereco(EnderecoFacade.buscarUsuario(id));
+        
+        novoUsuario.getEndereco().setEndereco(endereco);
+        novoUsuario.getEndereco().setNumero(num);
+        novoUsuario.getEndereco().setComplemento(compl);
+        novoUsuario.getEndereco().setBairro(bairro);
+        novoUsuario.getEndereco().setCep(cep);
+        novoUsuario.getEndereco().getCidade().setId(cidade);
+        novoUsuario.getEndereco().getEstado().setId(estado);
+        
+        try (ConnectionFactory connFactory = new ConnectionFactory()) {
+            UsuarioDAO usuarioDAO = new UsuarioDAO(connFactory.getConnection());
+            usuarioDAO.atualizar(novoUsuario);          
+            EnderecoFacade.atualizar(novoUsuario.getEndereco());
+        }
+        }
+
 }

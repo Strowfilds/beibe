@@ -31,6 +31,7 @@ public class UsuarioDAO implements DAO<Usuario> {
     private static final String QUERY_BUSCAR = "SELECT id_usuario, nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario FROM tb_usuario WHERE id_usuario = ?";
     private static final String QUERY_BUSCAR_CPF = "SELECT id_usuario, nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario FROM tb_usuario FROM tb_usuario WHERE cpf_usuario = ?";
     private static final String QUERY_BUSCAR_EMAIL = "SELECT id_usuario, nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario FROM tb_usuario WHERE email_usuario = ?";
+    private static final String QUERY_ATUALIZAR = "UPDATE tb_usuario SET nome_usuario = ?, telefone_usuario = ?, senha_usuario = ? WHERE id_usuario = ?";
 
     private Connection con = null;
 
@@ -100,7 +101,15 @@ public class UsuarioDAO implements DAO<Usuario> {
 
     @Override
     public void atualizar(Usuario t) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (PreparedStatement stmt = con.prepareStatement(QUERY_ATUALIZAR)) {
+            stmt.setString(1, t.getNome());
+            stmt.setString(2, t.getTelefone());
+            stmt.setString(3, t.getSenha());
+            stmt.setInt(4, t.getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            throw new DAOException("Erro atualizando usuario: " + QUERY_ATUALIZAR + "/ " + t.toString(), ex);
+        }
     }
 
     @Override

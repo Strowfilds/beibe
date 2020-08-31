@@ -1,6 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page errorPage = "erro.jsp"%>
 <%@include file="header.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:if test="${empty sessionScope.login}">     
     <jsp:forward page="erro.jsp" >
         <jsp:param name="msg" value="Usuário deve se autentificar para acessar o sistema."  />
@@ -32,45 +35,54 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th colspan="9">Não há atendimentos marcados</th>
-                            </tr>
-                        </thead>
-                        <thead>
-                            <tr>
-                                <th>Data/Hora</th>
-                                <th>Cliente</th>
-                                <th>Situação Do Atendimento</th>
-                                <th>Produto</th>
-                                <th>Tipo Do Atendimento</th>
-                                <th>Detalhes</th>
-                                <th>Editar</th>
-                                <th>Remover</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>11-11-2020 | 09:00</th>
-                                <th>Maria de Lourdes</th>
-                                <th>
-                                    <button style="pointer-events: none;" type="button" class="btn btn-primary">Aberto</button>
-                                    <button style="pointer-events: none;" type="button" class="btn btn-success">Resolvido</button>
-                                    <button style="pointer-events: none;" type="button" class="btn btn-danger">Pendente</button>
-                                    <button style="pointer-events: none;" type="button" class="btn btn-warning">Em andamento</button>
-                                    <button style="pointer-events: none;" type="button" class="btn btn-info">Congelado</button>
-                                </th>
-                                <th>
-                                    Hidratante
-                                </th>
-                                <th>
-                                    Telefônico
-                                </th>
-                                <th><a href="###########CRIAR LINK BASEADO NA  JSP VIEW-ATENDIMENTO####################">Mais detalhes</a></th>
-                                <th><a href="edit-atendimento.jsp"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></th>
-                                <th><a href="##############EXCLUIR ATENDIMENTO##############"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                            </tr>
-                        </tbody>
+                        <c:choose>
+                            <c:when test="${empty atendimentos}">
+                                <thead>
+                                    <tr>
+                                        <th colspan="9">Não há atendimentos marcados</th>
+                                    </tr>
+                                </thead>  
+                            </c:when>
+                            <c:otherwise>                                    
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>                                            
+                                        <th>Situação Do Atendimento</th>
+                                        <th>Produto</th>
+                                        <th>Tipo Do Atendimento</th>
+                                        <th>Descrição</th>
+                                        <th>Solução Apresentada</th>
+                                        <th>Editar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${sessionScope.atendimentos}" var="atendimento">
+                                        <tr>
+                                            <td><fmt:formatDate value="${atendimento.dataHora}" pattern="dd/MM/yyyy"/> </td>                                            
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${atendimento.aberto}">
+                                                <c:out value="Em aberto" />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:out value="Resolvido" />
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>
+                                        <c:out value="${atendimento.produto.nome}"/>
+                                    </td>
+                                    <td>                                                
+                                        <c:out value="${atendimento.tipoAtendimento.nome}"/>
+                                    </td>
+                                    <td><c:out value="${atendimento.descricao}"/></td>
+                                    <td><c:out value="${atendimento.solucao}"/></td>
+                                    <td><a href="#page-top"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                    </tr>                                            
+                                </c:forEach>
+                                </tbody>
+                            </c:otherwise>
+                        </c:choose>         
                     </table>
                 </div>
             </div>

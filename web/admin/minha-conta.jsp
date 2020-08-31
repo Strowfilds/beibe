@@ -32,10 +32,14 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Informações do <c:out value="${login.tipoUsuario.value}"/> </h1>
                                     </div>
-                                    <form class="user">
+                                    <c:url value="../UsuarioServlet" var="actionurl">
+                                        <c:param name="action" value="editar"/>                                    
+                                    </c:url>
+                                    <form class="user" action="${actionurl}" method="post">
+                                        <input type="hidden" value="${login.id}" name="id"/> 
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome Completo"  value="${usuario.nome}">
+                                                <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nome Completo"  name="nome" value="${usuario.nome}">
                                             </div>
                                             <div class="col-sm-6">                                                
                                                 <input type="text" class="form-control form-control-user" id="cpf" placeholder="CPF" disabled value="${usuario.cpf}">
@@ -46,39 +50,49 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-9 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Endereço" value="${usuario.endereco.endereco}">
+                                                <input type="text" class="form-control form-control-user" id="exampleInputtext" name="endereco" placeholder="Endereço" value="${usuario.endereco.endereco}">
                                             </div>
                                             <div class="col-sm-3">
-                                                <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Número" value="${usuario.endereco.numero}">
+                                                <input type="text" class="form-control form-control-user" id="exampleRepeattext" name="num" placeholder="Número" value="${usuario.endereco.numero}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-8 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Complemento" value="${usuario.endereco.complemento}">
+                                                <input type="text" class="form-control form-control-user" id="exampleInputtext" name="compl" placeholder="Complemento" value="${usuario.endereco.complemento}">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Bairro" value="${usuario.endereco.bairro}">
+                                                <input type="text" class="form-control form-control-user" id="exampleRepeattext" name="bairro" placeholder="Bairro" value="${usuario.endereco.bairro}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-8 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Cidade" value="${usuario.endereco.cidade.nome}">
+                                                <select class="form-control" style="border-radius: 50rem;" name="cidade" id="cidade">                             
+                                                    <option value="${usuario.endereco.cidade.id}" selected>${usuario.endereco.cidade.nome}</option>                               
+                                                </select>                                                
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Estado" value="${usuario.endereco.estado.nome}">
+
+                                                <select class="form-control" style="border-radius: 50rem;" name="estado" id="estado">
+                                                    <option value="${usuario.endereco.estado.id}">${usuario.endereco.estado.nome} - ${usuario.endereco.estado.sigla}</option>  
+                                                    <c:forEach items="${applicationScope.estados}" var="estado">     
+                                                        <c:if test="${usuario.endereco.estado.id != estado.id}">                                                                
+                                                            <option value="${estado.id}">${estado.nome} - ${estado.sigla}</option>                                                    
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </select>                                                
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-8 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="CEP" value="${usuario.endereco.cep}">
+                                                <input type="text" class="form-control form-control-user" id="exampleInputtext" name="cep" placeholder="CEP" value="${usuario.endereco.cep}">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" value="${usuario.telefone}">
+                                                <input type="tel" class="form-control form-control-user" id="exampleRepeattext" name="tel" placeholder="Telefone" value="${usuario.telefone}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha" required>
+                                                <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="senha" placeholder="Senha" required>
                                             </div>
                                         </div>
                                         <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">                                        
@@ -118,4 +132,37 @@
         var $seuCampoCpf = $("#cpf");
         $seuCampoCpf.mask('000.000.000-00', {reverse: true});
     });
+</script>
+
+<script type="text/javascript" >
+
+    $(document).ready(function () {
+        $("#estado").change(function () {
+            getCidades();
+        });
+    });
+
+    function getCidades() {
+        var estadoId = $("#estado").val();
+        var url = "AJAXServlet";
+        $.ajax({
+            url: url, // URL da sua Servlet
+            data: {
+                estadoId: estadoId
+            }, // Parâmetro passado para a Servlet
+            dataType: 'json',
+            success: function (data) {
+                // Se sucesso, limpa e preenche a combo de cidade
+                // alert(JSON.stringify(data));
+                $("#cidade").empty();
+                $.each(data, function (i, obj) {
+                    $("#cidade").append('<option value=' + obj.id + '>' + obj.nome + '</option>');
+                });
+            },
+            error: function (request, textStatus, errorThrown) {
+                alert(request.status + ', Error: ' + request.statusText);
+                // Erro
+            }
+        });
+    }
 </script>
