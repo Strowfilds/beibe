@@ -1,12 +1,12 @@
 package servlets;
 
-import beans.Categoria;
 import beans.Login;
-import beans.Produto;
+import beans.Usuario;
 import exceptions.DAOException;
-import facade.CategoriaFacade;
-import facade.ProdutoFacade;
+import facade.FuncionarioFacade;
+import facade.UsuarioFacade;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "ProdutoServlet", urlPatterns = {"/ProdutoServlet"})
-public class ProdutoServlet extends HttpServlet {
+@WebServlet(name = "FuncionarioServlet", urlPatterns = {"/FuncionarioServlet"})
+public class FuncionarioServlet extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -32,24 +32,38 @@ public class ProdutoServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-
         try {
             // ================================================================= Conferindo acesso
             if (session.getAttribute("login") != null) {
                 Login login = (Login) session.getAttribute("login");
-                if (login.getTipoUsuario().getId() < 2) {
+                if (login.getTipoUsuario().getId() < 3) {
                     // ========================================================= Privilégio insuficiente
                     session.setAttribute("msg", "Acesso não autorizado!");
                     response.sendRedirect("admin/erro.jsp");
                 } else {
-                    if (action.equals("novo")) {
-                        List<Categoria> categorias = CategoriaFacade.buscarCategorias();
-                        session.setAttribute("categorias", categorias);
-                        response.sendRedirect("admin/edit-produto.jsp?action=novo");
-                    } else if (action.equals("listproduto")) {
-                        List<Produto> produtos = ProdutoFacade.buscarTodos();
-                        session.setAttribute("produtos", produtos);
-                        response.sendRedirect("admin/produtos.jsp");
+                    if (action.equals("listfuncionarios")) {
+                        // ===================================================== Listar funcionários
+                        List<Usuario> funcionarios = FuncionarioFacade.buscarTodos();
+                        session.setAttribute("funcionarios", funcionarios);
+                        response.sendRedirect("admin/funcionarios.jsp");
+                    } else if (action.equals("novo")) {
+                        // ===================================================== Novo funcionários                        
+                        response.sendRedirect("admin/edit-funcionario.jsp?action=novo");
+                    } else if (action.equals("remover")) {
+                        // ===================================================== Remover funcionário                        
+                        String strId = request.getParameter("id");
+                        int id = 0;
+                        if (strId == null) {
+                            session.setAttribute("msg", "Invocação inválida: id é nulo");
+                            response.sendRedirect("admin/erro.jsp");
+                            return;
+                        } else {
+                            id = Integer.parseInt(strId);
+                            FuncionarioFacade.remover(id);
+                            List<Usuario> funcionarios = FuncionarioFacade.buscarTodos();
+                            session.setAttribute("funcionarios", funcionarios);
+                            response.sendRedirect("admin/funcionarios.jsp");
+                        }
                     } else if (action.equals("modificar")) {
                         String strId = request.getParameter("id");
                         int id = 0;
@@ -59,23 +73,9 @@ public class ProdutoServlet extends HttpServlet {
                             return;
                         } else {
                             id = Integer.parseInt(request.getParameter("id"));
-                            Produto produto = ProdutoFacade.buscar(id);
-                            session.setAttribute("produto", produto);
-                            response.sendRedirect("admin/edit-produto.jsp?action=modificar");
-                        }
-                    } else if (action.equals("remover")) {
-                        String strId = request.getParameter("id");
-                        int id = 0;
-                        if (strId == null) {
-                            session.setAttribute("msg", "Invocação inválida: id é nulo");
-                            response.sendRedirect("admin/erro.jsp");
-                            return;
-                        } else {
-                            id = Integer.parseInt(strId);
-                            ProdutoFacade.remover(id);
-                            List<Produto> produtos = ProdutoFacade.buscarTodos();
-                            session.setAttribute("produtos", produtos);
-                            response.sendRedirect("admin/produtos.jsp");
+                            Usuario funcionario = UsuarioFacade.buscar(id);
+                            session.setAttribute("funcionario", funcionario);
+                            response.sendRedirect("admin/edit-funcionario.jsp?action=modificar");
                         }
                     } else {
                         session.setAttribute("msg", "Opção inválida");
@@ -103,6 +103,7 @@ public class ProdutoServlet extends HttpServlet {
             session.setAttribute("msg", "ERRO: " + ex.getMessage());
             response.sendRedirect("erro.jsp");
         }
+
     }
 
     /**
@@ -119,48 +120,53 @@ public class ProdutoServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-
         try {
             // ================================================================= Conferindo acesso
             if (session.getAttribute("login") != null) {
                 Login login = (Login) session.getAttribute("login");
-                if (login.getTipoUsuario().getId() < 2) {
+                if (login.getTipoUsuario().getId() < 3) {
                     // ========================================================= Privilégio insuficiente
                     session.setAttribute("msg", "Acesso não autorizado!");
                     response.sendRedirect("admin/erro.jsp");
                 } else {
                     if (action.equals("adicionar")) {
-                        String produto = request.getParameter("produto");
-                        String categoriaStr = request.getParameter("categoria");
-                        String descricao = request.getParameter("descricao");
-                        String pesoStr = request.getParameter("peso");
-                        int categoria = Integer.parseInt(categoriaStr);
-                        int peso = Integer.parseInt(pesoStr);
-                        ProdutoFacade.inserir(produto, descricao, categoria, peso);
-                        List<Produto> produtos = ProdutoFacade.buscarTodos();
-                        session.setAttribute("produtos", produtos);
-                        response.sendRedirect("admin/produtos.jsp");
+                        String nome = request.getParameter("nome");
+                        String cpf = request.getParameter("cpf").replace(".", "").replace("-", "");
+                        String email = request.getParameter("email");
+                        String endereco = request.getParameter("endereco");
+                        int num = Integer.parseInt(request.getParameter("num"));
+                        String compl = request.getParameter("compl");
+                        String bairro = request.getParameter("bairro");
+                        int cidade = Integer.parseInt(request.getParameter("cidade"));
+                        int estado = Integer.parseInt(request.getParameter("estado"));
+                        String cep = request.getParameter("cep").replace(".", "").replace("-", "");
+                        String tel = request.getParameter("tel").replace(".", "").replace("-", "");
+                        String senha = request.getParameter("senha");
+                        UsuarioFacade.criarNovoUsuario(nome, cpf, email, endereco, num, compl, bairro, cidade, estado, cep, tel, senha, 2);
+                        List<Usuario> funcionarios = FuncionarioFacade.buscarTodos();
+                        session.setAttribute("funcionarios", funcionarios);
+                        response.sendRedirect("admin/funcionarios.jsp");
                     } else if (action.equals("editar")) {
+                        // ============================================================= EDITAR
                         String strId = request.getParameter("id");
-                        String nome = request.getParameter("produto");
-                        String strCategoria = request.getParameter("categoria");
-                        String descricao = request.getParameter("descricao");
-                        String strPeso = request.getParameter("peso");
-                        int id = 0;
-                        int peso = 0;
-                        int categoria = 0;
                         if (strId == null) {
                             session.setAttribute("msg", "Invocação inválida: id é nulo");
-                            response.sendRedirect("admin/erro.jsp");
+                            response.sendRedirect("erro.jsp");
                             return;
                         } else {
-                            id = Integer.parseInt(strId);
-                            peso = Integer.parseInt(strPeso);
-                            categoria = Integer.parseInt(strCategoria);
-                            ProdutoFacade.atualizar(id, nome, descricao, categoria, peso);
-                            List<Produto> produtos = ProdutoFacade.buscarTodos();
-                            session.setAttribute("produtos", produtos);
-                            response.sendRedirect("admin/produtos.jsp");
+                            String nome = request.getParameter("nome");
+                            String endereco = request.getParameter("endereco");
+                            int num = Integer.parseInt(request.getParameter("num"));
+                            String compl = request.getParameter("compl");
+                            String bairro = request.getParameter("bairro");
+                            int cidade = Integer.parseInt(request.getParameter("cidade"));
+                            int estado = Integer.parseInt(request.getParameter("estado"));
+                            String cep = request.getParameter("cep").replace(".", "").replace("-", "");
+                            String tel = request.getParameter("tel").replace("-", "");;
+                            String senha = request.getParameter("senha");
+                            int id = Integer.parseInt(strId);
+                            UsuarioFacade.alterar(id, nome, endereco, num, compl, bairro, cidade, estado, cep, tel, senha);
+                            response.sendRedirect("admin/index.jsp");
                         }
                     } else {
                         session.setAttribute("msg", "Opção inválida");
@@ -188,9 +194,10 @@ public class ProdutoServlet extends HttpServlet {
             session.setAttribute("msg", "ERRO: " + ex.getMessage());
             response.sendRedirect("erro.jsp");
         }
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Returns a short description of the servlet.
      *

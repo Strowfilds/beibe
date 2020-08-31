@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page errorPage = "erro.jsp"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="header.jsp" %>
 <c:choose>
     <c:when test="${sessionScoped.login.tipoUsuario.id < 3}">
@@ -21,8 +23,11 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
+    <c:url value="../FuncionarioServlet" var="novo">
+        <c:param name="action" value="novo"/>        
+    </c:url>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="edit-funcionario.jsp" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Adicionar Funcionário</a>
+        <a href="${novo}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Adicionar Funcionário</a>
     </div>
 
 </div>
@@ -35,30 +40,48 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>CPF</th>
-                                <th>Endereço</th>
-                                <th>Telefone</th>
-                                <th>Editar</th>
-                                <th>Remover</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Dados Funcionário -->
-                            <tr>
-                                <th>Cissa Magalhães</th>
-                                <th>000.000.000-00</th>
-                                <th>Rua dos Bobos, nº 0, apartamento 0, Centro, Curitiba - PR. CEP: 00.000-000</th>
-                                <th>11 1111-1111</th>
-                                <th><a href="edit-funcionario.jsp"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></th>
-                                <th><a href="########EXCLUIR Funcionario###########"><i class="fas fa-trash" style="color: red;"></i></a></th>
-                            </tr>
-                            <!-- fim Dados Funcionário -->
-                        </tbody>
-                    </table>
+                    <c:choose>
+                        <c:when test="${empty sessionScope.funcionarios}">
+                            <p>Não existem funcionários a serem apresentadas.</p>
+                        </c:when>                        
+                        <c:otherwise>      
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                        <th>Endereço</th>
+                                        <th>Telefone</th>
+                                        <th>Editar</th>
+                                        <th>Remover</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dados Funcionário -->
+                                    <c:forEach items="${sessionScope.funcionarios}" var="funcionario">
+                                        <tr>
+                                            <td><c:out value="${funcionario.nome}"/></td>
+                                            <td><c:out value="${funcionario.cpf}"/></td>
+                                            <td><c:out value="${funcionario.endereco.endereco} - ${funcionario.endereco.numero}"/></td>
+                                            <td>${funcionario.telefone}</td>
+                                            <c:url value="../FuncionarioServlet" var="edit">
+                                                <c:param name="action" value="modificar"/>
+                                                <c:param name="id" value="${funcionario.id}"/>                                                
+                                            </c:url>
+                                            <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                            <c:url value="../FuncionarioServlet" var="remover">
+                                                <c:param name="action" value="remover"/>
+                                                <c:param name="id" value="${funcionario.id}"/>                                                                                                                
+                                            </c:url>
+                                            <td><a href="${remover}"><i class="fas fa-trash" style="color: red;"></i></a></td>
+                                        </tr>
+                                    </c:forEach>
+                                    <!-- fim Dados Funcionário -->
+                                </tbody>
+                            </table>
+                        </c:otherwise>
+                    </c:choose>  
+                    <c:remove scope="session" var="funcionarios"/>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 package dao;
 
 import beans.Categoria;
+import beans.CategoriaDelSafe;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ public class CategoriaDAO implements DAO<Categoria> {
     
     private static final String QUERY_BUSCAR_TODOS = "SELECT id_categoria, nome_categoria  FROM tb_categoria ";
     private static final String QUERY_BUSCAR = "SELECT id_categoria, nome_categoria FROM tb_categoria WHERE id_categoria = ?";
+    private static final String QUERY_BUSCAR_TODOS_DEL_SAFE = "SELECT id_categoria, nome_categoria, deletesafe  FROM tb_categoria WHERE id_categoria = ?";
     private static final String QUERY_INSERIR = "INSERT INTO tb_categoria (nome_categoria) VALUES (?)";
     private static final String QUERY_ATUALIZAR = "UPDATE tb_categoria SET nome_categoria = ? WHERE id_categoria = ?";
     private static final String QUERY_REMOVER = "DELETE FROM tb_categoria WHERE id_categoria = ?";
@@ -58,6 +60,23 @@ public class CategoriaDAO implements DAO<Categoria> {
             }
         } catch (SQLException e) {
             throw new DAOException("Erro buscando todas as categorias: " + QUERY_BUSCAR_TODOS, e);
+        }
+        return categorias;
+    }
+    
+    public List<CategoriaDelSafe> buscarTodosDelSafe() throws DAOException {
+        List<CategoriaDelSafe> categorias = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR_TODOS_DEL_SAFE)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                CategoriaDelSafe c = new CategoriaDelSafe();
+                c.setId(rs.getInt("id_categoria"));
+                c.setNome(rs.getString("nome_categoria"));                
+                c.setDelSafe(rs.getBoolean("del_safe_categoria"));                
+                categorias.add(c);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Erro buscando todas as categorias: " + QUERY_BUSCAR_TODOS_DEL_SAFE, e);
         }
         return categorias;
     }

@@ -54,19 +54,23 @@
                                 <tbody>
                                     <!-- Dados categorias -->
                                     <c:forEach items="${sessionScope.categorias}" var="categoria">                                        
-                                        <tr>
+                                        <tr>categorias
                                             <td><c:out value="${categoria.nome}"/></td>
                                             <c:url value="../CategoriaServlet" var="edit">
                                                 <c:param name="action" value="modificar"/>
                                                 <c:param name="id" value="${categoria.id}"/>
                                                 <c:param name="nome" value="${categoria.nome}"/>
                                             </c:url>
-                                            <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
-                                                    <c:url value="../CategoriaServlet" var="remover">
-                                                        <c:param name="action" value="remover"/>
-                                                        <c:param name="id" value="${categoria.id}"/>                                                                                                                
-                                                    </c:url>
-                                            <td><a href="${remover}"><i class="fas fa-trash" style="color: red;"></i></a></td>
+                                            <c:choose>
+                                                <c:when test="">
+                                                    <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                                            <c:url value="../CategoriaServlet" var="remover">
+                                                                <c:param name="action" value="remover"/>
+                                                                <c:param name="id" value="${categoria.id}"/>                                                                                                                
+                                                            </c:url>
+                                                    <td><a href="${remover}"><i class="fas fa-trash" style="color: red;"></i></a></td>
+                                                </c:when>
+                                            </c:choose>
                                         </tr>
                                     </c:forEach>
                                     <!-- fim Dados categorias -->

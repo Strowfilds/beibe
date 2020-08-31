@@ -101,7 +101,6 @@ public class UsuarioServlet extends HttpServlet {
 
         try {
             if (session.getAttribute("login") != null) {
-
                 if (action.equals("editar")) {
                     // ============================================================= EDITAR
                     String strId = request.getParameter("id");

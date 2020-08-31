@@ -79,4 +79,11 @@ public class EnderecoFacade {
             enderecoDAO.atualizar(endereco);
         }
     }
+    
+    static void remover(Endereco endereco) throws DAOException, Exception {
+        try (ConnectionFactory connFactory = new ConnectionFactory()) {
+            EnderecoDAO enderecoDAO = new EnderecoDAO(connFactory.getConnection());
+            enderecoDAO.remover(endereco);
+        }
+    }
 }

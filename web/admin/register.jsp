@@ -79,8 +79,7 @@
                                                 <c:forEach items="${applicationScope.estados}" var="estado">                                                    
                                                     <option value="${estado.id}">${estado.nome} - ${estado.sigla}</option>                                                    
                                                 </c:forEach>
-                                            </select>  
-
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">

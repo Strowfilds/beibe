@@ -72,7 +72,10 @@
                 <!-- Nav Item - Tables -->
                 <c:if test="${login.tipoUsuario.id eq 3}">                    
                     <li class="nav-item">
-                        <a class="nav-link" href="funcionarios.jsp">
+                        <c:url value="../FuncionarioServlet" var="funcionarios">
+                            <c:param name="action" value="listfuncionarios"/>
+                        </c:url>
+                        <a class="nav-link" href="${funcionarios}">
                             <i class="fas fa-fw fa-user-tie"></i>
                             <span>Funcionários</span></a>
                     </li>

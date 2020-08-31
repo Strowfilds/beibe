@@ -18,6 +18,7 @@ public class EnderecoDAO implements DAO<Endereco> {
     private static final String QUERY_BUSCAR_USUARIO = "SELECT en.id_endereco, en.rua_endereco, en.numero_endereco, en.complemento_endereco, en.bairro_endereco, en.cep_endereco, en.id_cidade, en.id_estado, en.id_usuario FROM tb_endereco AS en JOIN tb_usuario AS us ON us.id_usuario = en.id_usuario WHERE us.id_usuario = ?";
     private static final String QUERY_INSERIR = "INSERT INTO tb_endereco (rua_endereco, numero_endereco, complemento_endereco, bairro_endereco, cep_endereco, id_cidade, id_estado, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String QUERY_ATUALIZAR = "UPDATE tb_endereco SET rua_endereco = ?, numero_endereco = ?, complemento_endereco = ?, bairro_endereco = ?, cep_endereco = ?, id_cidade = ?, id_estado = ? WHERE id_endereco = ?";
+    private static final String QUERY_REMOVER = "DELETE FROM tb_endereco WHERE id_endereco = ?";
 
     private Connection con = null;
 
@@ -120,7 +121,12 @@ public class EnderecoDAO implements DAO<Endereco> {
 
     @Override
     public void remover(Endereco t) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (PreparedStatement stmt = con.prepareStatement(QUERY_REMOVER)) {
+            stmt.setInt(1, t.getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            throw new DAOException("Erro removendo endereco: " + QUERY_REMOVER + "/ " + t.toString(), ex);
+        }
     }
 
 }
