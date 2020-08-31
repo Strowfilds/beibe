@@ -3,33 +3,21 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-
 import beans.Usuario;
 import beans.TipoUsuario;
 import dao.interfaces.DAO;
 import exceptions.BuscarUsuarioException;
 import exceptions.DAOException;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author Ana Nicole
- */
 public class UsuarioDAO implements DAO<Usuario> {
 
     private static final String QUERY_INSERIR = "INSERT INTO tb_usuario (nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario) VALUES (?, ?, ?, ?, ?, ?)";
     //private static final String QUERY_BUSCAR_TODOS = "SELECT id_usuario, login_usuario, senha_usuario, nome_usuario FROM tb_usuario";
     //private static final String QUERY_REMOVER = "DELETE FROM tb_usuario WHERE id_usuario = ?";
     private static final String QUERY_BUSCAR = "SELECT id_usuario, nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario FROM tb_usuario WHERE id_usuario = ?";
-    private static final String QUERY_BUSCAR_CPF = "SELECT id_usuario, nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario FROM tb_usuario FROM tb_usuario WHERE cpf_usuario = ?";
+    //private static final String QUERY_BUSCAR_CPF = "SELECT id_usuario, nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario FROM tb_usuario FROM tb_usuario WHERE cpf_usuario = ?";
     private static final String QUERY_BUSCAR_EMAIL = "SELECT id_usuario, nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario FROM tb_usuario WHERE email_usuario = ?";
     private static final String QUERY_ATUALIZAR = "UPDATE tb_usuario SET nome_usuario = ?, telefone_usuario = ?, senha_usuario = ? WHERE id_usuario = ?";
 
