@@ -1,21 +1,17 @@
 package servlets;
 
 import beans.Atendimento;
-import beans.Categoria;
 import beans.Login;
 import beans.Produto;
 import beans.TipoAtendimento;
 import beans.Usuario;
 import exceptions.DAOException;
 import facade.AtendimentoFacade;
-import facade.CategoriaFacade;
 import facade.ProdutoFacade;
 import facade.UsuarioFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,8 +54,7 @@ public class AtendimentoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        RequestDispatcher rd = null;
+        
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         try {
@@ -132,9 +127,8 @@ public class AtendimentoServlet extends HttpServlet {
                 }
             } else {
                 // ============================================================= Acesso não autorizado
-                request.setAttribute("msg", "Acesso não autorizado!");
-                rd = getServletContext().getRequestDispatcher("/admin/erro.jsp");
-                rd.forward(request, response);
+                session.setAttribute("msg", "Acesso não autorizado!");
+                response.sendRedirect("/admin/erro.jsp");                
             }
         } catch (NumberFormatException e) {
             session.setAttribute("javax.servlet.jsp.jspException", e);
