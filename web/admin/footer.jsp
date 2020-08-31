@@ -44,25 +44,22 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!--<script src="vendor/jquery-easing/jquery.easing.min.js"></script>-->
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
 
   <!-- -->
-  <script src='https://code.jquery.com/jquery-latest.min.js'></script>
+  <!--<script src='https://code.jquery.com/jquery-latest.min.js'></script>-->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
-  <script type="text/javascript" src="js/cpf.js"></script>
-
-  
-  
+  <!--<script type="text/javascript" src="js/cpf.js"></script> -->
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
+  <!--<script src="vendor/jquery/jquery.min.js"></script>-->
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!--<script src="vendor/jquery-easing/jquery.easing.min.js"></script>-->
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
@@ -74,65 +71,5 @@
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
 
-<script>
-      $(document).ready(function () {
-          var $seuCampoCpf = $("#CPF");
-      });
-
-      $(document).ready(function () {
-          var $seuCampoCpf = $("#CPF");
-          $seuCampoCpf.mask('000.000.000-00', {reverse: true});
-      });
-      $(document).ready(function () {
-          var $seuCampoTel = $("#tel");
-      });
-
-      $(document).ready(function () {
-          var $seuCampoTel = $("#tel");
-          $seuCampoTel.mask('00 0 0000-0000', {reverse: true});
-      });
-      $(document).ready(function () {
-          var $seuCampoCep = $("#cep");
-      });
-
-      $(document).ready(function () {
-          var $seuCampoCep = $("#cep");
-          $seuCampoCep.mask('00.000-000', {reverse: true});
-      });
-  </script>
-  <!--
-  <script type="text/javascript" >
-
-      $(document).ready(function () {
-          $("#estado").change(function () {
-              getCidades();
-          });
-      });
-
-      function getCidades() {
-          var estadoId = $("#estado").val();
-          var url = "AJAXServlet";
-          $.ajax({
-              url: url, // URL da sua Servlet
-              data: {
-                  estadoId: estadoId
-              }, // Parâmetro passado para a Servlet
-              dataType: 'json',
-              success: function (data) {
-                  // Se sucesso, limpa e preenche a combo de cidade
-                  // alert(JSON.stringify(data));
-                  $("#cidade").empty();
-                  $.each(data, function (i, obj) {
-                      $("#cidade").append('<option value=' + obj.id + '>' + obj.nome + '</option>');
-                  });
-              },
-              error: function (request, textStatus, errorThrown) {
-                  alert(request.status + ', Error: ' + request.statusText);
-                  // Erro
-              }
-          });
-      }
-  </script>
-  -->
 </body>
 </html>
