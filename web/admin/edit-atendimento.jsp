@@ -26,7 +26,7 @@
                             </c:when>
                             <c:when test="${param.action eq 'modificar'}">
                                 <c:url value="../AtendimentoServlet" var="actionurl">
-                                    <c:param name="action" value="editar"/>                                    
+                                    <c:param name="action" value="modificar"/>                                    
                                 </c:url>
                                 <c:set var="id" value="${param.id}"/>                                        
                                 <c:set var="nome" value="${param.nome}"/>                                        
@@ -43,14 +43,7 @@
                                 <div class="col-sm-3">
                                     <input type="tel" class="form-control form-control-user" id="exampleRepeattext" placeholder="Telefone" disabled value="${atendimento.usuario.telefone}">
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <c:if test="${param.action eq 'modificar'}">                                    
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Data e Hora" disabled value="${atendimento.dataHora}">
-                                    </div>
-                                </c:if>
-                            </div>
+                            </div>                            
                             <div class="form-group row">
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <select class="form-control" style="border-radius: 50px; height: calc(2.2em + .75rem + 2px); " id="exampleLastName" name="produto" required>
@@ -71,7 +64,7 @@
                                         </c:choose>                                                                             
                                     </select>
                                 </div>                                                        
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <c:choose>
                                         <c:when test="${param.action eq 'novo'}">
                                             <select class="form-control" style="border-radius: 50px; height: calc(2.2em + .75rem + 2px); " id="exampleLastName" name="tipoatendimento" required>
@@ -88,21 +81,34 @@
                                     </c:choose>
                                 </div>
                                 <c:if test="${param.action eq 'modificar'}">
-                                    <div class="col-sm-3">
-                                        <input type="checkbox" id="vehicle3" name="resolvido" value="Resolver">
-                                        <label for="vehicle3">Resolvido?</label>
+                                    <div class="col-sm-3 pt-3 pl-5">
+                                        <c:choose>
+                                            <c:when test="${atendimento.aberto}">
+                                                <input class="form-check-input" type="checkbox" id="resolvido" name="resolvido" value="Resolver"/>            
+                                                <label class="form-check-label" for="resolvido">Resolvido?</label>                                                
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input class="form-check-input" type="checkbox" id="resolvido" name="resolvido" value="Resolver" checked disabled/>            
+                                                <label class="form-check-label" for="resolvido">Resolvido?</label>  
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>                                    
-                                </c:if>    
+                                </c:if>   
+                                <c:if test="${param.action eq 'modificar'}">                                    
+                                    <div class="col-sm-2 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Data e Hora" disabled value="${atendimento.dataHora}">
+                                    </div>
+                                </c:if>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-12 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Descrição" name="descricao" value="${atendimendo.descricao}" required>
+                                    <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Descrição" name="descricao" value="${atendimento.descricao}" required>
                                 </div>
                             </div>
                             <c:if test="${login.tipoUsuario.id > 1}">                                        
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Solução" name="solucao" value="${atendimendo.solucao}">
+                                        <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Solução" name="solucao" value="${atendimendo.solucao}" required>
                                     </div>
                                 </div>
                             </c:if>
@@ -116,8 +122,14 @@
 
                             <input type="hidden" value="${login.id}" name="id"/> 
                             <input type="hidden" value="${atendimento.usuario.id}" name="idAtendimento"/> 
-
-                            <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
+                            <c:choose>
+                                <c:when test="${atendimento.aberto}">
+                                    <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success" disabled>
+                                </c:otherwise>
+                            </c:choose>
                             <c:url value="../AtendimentoServlet" var="voltar">
                                 <c:param name="action" value="home"/>
                             </c:url>
@@ -130,3 +142,4 @@
         </div>
     </div>
 </div>
+<%@include file="footer.jsp" %>

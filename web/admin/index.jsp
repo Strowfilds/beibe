@@ -38,7 +38,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Atendimentos até o Momento</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"><c:out value="${atendimentosQtd}"/></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Total: <c:out value="${atendimentosQtdTotal}"/> / Abertos: <c:out value="${atendimentosQtd}"/></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -55,11 +55,11 @@
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Atendimentos Abertos</div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">40%</div>
                                     </div>
                                     <div class="col">
                                         <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +130,11 @@
                                             </td>
                                             <td><c:out value="${atendimento.descricao}"/></td>
                                             <td><c:out value="${atendimento.solucao}"/></td>
-                                            <td><a href="#page-top"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                            <c:url value="../AtendimentoServlet" var="edit">
+                                                <c:param name="action" value="modificar"/>
+                                                <c:param name="id" value="${atendimento.id}"/>                                                
+                                            </c:url>
+                                            <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
                                         </tr>                                            
                                         </c:forEach>
                                     </tbody>
@@ -260,7 +264,11 @@
                                             </td>
                                             <td><c:out value="${atendimento.descricao}"/></td>
                                             <td><c:out value="${atendimento.solucao}"/></td>
-                                            <td><a href="#page-top"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                            <c:url value="../AtendimentoServlet" var="edit">
+                                                <c:param name="action" value="modificar"/>
+                                                <c:param name="id" value="${atendimento.id}"/>                                                
+                                            </c:url>
+                                            <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
                                         </tr>                                            
                                         </c:forEach>
                                     </tbody>

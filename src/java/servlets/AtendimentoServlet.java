@@ -128,7 +128,7 @@ public class AtendimentoServlet extends HttpServlet {
             } else {
                 // ============================================================= Acesso não autorizado
                 session.setAttribute("msg", "Acesso não autorizado!");
-                response.sendRedirect("/admin/erro.jsp");                
+                response.sendRedirect("admin/erro.jsp");                
             }
         } catch (NumberFormatException e) {
             session.setAttribute("javax.servlet.jsp.jspException", e);
@@ -191,7 +191,7 @@ public class AtendimentoServlet extends HttpServlet {
                     } else {
                         // ===================================================== Cliente opção inválida
                         session.setAttribute("msg", "Opção inválida");
-                        response.sendRedirect("/admin/erro.jsp");                        
+                        response.sendRedirect("admin/erro.jsp");                        
                     }
                 } else {
                     // ========================================================= Opções ADM
@@ -211,20 +211,20 @@ public class AtendimentoServlet extends HttpServlet {
                         } else {
                             id = Integer.parseInt(strId);
                             Atendimento atendimento = AtendimentoFacade.buscar(id);
-                            atendimento.setAberto(request.getParameter("resolvido") != null);
+                            atendimento.setAberto(request.getParameter("resolvido") == null);
                             atendimento.setSolucao((String) request.getAttribute("solucao"));                        
                             AtendimentoFacade.atualizar(atendimento);
                             response.sendRedirect("admin/index.jsp");
                         }
                     } else {
                         session.setAttribute("msg", "Opção inválida");
-                        response.sendRedirect("/admin/erro.jsp");
+                        response.sendRedirect("admin/erro.jsp");
                     }
                 }
             } else {
                 // ============================================================= Acesso não autorizado
                 session.setAttribute("msg", "Acesso não autorizado!");
-                response.sendRedirect("/admin/erro.jsp");                
+                response.sendRedirect("admin/erro.jsp");                
             }
         } catch (NumberFormatException e) {
             session.setAttribute("javax.servlet.jsp.jspException", e);
