@@ -104,7 +104,7 @@ public class CategoriaServlet extends HttpServlet {
             session.setAttribute("javax.servlet.error.status_code", 500);
             session.setAttribute("msg", "ERRO: " + ex.getMessage());
             response.sendRedirect("erro.jsp");
-        }        
+        }
     }
 
     /**
@@ -118,129 +118,88 @@ public class CategoriaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
-        RequestDispatcher rd = null;
+
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        // Conferindo acesso ===================================================
-        if (session.getAttribute("login") != null) {
-            Login login = (Login) session.getAttribute("login");
-            if (login.getTipoUsuario().getId() < 2) {
-                request.setAttribute("msg", "Privilégio de acesso insuficiente!");
-                rd = getServletContext().getRequestDispatcher("/admin/erro.jsp");
-                rd.forward(request, response);
-            }
-            // Conferindo opção ================================================
-            if (action.equals("adicionar")) { // ADICIONAR
-                String categoria = request.getParameter("categoria");
-                if (categoria == null) {
-                    request.setAttribute("msg", "Invocação inválida: categoria é nulo");
-                    rd = request.getRequestDispatcher("/erro.jsp");
-                    rd.forward(request, response);
-                    return;
+
+        try {
+            if (session.getAttribute("login") != null) {
+                Login login = (Login) session.getAttribute("login");
+                if (login.getTipoUsuario().getId() < 2) {
+                    // ========================================================= Privilégio insuficiente
+                    session.setAttribute("msg", "Privilégio de acesso insuficiente!");
+                    response.sendRedirect("/admin/erro.jsp");
                 } else {
-                    try {
-                        CategoriaFacade.inserir(categoria);
-                        List<Categoria> categorias = CategoriaFacade.buscarCategorias();
-                        session.setAttribute("categorias", categorias);
-                        response.sendRedirect("admin/categorias.jsp");
-                    } catch (DAOException de) {
-                        request.setAttribute("javax.servlet.jsp.jspException", de);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + de.getMessage());
-                        rd = request.getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    } catch (Exception ex) {
-                        request.setAttribute("javax.servlet.jsp.jspException", ex);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + ex.getMessage());
-                        rd = request.getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    }
-                }
-            } else if (action.equals("editar")) { // =========================== EDITAR
-                String strId = request.getParameter("id");
-                int id = 0;
-                if (strId == null) {
-                    request.setAttribute("msg", "Invocação inválida: id é nulo");
-                    rd = request.getRequestDispatcher("/erro.jsp");
-                    rd.forward(request, response);
-                    return;
-                } else {
-                    try {
-                        id = Integer.parseInt(request.getParameter("id"));
-                        String nome = request.getParameter("categoria");
-                        CategoriaFacade.atualizar(id, nome);
-                        List<Categoria> categorias = CategoriaFacade.buscarCategorias();
-                        session.setAttribute("categorias", categorias);
-                        response.sendRedirect("admin/categorias.jsp");
-                    } catch (NumberFormatException e) {
-                        request.setAttribute("javax.servlet.jsp.jspException", e);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "Id para apresentação inválido: " + id);
-                        rd = request.getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    } catch (DAOException de) {
-                        request.setAttribute("javax.servlet.jsp.jspException", de);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + de.getMessage());
-                        rd = request.getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    } catch (Exception ex) {
-                        request.setAttribute("javax.servlet.jsp.jspException", ex);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + ex.getMessage());
-                        rd = request.getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    }
-                }
-            } else if (action.equals("remover")) {
-                String strId = request.getParameter("id");
-                int id = 0;
-                if (strId == null) {
-                    request.setAttribute("msg", "Invocação inválida: id é nulo");
-                    rd = request.getRequestDispatcher("/erro.jsp");
-                    rd.forward(request, response);
-                    return;
-                } else {
-                    try {
-                        id = Integer.parseInt(request.getParameter("id"));
-                        CategoriaFacade.remover(id);
-                        List<Categoria> categorias = CategoriaFacade.buscarCategorias();
-                        session.setAttribute("categorias", categorias);
-                        response.sendRedirect("admin/categorias.jsp");
-                    } catch (NumberFormatException e) {
-                        request.setAttribute("javax.servlet.jsp.jspException", e);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "Id para apresentação inválido: " + id);
-                        rd = request.getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    } catch (DAOException de) {
-                        request.setAttribute("javax.servlet.jsp.jspException", de);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + de.getMessage());
-                        rd = request.getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
-                    } catch (Exception ex) {
-                        request.setAttribute("javax.servlet.jsp.jspException", ex);
-                        request.setAttribute("javax.servlet.error.status_code", 500);
-                        request.setAttribute("msg", "ERRO: " + ex.getMessage());
-                        rd = request.getRequestDispatcher("/erro.jsp");
-                        rd.forward(request, response);
+                    if (action.equals("adicionar")) {
+                        // ===================================================== Adicionar categoria
+                        String categoria = request.getParameter("categoria");
+                        if (categoria == null) {
+                            session.setAttribute("msg", "Invocação inválida: id é nulo");
+                            response.sendRedirect("/erro.jsp");
+                            return;
+                        } else {
+                            CategoriaFacade.inserir(categoria);
+                            List<Categoria> categorias = CategoriaFacade.buscarCategorias();
+                            session.setAttribute("categorias", categorias);
+                            response.sendRedirect("admin/categorias.jsp");
+                        }
+                    } else if (action.equals("editar")) {
+                        // ===================================================== Editar categoria
+                        String strId = request.getParameter("id");
+                        int id = 0;
+                        if (strId == null) {
+                            session.setAttribute("msg", "Invocação inválida: id é nulo");
+                            response.sendRedirect("/erro.jsp");
+                            return;
+                        } else {
+                            id = Integer.parseInt(request.getParameter("id"));
+                            String nome = request.getParameter("categoria");
+                            CategoriaFacade.atualizar(id, nome);
+                            List<Categoria> categorias = CategoriaFacade.buscarCategorias();
+                            session.setAttribute("categorias", categorias);
+                            response.sendRedirect("admin/categorias.jsp");
+                        }
+                    } else if (action.equals("remover")) {
+                        // ===================================================== Remover categoria
+                        String strId = request.getParameter("id");
+                        int id = 0;
+                        if (strId == null) {
+                            session.setAttribute("msg", "Invocação inválida: id é nulo");
+                            response.sendRedirect("/erro.jsp");
+                            return;
+                        } else {
+                            id = Integer.parseInt(request.getParameter("id"));
+                            CategoriaFacade.remover(id);
+                            List<Categoria> categorias = CategoriaFacade.buscarCategorias();
+                            session.setAttribute("categorias", categorias);
+                            response.sendRedirect("admin/categorias.jsp");
+                        }
+                    } else {
+                        // ===================================================== Opção invalida
+                        session.setAttribute("msg", "Opção inválida");
+                        response.sendRedirect("erro.jsp");
                     }
                 }
             } else {
-                request.setAttribute("msg", "Opção inválida");
-                rd = getServletContext().getRequestDispatcher("/admin/erro.jsp");
-                rd.forward(request, response);
+                // ============================================================= Acesso não autorizado
+                session.setAttribute("msg", "Acesso não autorizado!");
+                response.sendRedirect("/admin/erro.jsp");
             }
-            // Conferindo opção ================================================
-        } else {
-            request.setAttribute("msg", "Acesso não autorizado!");
-            rd = getServletContext().getRequestDispatcher("/admin/erro.jsp");
-            rd.forward(request, response);
+        } catch (NumberFormatException e) {
+            session.setAttribute("javax.servlet.jsp.jspException", e);
+            session.setAttribute("javax.servlet.error.status_code", 500);
+            session.setAttribute("msg", "Dados para apresentação inválidos.");
+            response.sendRedirect("erro.jsp");
+        } catch (DAOException daoex) {
+            session.setAttribute("javax.servlet.jsp.jspException", daoex);
+            session.setAttribute("javax.servlet.error.status_code", 500);
+            session.setAttribute("msg", "ERRO: " + daoex.getMessage());
+            response.sendRedirect("erro.jsp");
+        } catch (Exception ex) {
+            session.setAttribute("javax.servlet.jsp.jspException", ex);
+            session.setAttribute("javax.servlet.error.status_code", 500);
+            session.setAttribute("msg", "ERRO: " + ex.getMessage());
+            response.sendRedirect("erro.jsp");
         }
     }
 
