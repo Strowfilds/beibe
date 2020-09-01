@@ -71,13 +71,20 @@
                                                 <c:param name="id" value="${produto.id}"/>                                                
                                             </c:url>
                                             <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                            <c:choose>
+                                                <c:when test="${produto.delSafe}">
                                                     <c:url value="../ProdutoServlet" var="remover">
                                                         <c:param name="action" value="remover"/>
                                                         <c:param name="id" value="${produto.id}"/>                                                                                                                
                                                     </c:url>
-                                            <td><a href="${remover}"><i class="fas fa-trash" style="color: red;"></i></a></td>
+                                                    <td><a href="${remover}"><i class="fas fa-trash" style="color: red;"></i></a></td>
+                                                </c:when>
+                                                <c:otherwise>                                                                                          
+                                                    <td><a href="#" title='Não é possível remover este produto!' disabled><i class="fas fa-trash" style="color: gray;"></i></a></td>                                                      
+                                                </c:otherwise>
+                                            </c:choose>
                                         </tr>
-                                                                            </tr>
+                                        </tr>
                                     </c:forEach>
                                     <!-- fim Dados cliente -->
                                 </tbody>
