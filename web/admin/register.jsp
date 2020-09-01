@@ -69,16 +69,18 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <select class="form-control" style="border-radius: 50px;" name="cidade" id="cidade">                             
-                                                <option value="0" selected>Selecione um estado</option>                               
-                                            </select>
-                                        </div>
+                                        
                                         <div class="col-sm-6">
                                             <select class="form-control" style="border-radius: 50px;" name="estado" id="estado">
+                                                <option value="" selected disabled="">Selecione um estado</option>
                                                 <c:forEach items="${applicationScope.estados}" var="estado">                                                    
                                                     <option value="${estado.id}">${estado.nome} - ${estado.sigla}</option>                                                    
                                                 </c:forEach>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <select class="form-control" style="border-radius: 50px;" name="cidade" id="cidade">                             
+                                                <option value="0" selected disable>Selecione uma cidade</option>                               
                                             </select>
                                         </div>
                                     </div>

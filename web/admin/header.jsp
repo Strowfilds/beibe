@@ -150,10 +150,10 @@
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content-wrapper" class="d-flex flex-column" style="background-color: #151215">
 
                 <!-- Main Content -->
-                <div id="content" style="background-color: #151215">
+                <div id="content" style="flex: none">
 
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
