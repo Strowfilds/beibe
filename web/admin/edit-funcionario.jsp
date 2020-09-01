@@ -107,7 +107,6 @@
                                     </select>
                                 </c:otherwise>
                             </c:choose>
-
                         </div>
                     </div>
                     <div class="form-group row">
