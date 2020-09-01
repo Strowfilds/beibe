@@ -86,8 +86,7 @@ public class LoginServlet extends HttpServlet {
                 login.setTipoUsuario(TipoUsuarioEnum.getTipoUsuarioFromInt(usuario.getTipoUsuario().getId()));
                 session = request.getSession();
                 session.setAttribute("login", login);
-                response.sendRedirect("AtendimentoServlet?action=home");
-                
+                response.sendRedirect("AtendimentoServlet?action=home");                
             } else {
                 session.setAttribute("msg", "Usuário/Senha inválidos.");
                 session.setAttribute("code", 401);

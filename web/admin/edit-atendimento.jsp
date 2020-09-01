@@ -119,15 +119,14 @@
                                     </div>
                                 </div>
                             </c:if>
-
                             <input type="hidden" value="${login.id}" name="id"/> 
                             <input type="hidden" value="${atendimento.usuario.id}" name="idAtendimento"/> 
                             <c:choose>
-                                <c:when test="${atendimento.aberto}">
+                                <c:when test="${atendimento.aberto or empty atendimento}">
                                     <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
                                 </c:when>
                                 <c:otherwise>
-                                    <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success" disabled>
+                                    <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
                                 </c:otherwise>
                             </c:choose>
                             <c:url value="../AtendimentoServlet" var="voltar">
