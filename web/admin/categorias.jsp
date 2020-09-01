@@ -16,6 +16,34 @@
         <jsp:param name="cod" value="403" />
     </jsp:forward>
 </c:if>
+<style>
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+</style>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -54,19 +82,26 @@
                                 <tbody>
                                     <!-- Dados categorias -->
                                     <c:forEach items="${sessionScope.categorias}" var="categoria">                                        
-                                        <tr>categorias
+                                        <tr>
                                             <td><c:out value="${categoria.nome}"/></td>
                                             <c:url value="../CategoriaServlet" var="edit">
                                                 <c:param name="action" value="modificar"/>
                                                 <c:param name="id" value="${categoria.id}"/>
                                                 <c:param name="nome" value="${categoria.nome}"/>
                                             </c:url>
-                                            <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                                <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                            <c:choose>
+                                                <c:when test="${categoria.delSafe}">
                                                     <c:url value="../CategoriaServlet" var="remover">
                                                         <c:param name="action" value="remover"/>
                                                         <c:param name="id" value="${categoria.id}"/>                                                                                                                
                                                     </c:url>
-                                            <td><a href="${remover}"><i class="fas fa-trash" style="color: red;"></i></a></td>
+                                                    <td><a href="${remover}"><i class="fas fa-trash" style="color: red;"></i></a></td>
+                                                </c:when>
+                                                <c:otherwise>                                                                                          
+                                                    <td><a href="#" title='Não é possível remover esta categoria!' disabled><i class="fas fa-trash" style="color: gray;"></i></a></td>                                                      
+                                                </c:otherwise>
+                                            </c:choose>
                                         </tr>
                                     </c:forEach>
                                     <!-- fim Dados categorias -->
