@@ -79,8 +79,8 @@
                                             </select>                                            
                                         </c:otherwise>
                                     </c:choose>
-                                </div>
-                                <c:if test="${param.action eq 'modificar'}">
+                                </div>                                
+                                <c:if test="${param.action eq 'modificar' and login.tipoUsuario.id > 1}">
                                     <div class="col-sm-3 pt-3 pl-5">
                                         <c:choose>
                                             <c:when test="${atendimento.aberto}">
@@ -115,15 +115,15 @@
                             <c:if test="${login.tipoUsuario.id eq 1}">                                        
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Solução" name="tipoatendimento" disabled value="${atendimendo.solucao}">
+                                        <input type="text" class="form-control form-control-user" id="exampleRepeattext" placeholder="Solução" name="solucao" disabled value="${atendimendo.solucao}">
                                     </div>
                                 </div>
                             </c:if>
                             <input type="hidden" value="${login.id}" name="id"/> 
-                            <input type="hidden" value="${atendimento.usuario.id}" name="idAtendimento"/> 
+                            <input type="hidden" value="${atendimento.id}" name="idAtendimento"/> 
                             <c:choose>
-                                <c:when test="${atendimento.aberto or empty atendimento}">
-                                    <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
+                                <c:when test="${param.action eq 'modificar' and not atendimento.aberto}">
+                                    <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success" disabled>
                                 </c:when>
                                 <c:otherwise>
                                     <input type="submit" value="Salvar" class="btn btn-primary btn-user btn-block btn btn-success">
