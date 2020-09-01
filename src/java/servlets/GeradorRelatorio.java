@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.ufpr.tads.javaweb.servlets;
+package servlets;
 
 import dao.ConnectionFactory;
 import exceptions.DAOException;
@@ -44,7 +39,7 @@ public class GeradorRelatorio extends HttpServlet {
         try(ConnectionFactory factory = new ConnectionFactory()) {
 
             // Caminho contextualizado do relatório compilado
-            String jasper = request.getContextPath() + "/Teste.jasper";
+            String jasper = request.getContextPath() + "/reclamacoes.jasper";            
             // Host onde o servlet esta executando 
             String host = "http://" + request.getServerName() + ":" + request.getServerPort(); 
             System.out.println(host+jasper);
