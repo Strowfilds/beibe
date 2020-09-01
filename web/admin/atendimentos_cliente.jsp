@@ -65,7 +65,7 @@
                                                         <c:out value="Em aberto" />
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <c:out value="Resolvido" />
+                                                        <c:out value="Resolvido" /> <i class="fas fa-check-circle" style="color: green;"></i>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </td>

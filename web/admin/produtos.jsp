@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page errorPage = "erro.jsp"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="header.jsp" %>
 <c:choose>
     <c:when test="${sessionScoped.login.tipoUsuario.id < 2}">
@@ -62,7 +64,8 @@
                                         <td><c:out value="${produto.nome}"/></td>
                                         <td><c:out value="${produto.categoria.nome}"/></td>
                                         <td><c:out value="${produto.descricao}"/></td>
-                                        <td><c:out value="${produto.peso}"/></td>
+                                        <fmt:formatNumber value="${produto.peso}" type="number" var="pesoFmt" maxFractionDigits="2" pattern="##.##" />
+                                        <td><c:out value="${pesoFmt} g"/></td>
                                             <c:url value="../ProdutoServlet" var="edit">
                                                 <c:param name="action" value="modificar"/>
                                                 <c:param name="id" value="${produto.id}"/>                                                

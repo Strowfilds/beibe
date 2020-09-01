@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page errorPage = "erro.jsp"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="header.jsp" %>
 <c:if test="${empty sessionScope.login}">     
     <jsp:forward page="erro.jsp" >
@@ -96,7 +98,8 @@
                                 </c:if>   
                                 <c:if test="${param.action eq 'modificar'}">                                    
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Data e Hora" disabled value="${atendimento.dataHora}">
+                                        <fmt:formatDate value="${atendimento.dataHora}" pattern="dd/MM/yyyy" var="dataFmt"/>
+                                        <input type="text" class="form-control form-control-user" id="exampleInputtext" placeholder="Data e Hora" disabled value="${dataFmt}">
                                     </div>
                                 </c:if>
                             </div>

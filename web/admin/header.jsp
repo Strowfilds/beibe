@@ -33,7 +33,10 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"style="background-color: #333; background-image: none;">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
+                <c:url value="../AtendimentoServlet" var="atendimentos">
+                    <c:param name="action" value="home"/>
+                </c:url>
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${atendimentos}">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-cut
                            "></i>
