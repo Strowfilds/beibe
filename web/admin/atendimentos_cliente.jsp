@@ -59,27 +59,31 @@
                                     <c:forEach items="${sessionScope.atendimentos}" var="atendimento">
                                         <tr>
                                             <td><fmt:formatDate value="${atendimento.dataHora}" pattern="dd/MM/yyyy"/> </td>                                            
-                                    <td>
-                                        <c:choose>
-                                            <c:when test="${atendimento.aberto}">
-                                                <c:out value="Em aberto" />
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:out value="Resolvido" />
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td>
-                                        <c:out value="${atendimento.produto.nome}"/>
-                                    </td>
-                                    <td>                                                
-                                        <c:out value="${atendimento.tipoAtendimento.nome}"/>
-                                    </td>
-                                    <td><c:out value="${atendimento.descricao}"/></td>
-                                    <td><c:out value="${atendimento.solucao}"/></td>
-                                    <td><a href="#page-top"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
-                                    </tr>                                            
-                                </c:forEach>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${atendimento.aberto}">
+                                                        <c:out value="Em aberto" />
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:out value="Resolvido" />
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <c:out value="${atendimento.produto.nome}"/>
+                                            </td>
+                                            <td>                                                
+                                                <c:out value="${atendimento.tipoAtendimento.nome}"/>
+                                            </td>
+                                            <td><c:out value="${atendimento.descricao}"/></td>
+                                            <td><c:out value="${atendimento.solucao}"/></td>
+                                            <c:url value="../AtendimentoServlet" var="edit">
+                                                <c:param name="action" value="modificar"/>
+                                                <c:param name="id" value="${atendimento.id}"/>                                                
+                                            </c:url>
+                                            <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                        </tr>                                            
+                                    </c:forEach>
                                 </tbody>
                             </c:otherwise>
                         </c:choose>         
