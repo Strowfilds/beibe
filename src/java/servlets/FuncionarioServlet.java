@@ -6,7 +6,6 @@ import exceptions.DAOException;
 import facade.FuncionarioFacade;
 import facade.UsuarioFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -161,8 +160,8 @@ public class FuncionarioServlet extends HttpServlet {
                             String bairro = request.getParameter("bairro");
                             int cidade = Integer.parseInt(request.getParameter("cidade"));
                             int estado = Integer.parseInt(request.getParameter("estado"));
-                            String cep = request.getParameter("cep").replace(".", "").replace("-", "");
-                            String tel = request.getParameter("tel").replace("-", "");;
+                            String cep = request.getParameter("cep").replace(".", "").replace("-", "").replace(" ", "");
+                            String tel = request.getParameter("tel").replace(".", "").replace("-", "").replace(" ", "");
                             String senha = request.getParameter("senha");
                             int id = Integer.parseInt(strId);
                             UsuarioFacade.alterar(id, nome, endereco, num, compl, bairro, cidade, estado, cep, tel, senha);
