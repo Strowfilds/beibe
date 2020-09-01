@@ -131,7 +131,7 @@ public class FuncionarioServlet extends HttpServlet {
                 } else {
                     if (action.equals("adicionar")) {
                         String nome = request.getParameter("nome");
-                        String cpf = request.getParameter("cpf").replace(".", "").replace("-", "");
+                        String cpf = request.getParameter("cpf").replace(".", "").replace("-", "").replace(" ", "");
                         String email = request.getParameter("email");
                         String endereco = request.getParameter("endereco");
                         int num = Integer.parseInt(request.getParameter("num"));
@@ -139,8 +139,8 @@ public class FuncionarioServlet extends HttpServlet {
                         String bairro = request.getParameter("bairro");
                         int cidade = Integer.parseInt(request.getParameter("cidade"));
                         int estado = Integer.parseInt(request.getParameter("estado"));
-                        String cep = request.getParameter("cep").replace(".", "").replace("-", "");
-                        String tel = request.getParameter("tel").replace(".", "").replace("-", "");
+                        String cep = request.getParameter("cep").replace(".", "").replace("-", "").replace(" ", "");
+                        String tel = request.getParameter("tel").replace(".", "").replace("-", "").replace(" ", "");
                         String senha = request.getParameter("senha");
                         UsuarioFacade.criarNovoUsuario(nome, cpf, email, endereco, num, compl, bairro, cidade, estado, cep, tel, senha, 2);
                         List<Usuario> funcionarios = FuncionarioFacade.buscarTodos();
