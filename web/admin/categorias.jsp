@@ -61,16 +61,12 @@
                                                 <c:param name="id" value="${categoria.id}"/>
                                                 <c:param name="nome" value="${categoria.nome}"/>
                                             </c:url>
-                                            <c:choose>
-                                                <c:when test="">
-                                                    <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
-                                                            <c:url value="../CategoriaServlet" var="remover">
-                                                                <c:param name="action" value="remover"/>
-                                                                <c:param name="id" value="${categoria.id}"/>                                                                                                                
-                                                            </c:url>
-                                                    <td><a href="${remover}"><i class="fas fa-trash" style="color: red;"></i></a></td>
-                                                </c:when>
-                                            </c:choose>
+                                            <td><a href="${edit}"><i class="fas fa-pencil-alt" style="color: orange;"></i></a></td>
+                                                    <c:url value="../CategoriaServlet" var="remover">
+                                                        <c:param name="action" value="remover"/>
+                                                        <c:param name="id" value="${categoria.id}"/>                                                                                                                
+                                                    </c:url>
+                                            <td><a href="${remover}"><i class="fas fa-trash" style="color: red;"></i></a></td>
                                         </tr>
                                     </c:forEach>
                                     <!-- fim Dados categorias -->
