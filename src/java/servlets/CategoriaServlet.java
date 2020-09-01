@@ -1,13 +1,12 @@
 package servlets;
 
 import beans.Categoria;
+import beans.CategoriaDelSafe;
 import beans.Login;
 import exceptions.DAOException;
 import facade.CategoriaFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,7 +45,7 @@ public class CategoriaServlet extends HttpServlet {
                         response.sendRedirect("admin/edit-categoria.jsp?action=novo");
                     } else if (action.equals("listcategoria")) {
                         // ===================================================== Listar categorias
-                        List<Categoria> categorias = CategoriaFacade.buscarCategorias();
+                        List<CategoriaDelSafe> categorias = CategoriaFacade.buscarCategoriasDelSafe();
                         session.setAttribute("categorias", categorias);
                         response.sendRedirect("admin/categorias.jsp");
                     } else if (action.equals("modificar")) {
@@ -74,7 +73,7 @@ public class CategoriaServlet extends HttpServlet {
                         } else {
                             id = Integer.parseInt(request.getParameter("id"));
                             CategoriaFacade.remover(id);
-                            List<Categoria> categorias = CategoriaFacade.buscarCategorias();
+                            List<CategoriaDelSafe> categorias = CategoriaFacade.buscarCategoriasDelSafe();
                             session.setAttribute("categorias", categorias);
                             response.sendRedirect("admin/categorias.jsp");
                         }
@@ -139,7 +138,7 @@ public class CategoriaServlet extends HttpServlet {
                             return;
                         } else {
                             CategoriaFacade.inserir(categoria);
-                            List<Categoria> categorias = CategoriaFacade.buscarCategorias();
+                            List<CategoriaDelSafe> categorias = CategoriaFacade.buscarCategoriasDelSafe();
                             session.setAttribute("categorias", categorias);
                             response.sendRedirect("admin/categorias.jsp");
                         }
@@ -170,7 +169,7 @@ public class CategoriaServlet extends HttpServlet {
                         } else {
                             id = Integer.parseInt(request.getParameter("id"));
                             CategoriaFacade.remover(id);
-                            List<Categoria> categorias = CategoriaFacade.buscarCategorias();
+                            List<CategoriaDelSafe> categorias = CategoriaFacade.buscarCategoriasDelSafe();
                             session.setAttribute("categorias", categorias);
                             response.sendRedirect("admin/categorias.jsp");
                         }
