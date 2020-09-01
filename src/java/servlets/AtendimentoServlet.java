@@ -54,7 +54,7 @@ public class AtendimentoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         try {
@@ -84,6 +84,20 @@ public class AtendimentoServlet extends HttpServlet {
                         List<Atendimento> atendimentos = AtendimentoFacade.buscarUsuario(login.getId());
                         session.setAttribute("atendimentos", atendimentos);
                         response.sendRedirect("admin/index.jsp");
+                    } else if (action.equals("modificar")) {
+                        // ===================================================== Modificar atendimento
+                        String strId = request.getParameter("id");
+                        int id = 0;
+                        if (strId == null) {
+                            session.setAttribute("msg", "Invocação inválida: id é nulo");
+                            response.sendRedirect("/erro.jsp");
+                            return;
+                        } else {
+                            id = Integer.parseInt(request.getParameter("id"));
+                            Atendimento atendimento = AtendimentoFacade.buscar(id);
+                            session.setAttribute("atendimento", atendimento);
+                            response.sendRedirect("admin/edit-atendimento.jsp?action=modificar");
+                        }   
                     } else {
                         session.setAttribute("msg", "Opção inválida");
                         response.sendRedirect("erro.jsp");
@@ -101,9 +115,11 @@ public class AtendimentoServlet extends HttpServlet {
                         int atendimentosQtd = atendimentosAbertos.size();
                         List<Atendimento> atendimentos = AtendimentoFacade.buscarTodos();
                         int atendimentosQtdTotal = atendimentos.size();
+                        int porct = (int) (atendimentosQtd * 100) / (atendimentosQtdTotal == 0 ? 1 : atendimentosQtdTotal);
                         session.setAttribute("atendimentosQtd", atendimentosQtd);
                         session.setAttribute("atendimentosQtdTotal", atendimentosQtdTotal);
                         session.setAttribute("atendimentos", atendimentosAbertos);
+                        session.setAttribute("porct", porct);
                         response.sendRedirect("admin/index.jsp");
                     } else if (action.equals("modificar")) {
                         // ===================================================== Modificar
@@ -128,7 +144,7 @@ public class AtendimentoServlet extends HttpServlet {
             } else {
                 // ============================================================= Acesso não autorizado
                 session.setAttribute("msg", "Acesso não autorizado!");
-                response.sendRedirect("admin/erro.jsp");                
+                response.sendRedirect("admin/erro.jsp");
             }
         } catch (NumberFormatException e) {
             session.setAttribute("javax.servlet.jsp.jspException", e);
@@ -159,7 +175,7 @@ public class AtendimentoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         try {
@@ -177,7 +193,7 @@ public class AtendimentoServlet extends HttpServlet {
                         String strId = request.getParameter("id");
                         if (strId == null) {
                             session.setAttribute("msg", "Invocação inválida: id é nulo");
-                            response.sendRedirect("/erro.jsp");                            
+                            response.sendRedirect("/erro.jsp");
                             return;
                         } else {
                             int produto = Integer.parseInt(strProduto);
@@ -191,7 +207,7 @@ public class AtendimentoServlet extends HttpServlet {
                     } else {
                         // ===================================================== Cliente opção inválida
                         session.setAttribute("msg", "Opção inválida");
-                        response.sendRedirect("admin/erro.jsp");                        
+                        response.sendRedirect("admin/erro.jsp");
                     }
                 } else {
                     // ========================================================= Opções ADM
@@ -206,14 +222,24 @@ public class AtendimentoServlet extends HttpServlet {
                         int id = 0;
                         if (strId == null) {
                             session.setAttribute("msg", "Invocação inválida: id é nulo");
-                            response.sendRedirect("/erro.jsp");                            
+                            response.sendRedirect("/erro.jsp");
                             return;
                         } else {
                             id = Integer.parseInt(strId);
                             Atendimento atendimento = AtendimentoFacade.buscar(id);
                             atendimento.setAberto(request.getParameter("resolvido") == null);
-                            atendimento.setSolucao((String) request.getAttribute("solucao"));                        
+                            String soclucao = request.getParameter("solucao");
+                            atendimento.setSolucao(soclucao);
                             AtendimentoFacade.atualizar(atendimento);
+                            List<Atendimento> atendimentosAbertos = AtendimentoFacade.buscarAtendimentosAbertos();
+                            int atendimentosQtd = atendimentosAbertos.size();
+                            List<Atendimento> atendimentos = AtendimentoFacade.buscarTodos();
+                            int atendimentosQtdTotal = atendimentos.size();
+                            int porct = (int) (atendimentosQtd * 100) / (atendimentosQtdTotal == 0 ? 1 : atendimentosQtdTotal);
+                            session.setAttribute("atendimentosQtd", atendimentosQtd);
+                            session.setAttribute("atendimentosQtdTotal", atendimentosQtdTotal);
+                            session.setAttribute("atendimentos", atendimentosAbertos);
+                            session.setAttribute("porct", porct);
                             response.sendRedirect("admin/index.jsp");
                         }
                     } else {
@@ -224,7 +250,7 @@ public class AtendimentoServlet extends HttpServlet {
             } else {
                 // ============================================================= Acesso não autorizado
                 session.setAttribute("msg", "Acesso não autorizado!");
-                response.sendRedirect("admin/erro.jsp");                
+                response.sendRedirect("admin/erro.jsp");
             }
         } catch (NumberFormatException e) {
             session.setAttribute("javax.servlet.jsp.jspException", e);
