@@ -1,7 +1,7 @@
 package facade;
 
 import beans.Categoria;
-import beans.Usuario;
+import beans.CategoriaDelSafe;
 import dao.CategoriaDAO;
 import dao.ConnectionFactory;
 import exceptions.DAOException;
@@ -21,6 +21,13 @@ public class CategoriaFacade {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             CategoriaDAO categoriaDAO = new CategoriaDAO(connFactory.getConnection());
             return categoriaDAO.buscarTodos();
+        }
+    }
+
+    public static List<CategoriaDelSafe> buscarCategoriasDelSafe() throws DAOException, Exception {
+        try (ConnectionFactory connFactory = new ConnectionFactory()) {
+            CategoriaDAO categoriaDAO = new CategoriaDAO(connFactory.getConnection());
+            return categoriaDAO.buscarTodosDelSafe();
         }
     }
 
@@ -70,6 +77,6 @@ public class CategoriaFacade {
             Categoria categoria = categoriaDAO.buscar(id);
             categoriaDAO.remover(categoria);
         }
-    }   
+    }
 
 }
