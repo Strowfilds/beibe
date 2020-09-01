@@ -76,11 +76,11 @@
                                                     </c:forEach>
                                                 </select>                                                
                                             </div>
-                                                    <div class="col-sm-8 mb-3 mb-sm-0">
-                                                        <select class="form-control" style="border-radius: 50rem;" name="cidade" id="cidade">                             
-                                                            <option value="${usuario.endereco.cidade.id}" selected>${usuario.endereco.cidade.nome}</option>                               
-                                                        </select>                                                
-                                                    </div>
+                                            <div class="col-sm-8 mb-3 mb-sm-0">
+                                                <select class="form-control" style="border-radius: 50rem;" name="cidade" id="cidade">                             
+                                                    <option value="${usuario.endereco.cidade.id}" selected>${usuario.endereco.cidade.nome}</option>                               
+                                                </select>                                                
+                                            </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-8 mb-3 mb-sm-0">
@@ -165,4 +165,9 @@
             }
         });
     }
+</script>
+<script>
+    $(window).on('load', function () {
+        getCidades();
+    });
 </script>

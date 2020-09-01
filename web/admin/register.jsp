@@ -69,10 +69,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        
+
                                         <div class="col-sm-6">
-                                            <select class="form-control" style="border-radius: 50px;" name="estado" id="estado">
-                                                <option value="" selected disabled="">Selecione um estado</option>
+                                            <select class="form-control" style="border-radius: 50px;" name="estado" id="estado">                                                
                                                 <c:forEach items="${applicationScope.estados}" var="estado">                                                    
                                                     <option value="${estado.id}">${estado.nome} - ${estado.sigla}</option>                                                    
                                                 </c:forEach>
@@ -127,7 +126,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
         <!--<script type="text/javascript" src="js/cpf.js"></script>-->
 
-        
+
         <script>
             $(document).ready(function () {
                 var $seuCampoCpf = $("#CPF");
@@ -186,6 +185,10 @@
                 });
             }
         </script>
+        <script>
+            $(window).on('load', function () {
+                getCidades();
+            });
+        </script>
     </body>
-
 </html>
