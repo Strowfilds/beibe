@@ -88,14 +88,26 @@
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            <select class="form-control" style="border-radius: 50px;" name="estado" id="estado" required>
-                                <option value="${funcionario.endereco.estado.id}">${funcionario.endereco.estado.nome} - ${funcionario.endereco.estado.sigla}</option>  
-                                <c:forEach items="${applicationScope.estados}" var="estado">     
-                                    <c:if test="${funcionario.endereco.estado.id != estado.id}">                                                                
-                                        <option value="${estado.id}">${estado.nome} - ${estado.sigla}</option>                                                    
-                                    </c:if>
-                                </c:forEach>
-                            </select>
+                            <c:choose>
+                                <c:when test="${param.action eq 'novo'}">                                    
+                                    <select class="form-control" style="border-radius: 50px;" name="estado" id="estado" required>
+                                        <c:forEach items="${applicationScope.estados}" var="estado">     
+                                            <option value="${estado.id}">${estado.nome} - ${estado.sigla}</option>
+                                        </c:forEach>
+                                    </select>
+                                </c:when>
+                                <c:otherwise>
+                                    <select class="form-control" style="border-radius: 50px;" name="estado" id="estado" required>
+                                        <option value="${funcionario.endereco.estado.id}">${funcionario.endereco.estado.nome} - ${funcionario.endereco.estado.sigla}</option>  
+                                        <c:forEach items="${applicationScope.estados}" var="estado">     
+                                            <c:if test="${funcionario.endereco.estado.id != estado.id}">                                                                
+                                                <option value="${estado.id}">${estado.nome} - ${estado.sigla}</option>                                                    
+                                            </c:if>
+                                        </c:forEach>
+                                    </select>
+                                </c:otherwise>
+                            </c:choose>
+
                         </div>
                     </div>
                     <div class="form-group row">
@@ -187,4 +199,8 @@
         });
     }
 </script>
-
+<script>
+    $(window).on('load', function () {
+        getCidades();
+    });
+</script>
