@@ -2,6 +2,7 @@ package dao;
 
 import beans.Produto;
 import beans.Categoria;
+import beans.ProdutoDelSafe;
 import dao.interfaces.DAO;
 import exceptions.DAOException;
 import java.sql.Connection;
@@ -15,6 +16,7 @@ public class ProdutoDAO implements DAO<Produto> {
     
     private static final String QUERY_BUSCAR = "SELECT id_produto, nome_produto, descricao_produto, id_categoria, peso_produto FROM tb_produto WHERE id_produto = ?";
     private static final String QUERY_BUSCAR_TODOS = "SELECT id_produto, nome_produto, descricao_produto, id_categoria, peso_produto FROM tb_produto";
+    private static final String QUERY_BUSCAR_TODOS_SAFE_DEL = "SELECT id_produto, nome_produto, descricao_produto, id_categoria, peso_produto, (SELECT COUNT(id_produto) FROM tb_atendimento pr WHERE pr.id_produto = ca.id_produto) FROM tb_produto AS ca;";
     private static final String QUERY_BUSCAR_CATEGORIA = "SELECT id_produto, nome_produto, descricao_produto, id_categoria, peso_produto FROM tb_produto WHERE id_categoria = ?";
     private static final String QUERY_INSERIR = "INSERT INTO tb_produto(nome_produto, descricao_produto, id_categoria, peso_produto) VALUES(?, ?, ?, ?)";
     private static final String QUERY_ATUALIZAR = "UPDATE tb_produto SET nome_produto = ?, descricao_produto = ?, id_categoria = ?, peso_produto = ? WHERE id_produto = ?";
@@ -68,6 +70,28 @@ public class ProdutoDAO implements DAO<Produto> {
             }
         } catch (SQLException e) {
             throw new DAOException("Erro buscando todas os produtos: " + QUERY_BUSCAR_TODOS, e);
+        }
+        return produtos;
+    }
+    
+    public List<ProdutoDelSafe> buscarTodosSafeDel() throws DAOException {
+        List<ProdutoDelSafe> produtos = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR_TODOS_SAFE_DEL)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ProdutoDelSafe p = new ProdutoDelSafe();
+                p.setId(rs.getInt("id_produto"));
+                p.setNome(rs.getString("nome_produto"));
+                p.setDescricao(rs.getString("descricao_produto"));
+                p.setPeso(rs.getInt("peso_produto"));
+                Categoria c = new Categoria();
+                c.setId(rs.getInt("id_categoria"));
+                p.setCategoria(c);
+                p.setDelSafe((rs.getInt("count") == 0 ));   
+                produtos.add(p);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Erro buscando todas os produtos: " + QUERY_BUSCAR_TODOS_SAFE_DEL, e);
         }
         return produtos;
     }

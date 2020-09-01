@@ -3,6 +3,7 @@ package servlets;
 import beans.Categoria;
 import beans.Login;
 import beans.Produto;
+import beans.ProdutoDelSafe;
 import exceptions.DAOException;
 import facade.CategoriaFacade;
 import facade.ProdutoFacade;
@@ -47,7 +48,7 @@ public class ProdutoServlet extends HttpServlet {
                         session.setAttribute("categorias", categorias);
                         response.sendRedirect("admin/edit-produto.jsp?action=novo");
                     } else if (action.equals("listproduto")) {
-                        List<Produto> produtos = ProdutoFacade.buscarTodos();
+                        List<ProdutoDelSafe> produtos = ProdutoFacade.buscarTodosSafeDel();
                         session.setAttribute("produtos", produtos);
                         response.sendRedirect("admin/produtos.jsp");
                     } else if (action.equals("modificar")) {
@@ -73,7 +74,7 @@ public class ProdutoServlet extends HttpServlet {
                         } else {
                             id = Integer.parseInt(strId);
                             ProdutoFacade.remover(id);
-                            List<Produto> produtos = ProdutoFacade.buscarTodos();
+                            List<ProdutoDelSafe> produtos = ProdutoFacade.buscarTodosSafeDel();
                             session.setAttribute("produtos", produtos);
                             response.sendRedirect("admin/produtos.jsp");
                         }
@@ -137,7 +138,7 @@ public class ProdutoServlet extends HttpServlet {
                         int categoria = Integer.parseInt(categoriaStr);
                         int peso = Integer.parseInt(pesoStr);
                         ProdutoFacade.inserir(produto, descricao, categoria, peso);
-                        List<Produto> produtos = ProdutoFacade.buscarTodos();
+                        List<ProdutoDelSafe> produtos = ProdutoFacade.buscarTodosSafeDel();
                         session.setAttribute("produtos", produtos);
                         response.sendRedirect("admin/produtos.jsp");
                     } else if (action.equals("editar")) {
@@ -158,7 +159,7 @@ public class ProdutoServlet extends HttpServlet {
                             peso = Integer.parseInt(strPeso);
                             categoria = Integer.parseInt(strCategoria);
                             ProdutoFacade.atualizar(id, nome, descricao, categoria, peso);
-                            List<Produto> produtos = ProdutoFacade.buscarTodos();
+                            List<ProdutoDelSafe> produtos = ProdutoFacade.buscarTodosSafeDel();
                             session.setAttribute("produtos", produtos);
                             response.sendRedirect("admin/produtos.jsp");
                         }

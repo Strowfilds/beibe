@@ -2,6 +2,7 @@ package facade;
 
 import beans.Categoria;
 import beans.Produto;
+import beans.ProdutoDelSafe;
 import dao.CategoriaDAO;
 import dao.ConnectionFactory;
 import dao.ProdutoDAO;
@@ -32,6 +33,22 @@ public class ProdutoFacade {
             return produtos;            
         }
     }
+    
+    public static List<ProdutoDelSafe> buscarTodosSafeDel() throws Exception {
+        try (ConnectionFactory connFactory = new ConnectionFactory()) {
+            ProdutoDAO produtoDAO = new ProdutoDAO(connFactory.getConnection());
+            List<ProdutoDelSafe> produtos = produtoDAO.buscarTodosSafeDel();
+            CategoriaDAO categoriaDAO = new CategoriaDAO(connFactory.getConnection());
+            for(ProdutoDelSafe produto: produtos){
+                produto.setCategoria(categoriaDAO.buscar(produto.getCategoria().getId()));
+            }            
+            return produtos;            
+        }
+    }
+    
+    
+    
+    
     
     public static void remover(Produto produto) throws DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
