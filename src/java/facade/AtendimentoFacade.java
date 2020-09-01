@@ -45,7 +45,14 @@ public class AtendimentoFacade {
     public static List<Atendimento> buscarAtendimentosAbertos() throws DAOException, Exception {
         try (ConnectionFactory connFactory = new ConnectionFactory()) {
             AtendimentoDAO atendimentoDAO = new AtendimentoDAO(connFactory.getConnection());
-            return atendimentoDAO.buscarTodosAbertos();
+            List<Atendimento> atendimentos = atendimentoDAO.buscarTodosAbertos();;
+            for (Atendimento atendimento : atendimentos) {
+                Produto produto = ProdutoFacade.buscar(atendimento.getProduto().getId());
+                atendimento.setProduto(produto);
+                TipoAtendimento tipoAtendimento = AtendimentoFacade.buscarTipoAtendimento(atendimento.getTipoAtendimento().getId());
+                atendimento.setTipoAtendimento(tipoAtendimento);
+            }
+            return atendimentos;
         }
     }
 
