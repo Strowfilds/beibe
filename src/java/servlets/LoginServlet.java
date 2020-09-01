@@ -19,26 +19,6 @@ import javax.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        HttpSession session = request.getSession();
-        session.setAttribute("msg", "Forma de acesso inválida.");
-        session.setAttribute("code", 400);
-        response.sendRedirect("erro.jsp");
-        
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -49,7 +29,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
@@ -78,7 +58,7 @@ public class LoginServlet extends HttpServlet {
         // ===================================================================== Verificando o login
         try {
             if (UsuarioFacade.checkLogin(email, senha)) {
-        // ===================================================================== Configurando acesso                
+                // ===================================================================== Configurando acesso                
                 Usuario usuario = UsuarioFacade.buscarEmail(email);
                 Login login = new Login();
                 login.setId(usuario.getId());
@@ -86,7 +66,7 @@ public class LoginServlet extends HttpServlet {
                 login.setTipoUsuario(TipoUsuarioEnum.getTipoUsuarioFromInt(usuario.getTipoUsuario().getId()));
                 session = request.getSession();
                 session.setAttribute("login", login);
-                response.sendRedirect("AtendimentoServlet?action=home");                
+                response.sendRedirect("AtendimentoServlet?action=home");
             } else {
                 session.setAttribute("msg", "Usuário/Senha inválidos.");
                 session.setAttribute("code", 401);
@@ -108,6 +88,7 @@ public class LoginServlet extends HttpServlet {
 
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Returns a short description of the servlet.
      *

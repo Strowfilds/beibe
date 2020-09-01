@@ -121,7 +121,14 @@
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="password" class="form-control form-control-user" id="password" name="senha" placeholder="Senha" required>
                         </div>
+                        <div class="col-sm-3 pt-3 pl-5">
+                            <c:if test="${sessionScope.login.tipoUsuario.id eq 3}">
+                                <input class="form-check-input" type="checkbox" id="gerente" name="gerente" value="Gerente"/>            
+                                <label class="form-check-label" for="gerente">Gerente</label>  
+                            </c:if>
+                        </div>
                     </div>
+
                     <c:if test="${param.action eq 'modificar'}" >
                         <input type="hidden" value="${funcionario.id}" name="id"/> 
                     </c:if>

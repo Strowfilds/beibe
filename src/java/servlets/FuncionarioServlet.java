@@ -141,7 +141,11 @@ public class FuncionarioServlet extends HttpServlet {
                         String cep = request.getParameter("cep").replace(".", "").replace("-", "").replace(" ", "");
                         String tel = request.getParameter("tel").replace(".", "").replace("-", "").replace(" ", "");
                         String senha = request.getParameter("senha");
-                        UsuarioFacade.criarNovoUsuario(nome, cpf, email, endereco, num, compl, bairro, cidade, estado, cep, tel, senha, 2);
+                        if (request.getParameter("gerente") == null) {
+                            UsuarioFacade.criarNovoUsuario(nome, cpf, email, endereco, num, compl, bairro, cidade, estado, cep, tel, senha, 2);
+                        } else {
+                            UsuarioFacade.criarNovoUsuario(nome, cpf, email, endereco, num, compl, bairro, cidade, estado, cep, tel, senha, 3);
+                        }
                         List<Usuario> funcionarios = FuncionarioFacade.buscarTodos();
                         session.setAttribute("funcionarios", funcionarios);
                         response.sendRedirect("admin/funcionarios.jsp");

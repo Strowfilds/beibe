@@ -15,7 +15,7 @@ import java.util.List;
 public class FuncionarioDAO implements DAO<Usuario> {
 
     private static final String QUERY_INSERIR = "INSERT INTO tb_usuario (nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String QUERY_BUSCAR_TODOS = "SELECT id_usuario, nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario FROM tb_usuario WHERE id_tipo_usuario = 2";
+    private static final String QUERY_BUSCAR_TODOS = "SELECT id_usuario, nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario FROM tb_usuario WHERE id_tipo_usuario = 2 OR id_tipo_usuario = 3";
     private static final String QUERY_REMOVER = "DELETE FROM tb_usuario WHERE id_usuario = ?";
     private static final String QUERY_BUSCAR = "SELECT id_usuario, nome_usuario, cpf_usuario, email_usuario, telefone_usuario, senha_usuario, id_tipo_usuario FROM tb_usuario WHERE id_usuario = ?";
     private static final String QUERY_ATUALIZAR = "UPDATE tb_usuario SET nome_usuario = ?, telefone_usuario = ?, senha_usuario = ? WHERE id_usuario = ?";

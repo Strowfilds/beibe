@@ -60,7 +60,11 @@
                                     <!-- Dados Funcionário -->
                                     <c:forEach items="${sessionScope.funcionarios}" var="funcionario">
                                         <tr>
-                                            <td><c:out value="${funcionario.nome}"/></td>
+                                            <td>
+                                                <c:if test="${funcionario.tipoUsuario.id eq 3}">
+                                                    <i class="fas fa-user-tie"></i>
+                                                </c:if>
+                                                <c:out value=" ${funcionario.nome}"/></td>
                                             <td><c:out value="${funcionario.cpf}"/></td>
                                             <td><c:out value="${funcionario.endereco.endereco} - ${funcionario.endereco.numero}"/></td>
                                             <td>${funcionario.telefone}</td>
